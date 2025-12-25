@@ -22,7 +22,7 @@ export default {
                 },
             },
             fontFamily: {
-                cairo: ['Cairo', 'sans-serif'],
+                sf: ['"SF Pro"', '"SF Pro Display"', '-apple-system', 'BlinkMacSystemFont', '"Segoe UI"', 'Roboto', '"Helvetica Neue"', 'Arial', 'sans-serif'],
             },
             borderRadius: {
                 'xl': '20px',
@@ -32,6 +32,7 @@ export default {
                 'pulse-slow': 'pulse 8s ease-in-out infinite',
                 'bounce-slow': 'bounce 2s infinite',
                 'heartbeat': 'heartbeat 1.5s ease-in-out infinite',
+                'spin-slow': 'spin 20s linear infinite',
             },
             keyframes: {
                 heartbeat: {

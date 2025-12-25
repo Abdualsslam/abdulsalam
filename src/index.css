@@ -2,7 +2,20 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800&display=swap');
+/* SF Pro Font - Apple's San Francisco font */
+@font-face {
+    font-family: 'SF Pro';
+    src: local('-apple-system'), local('BlinkMacSystemFont'), local('Segoe UI'), local('Roboto'), local('Helvetica Neue'), local('Arial');
+    font-weight: 100 900;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'SF Pro Display';
+    src: local('-apple-system'), local('BlinkMacSystemFont'), local('Segoe UI'), local('Roboto'), local('Helvetica Neue'), local('Arial');
+    font-weight: 100 900;
+    font-style: normal;
+}
 
 @layer base {
     * {
@@ -16,7 +29,7 @@
     }
 
     body {
-        @apply font-cairo bg-dark text-white leading-relaxed overflow-x-hidden;
+        @apply font-sf bg-dark text-white leading-relaxed overflow-x-hidden;
         direction: rtl;
     }
 
