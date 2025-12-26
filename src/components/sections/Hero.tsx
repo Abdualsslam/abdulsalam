@@ -1,10 +1,10 @@
 import { motion } from 'framer-motion'
 import { Github, Linkedin, Mail, Download, ChevronDown } from 'lucide-react'
-import myPhoto from '../assets/my_photo.png'
-import flutterLogo from '../assets/flutter-logo.png'
-import vscodeLogo from '../assets/visual-studio-code.png'
-import pythonLogo from '../assets/python.png'
-import n8nLogo from '../assets/n8n.svg'
+import myPhoto from '../../assets/my_photo.png'
+import flutterLogo from '../../assets/flutter-logo.png'
+import vscodeLogo from '../../assets/visual-studio-code.png'
+import pythonLogo from '../../assets/python.png'
+import n8nLogo from '../../assets/n8n.svg'
 
 export default function Hero() {
     return (
