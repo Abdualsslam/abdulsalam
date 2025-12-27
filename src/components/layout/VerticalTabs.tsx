@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion'
+import { motion, PanInfo } from 'framer-motion'
 import { TabId, tabsConfig } from '../../hooks/useNavigation'
 import { Home } from 'lucide-react'
 import { ReactNode } from 'react'
@@ -56,6 +56,24 @@ export default function VerticalTabs({ activeTab, onTabChange, children }: Verti
                     const startOffset = totalWidth / 2 - tabWidth / 2
                     const horizontalOffset = startOffset - (index * tabWidth)
 
+                    // Handle drag end to determine if user wants to open or close the tab
+                    const handleDragEnd = (_: MouseEvent | TouchEvent | PointerEvent, info: PanInfo) => {
+                        const velocity = info.velocity.y
+                        const offset = info.offset.y
+
+                        if (isActive) {
+                            // If active, dragging down should close
+                            if (offset > 100 || velocity > 500) {
+                                onTabChange('home')
+                            }
+                        } else {
+                            // If inactive, dragging up should open
+                            if (offset < -50 || velocity < -300) {
+                                onTabChange(tab.id)
+                            }
+                        }
+                    }
+
                     return (
                         <motion.div
                             key={tab.id}
@@ -67,6 +85,16 @@ export default function VerticalTabs({ activeTab, onTabChange, children }: Verti
                                 damping: 28,
                                 stiffness: 180
                             }}
+                            drag={isActive || (!isActive && tabIndex === -1) ? 'y' : false}
+                            dragConstraints={{
+                                top: isActive ? 0 : -200,
+                                bottom: isActive ? 400 : 0
+                            }}
+                            dragElastic={{
+                                top: 0,
+                                bottom: isActive ? 0.3 : 0.1
+                            }}
+                            onDragEnd={handleDragEnd}
                             style={{
                                 zIndex: isActive ? 50 : 10 + index,
                                 '--tab-color': tab.color,
@@ -85,6 +113,7 @@ export default function VerticalTabs({ activeTab, onTabChange, children }: Verti
                                     transform: `translateX(${horizontalOffset}px)`,
                                     pointerEvents: 'auto',
                                     zIndex: 100 + index,
+                                    cursor: isActive ? 'grab' : 'pointer',
                                 }}
                             >
                                 <span className="attached-tab-label">{tab.label}</span>
