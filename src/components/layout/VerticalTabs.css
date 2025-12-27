@@ -74,59 +74,62 @@
 }
 
 /* ==================== */
-/* Attached Tab (Skewed design) */
+/* Attached Tab (Folder-style design from tabs.html) */
 /* ==================== */
 
 .attached-tab {
     position: relative;
     align-self: center;
-    padding: 12px 40px 10px;
-    margin-bottom: -2px;
+    padding: 12px 32px 10px;
+    margin-bottom: -4px;
     cursor: pointer;
     color: #FFF;
     font-family: 'SF Pro', -apple-system, BlinkMacSystemFont, sans-serif;
-    font-weight: 600;
-    font-size: 14px;
-    text-shadow: rgba(0, 0, 0, 0.2) 0 1px;
+    font-weight: 700;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    text-shadow: rgba(0, 0, 0, 0.15) 0 1px;
     transition: all 200ms ease;
-    border-radius: 12px 12px 0 0;
-    z-index: 2;
+    border-radius: 10px 10px 0 0;
 }
 
-/* Skewed edges for the tab */
+/* Skewed edges for the folder-tab effect */
 .attached-tab::before,
 .attached-tab::after {
     content: "";
     position: absolute;
     bottom: 0;
-    width: 30px;
+    width: 40px;
     height: 100%;
     background-color: inherit;
     transition: all 200ms ease;
 }
 
+/* Left skewed edge */
 .attached-tab::before {
-    right: -15px;
-    transform: skewX(-20deg);
-    border-radius: 0 10px 0 0;
-    box-shadow: 2px -2px 5px rgba(0, 0, 0, 0.1);
+    left: -20px;
+    transform: skewX(-25deg);
+    border-radius: 10px 0 0 0;
+    box-shadow: -3px 0 5px rgba(0, 0, 0, 0.15);
 }
 
+/* Right skewed edge */
 .attached-tab::after {
-    left: -15px;
-    transform: skewX(20deg);
-    border-radius: 10px 0 0 0;
-    box-shadow: -2px -2px 5px rgba(0, 0, 0, 0.1);
+    right: -20px;
+    transform: skewX(25deg);
+    border-radius: 0 10px 0 0;
+    box-shadow: 3px 0 5px rgba(0, 0, 0, 0.15);
 }
 
 .attached-tab:hover {
-    filter: brightness(1.1);
-    transform: translateY(-2px);
+    filter: brightness(1.08);
 }
 
 .attached-tab-label {
     position: relative;
     z-index: 1;
+    white-space: nowrap;
 }
 
 /* ==================== */
@@ -182,17 +185,17 @@
 }
 
 [dir="rtl"] .attached-tab::before {
-    right: auto;
-    left: -15px;
-    transform: skewX(20deg);
-    border-radius: 10px 0 0 0;
-    box-shadow: -2px -2px 5px rgba(0, 0, 0, 0.1);
+    left: auto;
+    right: -20px;
+    transform: skewX(25deg);
+    border-radius: 0 10px 0 0;
+    box-shadow: 3px 0 5px rgba(0, 0, 0, 0.15);
 }
 
 [dir="rtl"] .attached-tab::after {
-    left: auto;
-    right: -15px;
-    transform: skewX(-20deg);
-    border-radius: 0 10px 0 0;
-    box-shadow: 2px -2px 5px rgba(0, 0, 0, 0.1);
+    right: auto;
+    left: -20px;
+    transform: skewX(-25deg);
+    border-radius: 10px 0 0 0;
+    box-shadow: -3px 0 5px rgba(0, 0, 0, 0.15);
 }

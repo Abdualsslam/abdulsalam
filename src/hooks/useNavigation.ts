@@ -9,12 +9,12 @@ export interface TabConfig {
 }
 
 export const tabsConfig: TabConfig[] = [
-    { id: 'home', label: 'الرئيسية', color: '#7E66AC' },
-    { id: 'about', label: 'عني', color: '#FF6B6B' },
-    { id: 'skills', label: 'المهارات', color: '#4ECDC4' },
-    { id: 'projects', label: 'المشاريع', color: '#FFE66D' },
-    { id: 'experience', label: 'الخبرات', color: '#95E1D3' },
-    { id: 'contact', label: 'تواصل', color: '#DDA0DD' },
+    { id: 'home', label: 'الرئيسية', color: '#9b59b6' },
+    { id: 'about', label: 'عني', color: '#b073d0' },
+    { id: 'skills', label: 'المهارات', color: '#a566c3' },
+    { id: 'projects', label: 'المشاريع', color: '#9b59b6' },
+    { id: 'experience', label: 'الخبرات', color: '#8e44ad' },
+    { id: 'contact', label: 'تواصل', color: '#7d3c98' },
 ]
 
 export function useNavigation() {
