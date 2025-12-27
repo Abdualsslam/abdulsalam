@@ -29,8 +29,11 @@
     }
 
     body {
-        @apply font-sf bg-dark text-white leading-relaxed overflow-x-hidden;
+        @apply font-sf bg-dark text-white leading-relaxed;
         direction: rtl;
+        overflow: hidden;
+        height: 100vh;
+        height: 100dvh;
     }
 
     /* Scrollbar */
