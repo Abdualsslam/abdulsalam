@@ -1,0 +1,213 @@
+/* Vertical Tabs Container */
+.vertical-tabs-container {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: center;
+    align-items: flex-end;
+    gap: 0;
+    padding: 0 16px 0;
+}
+
+/* Home Tab Button */
+.home-tab {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    padding: 12px 20px;
+    border-radius: 16px 16px 0 0;
+    border: none;
+    cursor: pointer;
+    color: white;
+    font-family: 'SF Pro', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    transition: all 250ms ease;
+    margin-left: 8px;
+}
+
+.home-tab:hover {
+    transform: translateY(-4px);
+    background-color: #7E66AC !important;
+}
+
+.home-tab.active {
+    background-color: #7E66AC !important;
+    box-shadow: 0 -4px 20px rgba(126, 102, 172, 0.5);
+}
+
+/* Tabbed Container - Adapted from tabs.html */
+.tabbed {
+    overflow: hidden;
+    border-bottom: 4px solid #454545;
+    transition: border 250ms ease;
+}
+
+.tabbed ul {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    display: flex;
+    flex-direction: row-reverse;
+    padding-right: 24px;
+    list-style-type: none;
+}
+
+.tabbed ul * {
+    margin: 0;
+    padding: 0;
+}
+
+.tabbed ul li {
+    display: block;
+    padding: 10px 24px 8px;
+    background-color: #5F5F5F;
+    margin-left: 46px;
+    z-index: 2;
+    position: relative;
+    cursor: pointer;
+    color: #FFF;
+    text-transform: uppercase;
+    font-family: 'SF Pro', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-weight: 600;
+    font-size: 13px;
+    line-height: 20px;
+    transition: all 250ms ease;
+    text-shadow: rgba(0, 0, 0, 0.1) 0 1px;
+}
+
+.tabbed ul li:before,
+.tabbed ul li:after {
+    display: block;
+    content: " ";
+    position: absolute;
+    top: 0;
+    height: 100%;
+    width: 44px;
+    background-color: #5F5F5F;
+    transition: all 250ms ease;
+}
+
+.tabbed ul li:before {
+    right: -24px;
+    transform: skew(30deg, 0deg);
+    box-shadow: rgba(0, 0, 0, 0.1) 3px 2px 5px, inset rgba(255, 255, 255, 0.09) -1px 0;
+}
+
+.tabbed ul li:after {
+    left: -24px;
+    transform: skew(-30deg, 0deg);
+    box-shadow: rgba(0, 0, 0, 0.1) -3px 2px 5px, inset rgba(255, 255, 255, 0.09) 1px 0;
+}
+
+.tabbed ul li:hover,
+.tabbed ul li:hover:before,
+.tabbed ul li:hover:after {
+    background-color: #6B6B6B;
+}
+
+.tabbed ul li.active {
+    z-index: 3;
+}
+
+.tabbed ul li.active,
+.tabbed ul li.active:before,
+.tabbed ul li.active:after {
+    background-color: #454545;
+}
+
+/* Round Tabs */
+.tabbed.round ul li {
+    border-radius: 8px 8px 0 0;
+}
+
+.tabbed.round ul li:before {
+    border-radius: 0 8px 0 0;
+}
+
+.tabbed.round ul li:after {
+    border-radius: 8px 0 0 0;
+}
+
+/* Skin - Graphite (default dark theme) */
+.tabbed.skin-graphite {
+    border-bottom-color: #454545;
+}
+
+.tabbed.skin-graphite ul li,
+.tabbed.skin-graphite ul li:before,
+.tabbed.skin-graphite ul li:after {
+    background-color: #5F5F5F;
+}
+
+.tabbed.skin-graphite ul li:hover,
+.tabbed.skin-graphite ul li:hover:before,
+.tabbed.skin-graphite ul li:hover:after {
+    background-color: #6B6B6B;
+}
+
+.tabbed.skin-graphite ul li.active,
+.tabbed.skin-graphite ul li.active:before,
+.tabbed.skin-graphite ul li.active:after {
+    background-color: #454545;
+}
+
+/* Custom Colors per Tab */
+.tabbed ul li.active {
+    background-color: var(--tab-color-dark, #454545);
+}
+
+.tabbed ul li.active:before,
+.tabbed ul li.active:after {
+    background-color: var(--tab-color-dark, #454545);
+}
+
+.tabbed ul li:not(.active) {
+    background-color: var(--tab-color-light, #5F5F5F);
+}
+
+.tabbed ul li:not(.active):before,
+.tabbed ul li:not(.active):after {
+    background-color: var(--tab-color-light, #5F5F5F);
+}
+
+.tabbed ul li:not(.active):hover,
+.tabbed ul li:not(.active):hover:before,
+.tabbed ul li:not(.active):hover:after {
+    background-color: var(--tab-color, #6B6B6B);
+    filter: brightness(1.1);
+}
+
+/* RTL adjustments */
+[dir="rtl"] .tabbed ul {
+    padding-right: 0;
+    padding-left: 24px;
+}
+
+[dir="rtl"] .tabbed ul li {
+    margin-left: 0;
+    margin-right: 46px;
+}
+
+[dir="rtl"] .tabbed ul li:before {
+    right: auto;
+    left: -24px;
+    transform: skew(-30deg, 0deg);
+    box-shadow: rgba(0, 0, 0, 0.1) -3px 2px 5px, inset rgba(255, 255, 255, 0.09) 1px 0;
+}
+
+[dir="rtl"] .tabbed ul li:after {
+    left: auto;
+    right: -24px;
+    transform: skew(30deg, 0deg);
+    box-shadow: rgba(0, 0, 0, 0.1) 3px 2px 5px, inset rgba(255, 255, 255, 0.09) -1px 0;
+}
+
+[dir="rtl"] .tabbed.round ul li:before {
+    border-radius: 8px 0 0 0;
+}
+
+[dir="rtl"] .tabbed.round ul li:after {
+    border-radius: 0 8px 0 0;
+}
