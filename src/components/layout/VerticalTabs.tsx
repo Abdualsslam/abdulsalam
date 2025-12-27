@@ -1,63 +1,109 @@
 import { motion } from 'framer-motion'
 import { TabId, tabsConfig } from '../../hooks/useNavigation'
 import { Home } from 'lucide-react'
+import { ReactNode } from 'react'
 import './VerticalTabs.css'
 
 interface VerticalTabsProps {
     activeTab: TabId | null
     onTabChange: (tabId: TabId) => void
+    children?: ReactNode
 }
 
-export default function VerticalTabs({ activeTab, onTabChange }: VerticalTabsProps) {
-    // Filter out 'home' from tabs as it will be handled separately or shown differently
+export default function VerticalTabs({ activeTab, onTabChange, children }: VerticalTabsProps) {
+    // Filter out 'home' from tabs - these are the tabs that have associated pages
     const tabs = tabsConfig.filter(tab => tab.id !== 'home')
+    const totalTabs = tabs.length
 
     return (
-        <motion.nav
-            className="fixed bottom-0 left-0 right-0 z-50 pointer-events-none"
-            initial={{ y: 100 }}
-            animate={{ y: 0 }}
-            transition={{ delay: 0.5, type: 'spring', stiffness: 100 }}
-        >
-            <div className="vertical-tabs-container pointer-events-auto">
-                {/* Home button - separate from the skewed tabs */}
-                <motion.button
-                    onClick={() => onTabChange('home')}
-                    className={`home-tab ${activeTab === null ? 'active' : ''}`}
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    style={{
-                        backgroundColor: activeTab === null ? '#7E66AC' : 'rgba(126, 102, 172, 0.4)',
-                    }}
-                >
-                    <Home size={20} />
-                    <span>الرئيسية</span>
-                </motion.button>
+        <div className="tabs-system">
+            {/* Fixed Home button */}
+            <motion.button
+                onClick={() => onTabChange('home')}
+                className={`home-button-fixed ${activeTab === null ? 'active' : ''}`}
+                initial={{ y: 100 }}
+                animate={{ y: 0 }}
+                transition={{ delay: 0.5, type: 'spring', stiffness: 100 }}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+            >
+                <Home size={20} />
+                <span>الرئيسية</span>
+            </motion.button>
 
-                {/* Skewed tabs container */}
-                <div className="tabbed skin-graphite round">
-                    <ul>
-                        {tabs.map((tab) => {
-                            const isActive = activeTab === tab.id
+            {/* Stacked tab-pages - each tab is attached to its page */}
+            <div className="stacked-pages">
+                {tabs.map((tab, index) => {
+                    const isActive = activeTab === tab.id
+                    const tabIndex = tabs.findIndex(t => t.id === activeTab)
 
-                            return (
-                                <li
-                                    key={tab.id}
-                                    className={isActive ? 'active' : ''}
-                                    onClick={() => onTabChange(tab.id)}
-                                    style={{
-                                        '--tab-color': tab.color,
-                                        '--tab-color-light': `${tab.color}CC`,
-                                        '--tab-color-dark': tab.color,
-                                    } as React.CSSProperties}
-                                >
-                                    {tab.label}
-                                </li>
-                            )
-                        })}
-                    </ul>
-                </div>
+                    // Calculate the y position based on whether this tab is active
+                    // When active: slide up to show full page
+                    // When inactive: stack at bottom, showing only the tab
+                    let yPosition = 'calc(100vh - 60px)' // Default: at bottom showing tab
+
+                    if (isActive) {
+                        yPosition = '0px' // Active: full page visible
+                    } else if (tabIndex !== -1 && index < tabIndex) {
+                        // Tabs before active tab: hidden below
+                        yPosition = '100vh'
+                    }
+
+                    // Calculate horizontal offset for each tab (spread them out horizontally)
+                    // This creates the side-by-side effect
+                    const tabWidth = 100 // Width of each tab in pixels
+                    const totalWidth = totalTabs * tabWidth
+                    const startOffset = totalWidth / 2 - tabWidth / 2
+                    const horizontalOffset = startOffset - (index * tabWidth)
+
+                    return (
+                        <motion.div
+                            key={tab.id}
+                            className="tab-page-unit"
+                            initial={{ y: 'calc(100vh - 60px)' }}
+                            animate={{ y: yPosition }}
+                            transition={{
+                                type: 'spring',
+                                damping: 28,
+                                stiffness: 180
+                            }}
+                            style={{
+                                zIndex: isActive ? 50 : 10 + index,
+                                '--tab-color': tab.color,
+                                '--tab-offset': `${horizontalOffset}px`,
+                                pointerEvents: isActive ? 'auto' : 'none',
+                            } as React.CSSProperties}
+                        >
+                            <div
+                                className="attached-tab"
+                                onClick={(e) => {
+                                    e.stopPropagation()
+                                    isActive ? onTabChange('home') : onTabChange(tab.id)
+                                }}
+                                style={{
+                                    backgroundColor: tab.color,
+                                    transform: `translateX(${horizontalOffset}px)`,
+                                    pointerEvents: 'auto',
+                                    zIndex: 100 + index,
+                                }}
+                            >
+                                <span className="attached-tab-label">{tab.label}</span>
+                            </div>
+
+                            {/* The Page Content */}
+                            <div
+                                className="tab-page-content"
+                                style={{
+                                    borderTopColor: tab.color,
+                                    backgroundColor: '#1a1a2e'
+                                }}
+                            >
+                                {isActive && children}
+                            </div>
+                        </motion.div>
+                    )
+                })}
             </div>
-        </motion.nav>
+        </div>
     )
 }
