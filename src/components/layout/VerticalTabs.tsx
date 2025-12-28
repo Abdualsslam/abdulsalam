@@ -7,18 +7,18 @@ import './VerticalTabs.css'
 interface VerticalTabsProps {
     activeTab: TabId | null
     onTabChange: (tabId: TabId) => void
-    children?: ReactNode
+    tabContents: Record<TabId, ReactNode>
 }
 
 interface TabPageUnitProps {
     tab: TabConfig
+    pageContent?: ReactNode
     index: number
     isActive: boolean
     tabIndex: number
     horizontalOffset: number
     totalTabs: number
     onTabChange: (tabId: TabId) => void
-    children?: ReactNode
 }
 
 interface TabConfig {
@@ -27,7 +27,7 @@ interface TabConfig {
     color: string
 }
 
-function TabPageUnit({ tab, index, isActive, tabIndex, horizontalOffset, totalTabs, onTabChange, children }: TabPageUnitProps) {
+function TabPageUnit({ tab, pageContent, index, isActive, tabIndex, horizontalOffset, totalTabs, onTabChange }: TabPageUnitProps) {
     const dragControls = useDragControls()
     const contentRef = useRef<HTMLDivElement>(null)
     const [contentHeight, setContentHeight] = useState(0)
@@ -48,7 +48,7 @@ function TabPageUnit({ tab, index, isActive, tabIndex, horizontalOffset, totalTa
             const timer = setTimeout(measureHeight, 100)
             return () => clearTimeout(timer)
         }
-    }, [isActive, children])
+    }, [isActive, pageContent])
 
     // Recalculate height on window resize
     useEffect(() => {
@@ -200,7 +200,7 @@ function TabPageUnit({ tab, index, isActive, tabIndex, horizontalOffset, totalTa
             >
                 <div className="tab-scroll-wrapper">
                     <div ref={contentRef} style={{ padding: '24px', paddingBottom: '100px' }}>
-                        {isActive && children}
+                        {pageContent}
                     </div>
                 </div>
             </div>
@@ -209,7 +209,7 @@ function TabPageUnit({ tab, index, isActive, tabIndex, horizontalOffset, totalTa
 }
 
 
-export default function VerticalTabs({ activeTab, onTabChange, children }: VerticalTabsProps) {
+export default function VerticalTabs({ activeTab, onTabChange, tabContents }: VerticalTabsProps) {
     const tabs = tabsConfig.filter(tab => tab.id !== 'home')
     const totalTabs = tabs.length
 
@@ -243,15 +243,14 @@ export default function VerticalTabs({ activeTab, onTabChange, children }: Verti
                         <TabPageUnit
                             key={tab.id}
                             tab={tab}
+                            pageContent={tabContents[tab.id]}
                             index={index}
                             isActive={isActive}
                             tabIndex={tabIndex}
                             horizontalOffset={horizontalOffset}
                             totalTabs={totalTabs}
                             onTabChange={onTabChange}
-                        >
-                            {isActive && children}
-                        </TabPageUnit>
+                        />
                     )
                 })}
             </div>
