@@ -71,8 +71,9 @@ function TabPageUnit({ tab, pageContent, index, isActive, tabIndex, horizontalOf
     const borderTop = 4 // Border top of tab-page-content
     const heightIncrement = 8 // Increment per tab for staircase effect
 
+    // Always use full height so content is visible during drag
+    const dynamicHeight = windowHeight - minTopPadding
     let yPosition = windowHeight - tabHandleHeight
-    let dynamicHeight = windowHeight // Default to full height
 
     if (isActive && contentHeight > 0) {
         // Calculate total height needed for content
@@ -81,29 +82,20 @@ function TabPageUnit({ tab, pageContent, index, isActive, tabIndex, horizontalOf
 
         if (totalContentHeight >= windowHeight - minTopPadding) {
             // Content is tall enough, use full height minus top padding
-            dynamicHeight = windowHeight - minTopPadding
             yPosition = minTopPadding
         } else {
-            // Content is shorter, use only the height needed
-            dynamicHeight = totalContentHeight
+            // Content is shorter, position based on content height
             yPosition = windowHeight - totalContentHeight
             // Ensure minimum is at minTopPadding
             yPosition = Math.max(yPosition, minTopPadding)
-            // Adjust height if we hit the minimum padding
-            if (yPosition === minTopPadding) {
-                dynamicHeight = windowHeight - minTopPadding
-            }
         }
     } else if (isActive) {
         // Content not measured yet, use default full height
-        dynamicHeight = windowHeight - minTopPadding
         yPosition = minTopPadding
     } else {
-        // When not active, show the tab handle with incremental height for staircase effect
-        // Reverse order: first tab is tallest, last tab is shortest
-        const incrementalHeight = tabHandleHeight + ((totalTabs - 1 - index) * heightIncrement)
-        dynamicHeight = incrementalHeight
-        yPosition = windowHeight - incrementalHeight
+        // When not active, position at bottom with staircase effect
+        const incrementalOffset = (totalTabs - 1 - index) * heightIncrement
+        yPosition = windowHeight - tabHandleHeight - incrementalOffset
     }
 
     if (tabIndex !== -1 && index < tabIndex) {
