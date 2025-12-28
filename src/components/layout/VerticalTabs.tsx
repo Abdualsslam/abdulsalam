@@ -226,7 +226,9 @@ export default function VerticalTabs({ activeTab, onTabChange, tabContents }: Ve
                 {tabs.map((tab, index) => {
                     const isActive = activeTab === tab.id
                     const tabIndex = tabs.findIndex(t => t.id === activeTab)
-                    const tabWidth = 100
+                    // Smaller tab width on mobile, larger on desktop
+                    const isMobile = typeof window !== 'undefined' && window.innerWidth < 768
+                    const tabWidth = isMobile ? 60 : 130
                     const totalWidth = totalTabs * tabWidth
                     const startOffset = totalWidth / 2 - tabWidth / 2
                     const horizontalOffset = startOffset - (index * tabWidth)

@@ -15,27 +15,39 @@
 
 .home-button-fixed {
     position: fixed;
-    bottom: 16px;
-    left: 16px;
+    bottom: 12px;
+    left: 12px;
     z-index: 100;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 4px;
-    padding: 12px 20px;
-    border-radius: 16px;
+    gap: 2px;
+    padding: 8px 14px;
+    border-radius: 12px;
     border: none;
     cursor: pointer;
     pointer-events: auto;
     color: white;
     font-family: 'SF Pro', -apple-system, BlinkMacSystemFont, sans-serif;
-    font-size: 12px;
+    font-size: 9px;
     font-weight: 600;
     background-color: rgba(126, 102, 172, 0.4);
     backdrop-filter: blur(10px);
     transition: all 250ms ease;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Larger home button on desktop */
+@media (min-width: 768px) {
+    .home-button-fixed {
+        bottom: 16px;
+        left: 16px;
+        gap: 4px;
+        padding: 12px 20px;
+        border-radius: 16px;
+        font-size: 12px;
+    }
 }
 
 .home-button-fixed:hover {
@@ -79,18 +91,18 @@
 .attached-tab {
     position: relative;
     align-self: center;
-    padding: 8px 20px 6px;
+    padding: 6px 14px 5px;
     margin-bottom: -4px;
     cursor: pointer;
     color: #FFF;
     font-family: 'SF Pro', -apple-system, BlinkMacSystemFont, sans-serif;
     font-weight: 700;
-    font-size: 11px;
+    font-size: 9px;
     text-transform: uppercase;
-    letter-spacing: 0.5px;
+    letter-spacing: 0.3px;
     text-shadow: rgba(0, 0, 0, 0.15) 0 1px;
     transition: all 200ms ease;
-    border-radius: 8px 8px 0 0;
+    border-radius: 6px 6px 0 0;
     user-select: none;
     -webkit-user-select: none;
 }
@@ -100,36 +112,38 @@
     .attached-tab {
         padding: 12px 32px 10px;
         font-size: 13px;
+        letter-spacing: 0.5px;
         border-radius: 10px 10px 0 0;
     }
 }
 
-/* Skewed edges for the folder-tab effect */
+/* Skewed edges for the folder-tab effect - Hidden on mobile */
 .attached-tab::before,
 .attached-tab::after {
     content: "";
     position: absolute;
     bottom: 0;
-    width: 28px;
+    width: 20px;
     height: 100%;
     background-color: inherit;
     transition: all 200ms ease;
+    display: none;
 }
 
 /* Left skewed edge */
 .attached-tab::before {
-    left: -14px;
+    left: -10px;
     transform: skewX(-25deg);
-    border-radius: 8px 0 0 0;
-    box-shadow: -3px 0 5px rgba(0, 0, 0, 0.15);
+    border-radius: 6px 0 0 0;
+    box-shadow: -2px 0 4px rgba(0, 0, 0, 0.15);
 }
 
 /* Right skewed edge */
 .attached-tab::after {
-    right: -14px;
+    right: -10px;
     transform: skewX(25deg);
-    border-radius: 0 8px 0 0;
-    box-shadow: 3px 0 5px rgba(0, 0, 0, 0.15);
+    border-radius: 0 6px 0 0;
+    box-shadow: 2px 0 4px rgba(0, 0, 0, 0.15);
 }
 
 /* Larger skewed edges on desktop */
@@ -137,6 +151,7 @@
 
     .attached-tab::before,
     .attached-tab::after {
+        display: block;
         width: 40px;
     }
 

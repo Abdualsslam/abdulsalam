@@ -17,8 +17,8 @@ export default function Hero() {
                 </div>
             </div>
 
-            <div className="max-w-7xl mx-auto px-5 pt-24 pb-0 h-full">
-                <div className="grid lg:grid-cols-2 gap-12 items-end min-h-[calc(100vh-6rem)]">
+            <div className="max-w-7xl mx-auto px-5 pt-16 pb-20 lg:pt-24 lg:pb-0 h-full">
+                <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-end min-h-[calc(100vh-10rem)] lg:min-h-[calc(100vh-6rem)]">
                     {/* Text Content */}
                     <motion.div
                         className="text-center lg:text-right order-1 lg:order-1"
@@ -170,7 +170,7 @@ export default function Hero() {
                                 <img
                                     src={myPhoto}
                                     alt="عبدالسلام معاد"
-                                    className="relative w-[320px] h-auto md:w-[420px] max-h-[75vh] object-contain object-bottom drop-shadow-2xl"
+                                    className="relative w-[200px] h-auto md:w-[320px] lg:w-[420px] max-h-[40vh] md:max-h-[60vh] lg:max-h-[75vh] object-contain object-bottom drop-shadow-2xl"
                                     style={{
                                         filter: 'drop-shadow(0 0 30px rgba(143, 0, 255, 0.3)) drop-shadow(0 0 60px rgba(126, 102, 172, 0.2))'
                                     }}
