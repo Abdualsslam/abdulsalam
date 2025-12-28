@@ -98,9 +98,7 @@ function TabPageUnit({ tab, pageContent, index, isActive, tabIndex, horizontalOf
         yPosition = windowHeight - tabHandleHeight - incrementalOffset
     }
 
-    if (tabIndex !== -1 && index < tabIndex) {
-        yPosition = windowHeight
-    }
+    // Note: Tabs before the active one stay visible with their staircase positions
 
     // Handle drag end
     const handleDragEnd = (_: MouseEvent | TouchEvent | PointerEvent, info: PanInfo) => {
@@ -155,7 +153,9 @@ function TabPageUnit({ tab, pageContent, index, isActive, tabIndex, horizontalOf
                 scale: 1,
             }}
             style={{
-                zIndex: isActive ? 50 : 10 + index,
+                // Tabs AFTER the active one should appear in front (higher z-index)
+                // Active tab: 50, Tabs before active: 10+index, Tabs after active: 60+index
+                zIndex: isActive ? 50 : (tabIndex !== -1 && index > tabIndex) ? 60 + index : 10 + index,
                 '--tab-color': tab.color,
                 '--tab-offset': `${horizontalOffset}px`,
                 pointerEvents: 'none',
