@@ -1,7 +1,7 @@
 import { motion, PanInfo, useDragControls } from 'framer-motion'
 import { TabId, tabsConfig } from '../../hooks/useNavigation'
 import { Home } from 'lucide-react'
-import { ReactNode } from 'react'
+import { ReactNode, useRef, useState, useLayoutEffect, useEffect } from 'react'
 import './VerticalTabs.css'
 
 interface VerticalTabsProps {
@@ -28,14 +28,81 @@ interface TabConfig {
 
 function TabPageUnit({ tab, index, isActive, tabIndex, horizontalOffset, onTabChange, children }: TabPageUnitProps) {
     const dragControls = useDragControls()
+    const contentRef = useRef<HTMLDivElement>(null)
+    const [contentHeight, setContentHeight] = useState(0)
 
-    // Calculate the y position
-    let yPosition = window.innerHeight - 60
+    // Measure content height when active
+    useLayoutEffect(() => {
+        if (isActive && contentRef.current) {
+            // Wait for content to render
+            const measureHeight = () => {
+                if (contentRef.current) {
+                    const height = contentRef.current.scrollHeight
+                    setContentHeight(height)
+                }
+            }
+            // Measure immediately
+            measureHeight()
+            // Also measure after a short delay to catch dynamic content
+            const timer = setTimeout(measureHeight, 100)
+            return () => clearTimeout(timer)
+        }
+    }, [isActive, children])
 
-    if (isActive) {
-        yPosition = 0
-    } else if (tabIndex !== -1 && index < tabIndex) {
-        yPosition = window.innerHeight
+    // Recalculate height on window resize
+    useEffect(() => {
+        if (isActive && contentRef.current) {
+            const handleResize = () => {
+                if (contentRef.current) {
+                    const height = contentRef.current.scrollHeight
+                    setContentHeight(height)
+                }
+            }
+            window.addEventListener('resize', handleResize)
+            return () => window.removeEventListener('resize', handleResize)
+        }
+    }, [isActive])
+
+    // Calculate the y position and height based on content height
+    const windowHeight = typeof window !== 'undefined' ? window.innerHeight : 800
+    const tabHandleHeight = 60 // Height of the tab handle
+    const minTopPadding = 40 // Minimum padding from the top of the screen
+    const borderTop = 4 // Border top of tab-page-content
+
+    let yPosition = windowHeight - tabHandleHeight
+    let dynamicHeight = windowHeight // Default to full height
+
+    if (isActive && contentHeight > 0) {
+        // Calculate total height needed for content
+        // contentHeight already includes padding (24px + 100px bottom padding)
+        const totalContentHeight = contentHeight + tabHandleHeight + borderTop
+
+        if (totalContentHeight >= windowHeight - minTopPadding) {
+            // Content is tall enough, use full height minus top padding
+            dynamicHeight = windowHeight - minTopPadding
+            yPosition = minTopPadding
+        } else {
+            // Content is shorter, use only the height needed
+            dynamicHeight = totalContentHeight
+            yPosition = windowHeight - totalContentHeight
+            // Ensure minimum is at minTopPadding
+            yPosition = Math.max(yPosition, minTopPadding)
+            // Adjust height if we hit the minimum padding
+            if (yPosition === minTopPadding) {
+                dynamicHeight = windowHeight - minTopPadding
+            }
+        }
+    } else if (isActive) {
+        // Content not measured yet, use default full height
+        dynamicHeight = windowHeight - minTopPadding
+        yPosition = minTopPadding
+    } else {
+        // When not active, just show the tab handle
+        dynamicHeight = tabHandleHeight
+    }
+
+    if (tabIndex !== -1 && index < tabIndex) {
+        yPosition = windowHeight
     }
 
     // Handle drag end
@@ -96,6 +163,7 @@ function TabPageUnit({ tab, index, isActive, tabIndex, horizontalOffset, onTabCh
                 '--tab-offset': `${horizontalOffset}px`,
                 pointerEvents: 'none',
                 touchAction: 'none',
+                height: `${dynamicHeight}px`,
             } as React.CSSProperties}
         >
             <div
@@ -125,7 +193,11 @@ function TabPageUnit({ tab, index, isActive, tabIndex, horizontalOffset, onTabCh
                     pointerEvents: isActive ? 'auto' : 'none',
                 }}
             >
-                {isActive && children}
+                <div className="tab-scroll-wrapper">
+                    <div ref={contentRef} style={{ padding: '24px', paddingBottom: '100px' }}>
+                        {isActive && children}
+                    </div>
+                </div>
             </div>
         </motion.div>
     )

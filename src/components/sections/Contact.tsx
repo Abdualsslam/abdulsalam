@@ -21,9 +21,9 @@ export default function Contact() {
     }
 
     const contactInfo = [
-        { icon: <Mail size={24} />, label: 'البريد الإلكتروني', value: 'contact@abdulsalam.dev' },
-        { icon: <Phone size={24} />, label: 'الهاتف', value: '+966 XX XXX XXXX' },
-        { icon: <MapPin size={24} />, label: 'الموقع', value: 'المملكة العربية السعودية' },
+        { icon: <Mail size={24} />, label: 'البريد الإلكتروني', value: 'contact@abdulsalam.pro' },
+        { icon: <Phone size={24} />, label: 'الهاتف', value: '+967 775 019 485' },
+        { icon: <MapPin size={24} />, label: 'الموقع', value: 'صنعاء اليمن' },
     ]
 
     const socialLinks = [
