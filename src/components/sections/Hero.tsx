@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { Github, Linkedin, Mail, Download, ChevronDown } from 'lucide-react'
+import { Github, Linkedin, Mail, Download } from 'lucide-react'
 import myPhoto from '../../assets/my_photo.png'
 import flutterLogo from '../../assets/flutter-logo.png'
 import vscodeLogo from '../../assets/visual-studio-code.png'
@@ -277,16 +277,6 @@ export default function Hero() {
                     </motion.div>
                 </div>
             </div>
-
-            <motion.a
-                href="#about"
-                className="absolute bottom-10 left-1/2 -translate-x-1/2 text-gray-500 animate-bounce-slow"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 1.5 }}
-            >
-                <ChevronDown size={30} />
-            </motion.a>
         </section>
     )
 }
