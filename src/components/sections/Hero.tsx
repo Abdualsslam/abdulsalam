@@ -21,7 +21,7 @@ export default function Hero() {
                 <div className="grid lg:grid-cols-2 gap-12 items-end min-h-[calc(100vh-6rem)]">
                     {/* Text Content */}
                     <motion.div
-                        className="text-center lg:text-right order-2 lg:order-1"
+                        className="text-center lg:text-right order-1 lg:order-1"
                         initial={{ opacity: 0, x: 50 }}
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ duration: 0.8 }}
@@ -114,7 +114,7 @@ export default function Hero() {
 
                     {/* Photo Section */}
                     <motion.div
-                        className="relative order-1 lg:order-2 flex justify-center items-end self-end"
+                        className="relative order-2 lg:order-2 flex justify-center items-end self-end"
                         initial={{ opacity: 0, scale: 0.8 }}
                         animate={{ opacity: 1, scale: 1 }}
                         transition={{ duration: 1, delay: 0.3 }}

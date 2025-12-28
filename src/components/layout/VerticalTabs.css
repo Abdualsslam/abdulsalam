@@ -79,20 +79,29 @@
 .attached-tab {
     position: relative;
     align-self: center;
-    padding: 12px 32px 10px;
+    padding: 8px 20px 6px;
     margin-bottom: -4px;
     cursor: pointer;
     color: #FFF;
     font-family: 'SF Pro', -apple-system, BlinkMacSystemFont, sans-serif;
     font-weight: 700;
-    font-size: 13px;
+    font-size: 11px;
     text-transform: uppercase;
     letter-spacing: 0.5px;
     text-shadow: rgba(0, 0, 0, 0.15) 0 1px;
     transition: all 200ms ease;
-    border-radius: 10px 10px 0 0;
+    border-radius: 8px 8px 0 0;
     user-select: none;
     -webkit-user-select: none;
+}
+
+/* Larger tabs on desktop */
+@media (min-width: 768px) {
+    .attached-tab {
+        padding: 12px 32px 10px;
+        font-size: 13px;
+        border-radius: 10px 10px 0 0;
+    }
 }
 
 /* Skewed edges for the folder-tab effect */
@@ -101,7 +110,7 @@
     content: "";
     position: absolute;
     bottom: 0;
-    width: 40px;
+    width: 28px;
     height: 100%;
     background-color: inherit;
     transition: all 200ms ease;
@@ -109,18 +118,37 @@
 
 /* Left skewed edge */
 .attached-tab::before {
-    left: -20px;
+    left: -14px;
     transform: skewX(-25deg);
-    border-radius: 10px 0 0 0;
+    border-radius: 8px 0 0 0;
     box-shadow: -3px 0 5px rgba(0, 0, 0, 0.15);
 }
 
 /* Right skewed edge */
 .attached-tab::after {
-    right: -20px;
+    right: -14px;
     transform: skewX(25deg);
-    border-radius: 0 10px 0 0;
+    border-radius: 0 8px 0 0;
     box-shadow: 3px 0 5px rgba(0, 0, 0, 0.15);
+}
+
+/* Larger skewed edges on desktop */
+@media (min-width: 768px) {
+
+    .attached-tab::before,
+    .attached-tab::after {
+        width: 40px;
+    }
+
+    .attached-tab::before {
+        left: -20px;
+        border-radius: 10px 0 0 0;
+    }
+
+    .attached-tab::after {
+        right: -20px;
+        border-radius: 0 10px 0 0;
+    }
 }
 
 .attached-tab:hover {
@@ -149,7 +177,7 @@
     min-height: 0;
 }
 
-.tab-page-content > .tab-scroll-wrapper {
+.tab-page-content>.tab-scroll-wrapper {
     flex: 1;
     overflow-y: auto;
     overflow-x: hidden;
