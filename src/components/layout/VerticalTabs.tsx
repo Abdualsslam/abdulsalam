@@ -16,6 +16,7 @@ interface TabPageUnitProps {
     isActive: boolean
     tabIndex: number
     horizontalOffset: number
+    totalTabs: number
     onTabChange: (tabId: TabId) => void
     children?: ReactNode
 }
@@ -26,7 +27,7 @@ interface TabConfig {
     color: string
 }
 
-function TabPageUnit({ tab, index, isActive, tabIndex, horizontalOffset, onTabChange, children }: TabPageUnitProps) {
+function TabPageUnit({ tab, index, isActive, tabIndex, horizontalOffset, totalTabs, onTabChange, children }: TabPageUnitProps) {
     const dragControls = useDragControls()
     const contentRef = useRef<HTMLDivElement>(null)
     const [contentHeight, setContentHeight] = useState(0)
@@ -65,9 +66,10 @@ function TabPageUnit({ tab, index, isActive, tabIndex, horizontalOffset, onTabCh
 
     // Calculate the y position and height based on content height
     const windowHeight = typeof window !== 'undefined' ? window.innerHeight : 800
-    const tabHandleHeight = 60 // Height of the tab handle
+    const tabHandleHeight = 60 // Base height of the tab handle
     const minTopPadding = 40 // Minimum padding from the top of the screen
     const borderTop = 4 // Border top of tab-page-content
+    const heightIncrement = 8 // Increment per tab for staircase effect
 
     let yPosition = windowHeight - tabHandleHeight
     let dynamicHeight = windowHeight // Default to full height
@@ -97,8 +99,11 @@ function TabPageUnit({ tab, index, isActive, tabIndex, horizontalOffset, onTabCh
         dynamicHeight = windowHeight - minTopPadding
         yPosition = minTopPadding
     } else {
-        // When not active, just show the tab handle
-        dynamicHeight = tabHandleHeight
+        // When not active, show the tab handle with incremental height for staircase effect
+        // Reverse order: first tab is tallest, last tab is shortest
+        const incrementalHeight = tabHandleHeight + ((totalTabs - 1 - index) * heightIncrement)
+        dynamicHeight = incrementalHeight
+        yPosition = windowHeight - incrementalHeight
     }
 
     if (tabIndex !== -1 && index < tabIndex) {
@@ -242,6 +247,7 @@ export default function VerticalTabs({ activeTab, onTabChange, children }: Verti
                             isActive={isActive}
                             tabIndex={tabIndex}
                             horizontalOffset={horizontalOffset}
+                            totalTabs={totalTabs}
                             onTabChange={onTabChange}
                         >
                             {isActive && children}
