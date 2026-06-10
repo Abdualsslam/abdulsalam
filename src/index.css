@@ -1,17 +1,13 @@
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@200..1000&family=Tajawal:wght@200..900&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* SF Pro Font - Apple's San Francisco font */
+
+/* SF Pro Font - Fallback */
 @font-face {
     font-family: 'SF Pro';
-    src: local('-apple-system'), local('BlinkMacSystemFont'), local('Segoe UI'), local('Roboto'), local('Helvetica Neue'), local('Arial');
-    font-weight: 100 900;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: 'SF Pro Display';
     src: local('-apple-system'), local('BlinkMacSystemFont'), local('Segoe UI'), local('Roboto'), local('Helvetica Neue'), local('Arial');
     font-weight: 100 900;
     font-style: normal;
@@ -29,7 +25,8 @@
     }
 
     body {
-        @apply font-sf bg-dark text-white leading-relaxed;
+        font-family: 'Cairo', 'Tajawal', 'SF Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        @apply bg-dark text-white leading-relaxed;
         direction: rtl;
         overflow: hidden;
         height: 100vh;

@@ -17,8 +17,8 @@ export default function Hero() {
                 </div>
             </div>
 
-            <div className="max-w-7xl mx-auto px-5 pt-16 pb-20 lg:pt-24 lg:pb-0 h-full">
-                <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-end min-h-[calc(100vh-10rem)] lg:min-h-[calc(100vh-6rem)]">
+            <div className="max-w-7xl mx-auto px-5 pt-12 pb-24 md:pt-16 md:pb-20 lg:pt-24 lg:pb-0 h-full">
+                <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center min-h-[calc(100vh-12rem)] lg:min-h-[calc(100vh-6rem)]">
                     {/* Text Content */}
                     <motion.div
                         className="text-center lg:text-right order-1 lg:order-1"
@@ -27,7 +27,7 @@ export default function Hero() {
                         transition={{ duration: 0.8 }}
                     >
                         <motion.span
-                            className="inline-block text-lg text-primary-light mb-4 px-5 py-2 bg-primary/15 rounded-full border border-primary/30"
+                            className="inline-block text-base md:text-lg text-primary-light mb-2 md:mb-4 px-4 md:px-5 py-1.5 md:py-2 bg-primary/15 rounded-full border border-primary/30"
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
                             transition={{ delay: 0.2 }}
@@ -36,7 +36,7 @@ export default function Hero() {
                         </motion.span>
 
                         <motion.h1
-                            className="text-5xl md:text-6xl font-extrabold mb-4 leading-tight"
+                            className="text-4xl md:text-6xl font-extrabold mb-2 md:mb-4 leading-tight"
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: 0.4 }}
@@ -45,25 +45,25 @@ export default function Hero() {
                         </motion.h1>
 
                         <motion.h2
-                            className="text-2xl md:text-3xl font-medium text-gray-400 mb-6"
+                            className="text-xl md:text-3xl font-medium text-gray-400 mb-4 md:mb-6"
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: 0.6 }}
                         >
-                            مبرمج <span className="gradient-text">Flutter</span> و <span className="gradient-text">Automation</span>
+                            مطور <span className="gradient-text">Flutter</span> | محلل <span className="gradient-text">نظم</span> | خبير <span className="gradient-text">أتمتة</span>
                         </motion.h2>
 
                         <motion.p
-                            className="text-lg text-gray-400 max-w-xl mx-auto lg:mx-0 lg:mr-0 mb-10 leading-relaxed"
+                            className="text-sm md:text-lg text-gray-400 max-w-xl mx-auto lg:mx-0 lg:mr-0 mb-6 md:mb-10 leading-relaxed"
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
                             transition={{ delay: 0.8 }}
                         >
-                            أقوم بتطوير تطبيقات الهاتف المحمول وحلول الأتمتة التي تساعد الشركات على تحسين أدائها وتوفير الوقت والجهد
+                            مهندس برمجيات هاتف محمول متخصص في بناء تطبيقات متكاملة وآمنة ببنى برمجية متينة (Clean Architecture) وإدارة حالة متقدمة (Bloc/Cubit)، وخبير في أتمتة العمليات (Python, n8n) وتحليل الأنظمة.
                         </motion.p>
 
                         <motion.div
-                            className="flex gap-5 justify-center lg:justify-start flex-wrap mb-12"
+                            className="flex gap-3 md:gap-5 justify-center lg:justify-start flex-wrap mb-8 md:mb-12"
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: 1 }}
@@ -94,7 +94,7 @@ export default function Hero() {
                                 <Github size={24} />
                             </a>
                             <a
-                                href="https://linkedin.com"
+                                href="https://www.linkedin.com/in/abdulsalam-muaad/"
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 aria-label="LinkedIn"
@@ -103,7 +103,7 @@ export default function Hero() {
                                 <Linkedin size={24} />
                             </a>
                             <a
-                                href="mailto:contact@abdulsalam.dev"
+                                href="mailto:abdulsalammuaad@gmail.com"
                                 aria-label="Email"
                                 className="w-12 h-12 flex items-center justify-center rounded-full bg-dark-card text-gray-400 border border-white/10 transition-all duration-300 hover:bg-primary hover:text-white hover:-translate-y-1 hover:shadow-lg hover:shadow-primary/30"
                             >

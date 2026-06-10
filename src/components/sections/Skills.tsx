@@ -1,22 +1,28 @@
 import { motion } from 'framer-motion'
 
 const skillsData = {
-    'تطوير التطبيقات': [
+    'تطوير الموبايل (Flutter & Dart)': [
         { name: 'Flutter', level: 95 },
         { name: 'Dart', level: 90 },
-        { name: 'React Native', level: 70 },
+        { name: 'Clean Architecture', level: 90 },
+        { name: 'Bloc / Cubit', level: 90 },
+        { name: 'GetX', level: 85 },
+        { name: 'AR/EN Localization', level: 90 },
     ],
-    'الأتمتة والـ Backend': [
-        { name: 'Python', level: 85 },
-        { name: 'Node.js', level: 80 },
-        { name: 'Firebase', level: 85 },
-        { name: 'REST APIs', level: 90 },
+    'الأتمتة وتحليل النظم': [
+        { name: 'Python Scripting', level: 85 },
+        { name: 'n8n Workflows', level: 90 },
+        { name: 'Systems Analysis', level: 85 },
+        { name: 'User Flows & Data Entities', level: 85 },
     ],
-    'الأدوات والتقنيات': [
+    'التقنيات السحابية والأدوات': [
+        { name: 'Dio & REST APIs', level: 90 },
+        { name: 'Socket.IO (Real-time)', level: 85 },
+        { name: 'JWT Auth & Refresh Tokens', level: 90 },
+        { name: 'Hive & Firestore', level: 85 },
+        { name: 'FCM & Push Notifications', level: 90 },
+        { name: 'Google Maps & Geolocator', level: 85 },
         { name: 'Git / GitHub', level: 90 },
-        { name: 'Docker', level: 75 },
-        { name: 'CI/CD', level: 70 },
-        { name: 'Figma', level: 65 },
     ],
 }
 

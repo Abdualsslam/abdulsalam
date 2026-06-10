@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
-import { Mail, Phone, MapPin, Send, Github, Linkedin, Twitter } from 'lucide-react'
+import { Mail, Phone, MapPin, Send, Github, Linkedin } from 'lucide-react'
 
 export default function Contact() {
     const [formData, setFormData] = useState({
@@ -21,15 +21,14 @@ export default function Contact() {
     }
 
     const contactInfo = [
-        { icon: <Mail size={24} />, label: 'البريد الإلكتروني', value: 'contact@abdulsalam.pro' },
+        { icon: <Mail size={24} />, label: 'البريد الإلكتروني', value: 'abdulsalammuaad@gmail.com' },
         { icon: <Phone size={24} />, label: 'الهاتف', value: '+967 775 019 485' },
-        { icon: <MapPin size={24} />, label: 'الموقع', value: 'صنعاء اليمن' },
+        { icon: <MapPin size={24} />, label: 'الموقع', value: 'صنعاء، اليمن' },
     ]
 
     const socialLinks = [
         { icon: <Github size={24} />, href: 'https://github.com/Abdualsslam', label: 'GitHub' },
-        { icon: <Linkedin size={24} />, href: 'https://linkedin.com', label: 'LinkedIn' },
-        { icon: <Twitter size={24} />, href: 'https://twitter.com', label: 'Twitter' },
+        { icon: <Linkedin size={24} />, href: 'https://www.linkedin.com/in/abdulsalam-muaad/', label: 'LinkedIn' },
     ]
 
     return (

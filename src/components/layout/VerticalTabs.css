@@ -29,7 +29,7 @@
     cursor: pointer;
     pointer-events: auto;
     color: white;
-    font-family: 'SF Pro', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-family: inherit;
     font-size: 9px;
     font-weight: 600;
     background-color: rgba(126, 102, 172, 0.4);
@@ -95,7 +95,7 @@
     margin-bottom: -4px;
     cursor: pointer;
     color: #FFF;
-    font-family: 'SF Pro', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-family: inherit;
     font-weight: 700;
     font-size: 9px;
     text-transform: uppercase;

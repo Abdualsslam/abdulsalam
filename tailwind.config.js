@@ -22,7 +22,9 @@ export default {
                 },
             },
             fontFamily: {
-                sf: ['"SF Pro"', '"SF Pro Display"', '-apple-system', 'BlinkMacSystemFont', '"Segoe UI"', 'Roboto', '"Helvetica Neue"', 'Arial', 'sans-serif'],
+                cairo: ['"Cairo"', 'sans-serif'],
+                tajawal: ['"Tajawal"', 'sans-serif'],
+                sf: ['"Cairo"', '"Tajawal"', '"SF Pro"', '-apple-system', 'BlinkMacSystemFont', '"Segoe UI"', 'Roboto', '"Helvetica Neue"', 'Arial', 'sans-serif'],
             },
             borderRadius: {
                 'xl': '20px',
