@@ -32,7 +32,7 @@ export default function Contact() {
     ]
 
     return (
-        <section id="contact" className="py-24 bg-dark-secondary">
+        <section id="contact" className="py-24">
             <div className="max-w-6xl mx-auto px-5">
                 <motion.h2
                     className="section-title"
