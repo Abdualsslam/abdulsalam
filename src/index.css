@@ -53,6 +53,17 @@
     ::selection {
         @apply bg-primary text-white;
     }
+
+    @media (prefers-reduced-motion: reduce) {
+
+        *,
+        *::before,
+        *::after {
+            animation-duration: 0.001ms !important;
+            animation-iteration-count: 1 !important;
+            transition-duration: 0.001ms !important;
+        }
+    }
 }
 
 @layer components {
@@ -77,11 +88,56 @@
     }
 
     .card {
-        @apply bg-dark-card rounded-xl p-7 border border-white/5 transition-all duration-300;
+        @apply rounded-2xl p-7 transition-all duration-300;
+        background: rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(12px) saturate(130%);
+        -webkit-backdrop-filter: blur(12px) saturate(130%);
+        border: 1px solid rgba(255, 255, 255, 0.08);
     }
 
     .card:hover {
-        @apply bg-dark-card-hover -translate-y-1 border-primary/30 shadow-lg shadow-primary/20;
+        @apply -translate-y-1.5;
+        background: rgba(255, 255, 255, 0.08);
+        border-color: rgba(126, 102, 172, 0.45);
+        box-shadow: 0 12px 40px rgba(126, 102, 172, 0.25);
+    }
+
+    .glass-panel {
+        background: rgba(24, 22, 40, 0.55);
+        backdrop-filter: blur(22px) saturate(140%);
+        -webkit-backdrop-filter: blur(22px) saturate(140%);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+    }
+
+    .gradient-text-animated {
+        background: linear-gradient(90deg, #7E66AC, #8F00FF, #00D9FF, #8F00FF, #7E66AC);
+        background-size: 300% 100%;
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        animation: gradient-shift 6s ease infinite;
+    }
+
+    @keyframes gradient-shift {
+
+        0%,
+        100% {
+            background-position: 0% 50%;
+        }
+
+        50% {
+            background-position: 100% 50%;
+        }
+    }
+
+    @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+        .card {
+            background: rgba(26, 26, 37, 0.92);
+        }
+
+        .glass-panel {
+            background: rgba(20, 18, 32, 0.94);
+        }
     }
 
     .section-title {
