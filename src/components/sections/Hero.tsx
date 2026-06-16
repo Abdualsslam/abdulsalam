@@ -1,5 +1,8 @@
-import { motion } from 'framer-motion'
+import { motion, useMotionValue, useMotionTemplate, useTransform, useSpring, useReducedMotion } from 'framer-motion'
 import { Github, Linkedin, Mail, Download } from 'lucide-react'
+import { useRef } from 'react'
+import { usePointerParallax } from '../../hooks/usePointerParallax'
+import MagneticButton from '../common/MagneticButton'
 import myPhoto from '../../assets/my_photo.png'
 import flutterLogo from '../../assets/flutter-logo.png'
 import vscodeLogo from '../../assets/visual-studio-code.png'
@@ -7,15 +10,56 @@ import pythonLogo from '../../assets/python.png'
 import n8nLogo from '../../assets/n8n.svg'
 
 export default function Hero() {
+    const reduce = useReducedMotion()
+    const sectionRef = useRef<HTMLElement>(null)
+    const { x: px, y: py } = usePointerParallax(sectionRef)
+
+    // Raw pointer pixels for the cursor spotlight
+    const spotX = useMotionValue(0)
+    const spotY = useMotionValue(0)
+    const ssx = useSpring(spotX, { stiffness: 150, damping: 25 })
+    const ssy = useSpring(spotY, { stiffness: 150, damping: 25 })
+    const spotlight = useMotionTemplate`radial-gradient(600px circle at ${ssx}px ${ssy}px, rgba(126,102,172,0.18), transparent 70%)`
+    const handleSpotlight = (e: React.PointerEvent) => {
+        if (reduce) return
+        const r = e.currentTarget.getBoundingClientRect()
+        spotX.set(e.clientX - r.left)
+        spotY.set(e.clientY - r.top)
+    }
+
+    // Parallax translations (different factors = depth)
+    const orbX = useTransform(px, (v) => v * -40)
+    const orbY = useTransform(py, (v) => v * -40)
+    const photoX = useTransform(px, (v) => v * 25)
+    const photoY = useTransform(py, (v) => v * 25)
+    // 3D tilt for the photo
+    const rotateY = useTransform(px, (v) => v * 16)
+    const rotateX = useTransform(py, (v) => v * -16)
+
     return (
-        <section id="home" className="min-h-screen flex items-center justify-center relative overflow-hidden">
+        <section
+            id="home"
+            ref={sectionRef}
+            onPointerMove={handleSpotlight}
+            className="min-h-screen flex items-center justify-center relative overflow-hidden"
+        >
             {/* Background */}
             <div className="absolute inset-0 -z-10">
                 <div className="absolute inset-0 bg-gradient-to-br from-dark via-dark-secondary to-[#16213e]">
-                    <div className="absolute top-[-50%] right-[-50%] w-full h-full bg-[radial-gradient(circle,rgba(126,102,172,0.15)_0%,transparent_60%)] animate-pulse-slow" />
-                    <div className="absolute bottom-[-50%] left-[-50%] w-[80%] h-[80%] bg-[radial-gradient(circle,rgba(143,0,255,0.1)_0%,transparent_60%)] animate-pulse-slow animation-delay-[-5s]" />
+                    <motion.div style={{ x: orbX, y: orbY }} className="absolute inset-0">
+                        <div className="absolute top-[-50%] right-[-50%] w-full h-full bg-[radial-gradient(circle,rgba(126,102,172,0.15)_0%,transparent_60%)] animate-pulse-slow" />
+                        <div className="absolute bottom-[-50%] left-[-50%] w-[80%] h-[80%] bg-[radial-gradient(circle,rgba(143,0,255,0.1)_0%,transparent_60%)] animate-pulse-slow animation-delay-[-5s]" />
+                    </motion.div>
                 </div>
             </div>
+
+            {/* Cursor spotlight */}
+            {!reduce && (
+                <motion.div
+                    className="pointer-events-none absolute inset-0 -z-[5]"
+                    style={{ background: spotlight }}
+                />
+            )}
 
             <div className="max-w-7xl mx-auto px-5 pt-12 pb-24 md:pt-16 md:pb-20 lg:pt-24 lg:pb-0 h-full">
                 <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center min-h-[calc(100vh-12rem)] lg:min-h-[calc(100vh-6rem)]">
@@ -50,7 +94,7 @@ export default function Hero() {
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: 0.6 }}
                         >
-                            مطور <span className="gradient-text">Flutter</span> | محلل <span className="gradient-text">نظم</span> | خبير <span className="gradient-text">أتمتة</span>
+                            مطور <span className="gradient-text-animated">Flutter</span> | محلل <span className="gradient-text-animated">نظم</span> | خبير <span className="gradient-text-animated">أتمتة</span>
                         </motion.h2>
 
                         <motion.p
@@ -68,14 +112,14 @@ export default function Hero() {
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: 1 }}
                         >
-                            <a href="#contact" className="btn btn-primary">
+                            <MagneticButton href="#contact" className="btn btn-primary">
                                 <Mail size={20} />
                                 تواصل معي
-                            </a>
-                            <a href="/cv.pdf" className="btn btn-secondary" download>
+                            </MagneticButton>
+                            <MagneticButton href="/cv.pdf" download className="btn btn-secondary">
                                 <Download size={20} />
                                 تحميل السيرة الذاتية
-                            </a>
+                            </MagneticButton>
                         </motion.div>
 
                         <motion.div
@@ -115,6 +159,7 @@ export default function Hero() {
                     {/* Photo Section */}
                     <motion.div
                         className="relative order-2 lg:order-2 flex justify-center items-end self-end"
+                        style={{ x: photoX, y: photoY }}
                         initial={{ opacity: 0, scale: 0.8 }}
                         animate={{ opacity: 1, scale: 1 }}
                         transition={{ duration: 1, delay: 0.3 }}
@@ -157,7 +202,7 @@ export default function Hero() {
                         {/* Main Photo Container */}
                         <motion.div
                             className="relative z-10"
-                            whileHover={{ scale: 1.02 }}
+                            style={{ rotateX, rotateY, transformPerspective: 900 }}
                             transition={{ duration: 0.3 }}
                         >
                             {/* Decorative Ring */}
