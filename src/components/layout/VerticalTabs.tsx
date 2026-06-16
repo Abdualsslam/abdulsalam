@@ -172,7 +172,7 @@ function TabPageUnit({ tab, pageContent, index, isActive, tabIndex, horizontalOf
                 }}
                 style={{
                     backgroundColor: tab.color,
-                    transform: `translateX(${horizontalOffset}px)`,
+                    translate: `${horizontalOffset}px 0`,
                     pointerEvents: 'auto',
                     zIndex: 100 + index,
                     cursor: 'grab',
@@ -186,7 +186,6 @@ function TabPageUnit({ tab, pageContent, index, isActive, tabIndex, horizontalOf
                 className="tab-page-content"
                 style={{
                     borderTopColor: tab.color,
-                    backgroundColor: '#1a1a2e',
                     pointerEvents: isActive ? 'auto' : 'none',
                 }}
             >

@@ -105,6 +105,7 @@
     border-radius: 6px 6px 0 0;
     user-select: none;
     -webkit-user-select: none;
+    will-change: transform, filter, translate, scale;
 }
 
 /* Larger tabs on desktop */
@@ -167,7 +168,10 @@
 }
 
 .attached-tab:hover {
-    filter: brightness(1.08);
+    filter: brightness(1.15);
+    transform: translateY(-8px);
+    scale: 1.04;
+    box-shadow: 0 -6px 24px color-mix(in srgb, var(--tab-color, #7E66AC) 65%, transparent);
 }
 
 .attached-tab-label {
@@ -187,9 +191,21 @@
     overflow: hidden;
     display: flex;
     flex-direction: column;
-    box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.4);
+    background: rgba(24, 22, 40, 0.55);
+    backdrop-filter: blur(22px) saturate(140%);
+    -webkit-backdrop-filter: blur(22px) saturate(140%);
+    border-left: 1px solid rgba(255, 255, 255, 0.08);
+    border-right: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 -12px 60px color-mix(in srgb, var(--tab-color, #7E66AC) 30%, transparent),
+        0 -4px 20px rgba(0, 0, 0, 0.45);
     margin-inline: 32px;
     min-height: 0;
+}
+
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    .tab-page-content {
+        background: rgba(20, 18, 32, 0.94);
+    }
 }
 
 .tab-page-content>.tab-scroll-wrapper {
