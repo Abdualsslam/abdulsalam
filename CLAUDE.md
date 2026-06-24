@@ -1,0 +1,42 @@
+# CLAUDE.md
+
+This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+
+## Overview
+
+Personal portfolio site for **عبدالسلام معاد** (a Flutter & automation developer). Single-page React app, Arabic-first and RTL (`<html lang="ar" dir="rtl">`), deployed as a static site. UI copy is in Arabic.
+
+## Stack
+
+React 19 · Vite 6 · TypeScript (strict) · Tailwind CSS 3 · Framer Motion 12 · lucide-react. No router, no test runner, no server — purely static client-side.
+
+## Commands
+
+```bash
+npm run dev        # Vite dev server (default http://localhost:5173)
+npm run build      # tsc type-check, then vite build → dist/
+npm run preview    # Serve the production build locally
+npm run lint       # ESLint over ts/tsx
+```
+
+There are no automated tests. `npm run build` runs `tsc` first, so a type error fails the build — treat a clean build as the verification gate. Note `.vscode/launch.json` points Chrome at port 8080, which is stale; the dev server actually runs on Vite's default 5173.
+
+## Path alias
+
+`@/*` → `src/*` (configured in both `tsconfig.json` and `vite.config.ts`). Keep them in sync if changed.
+
+## Architecture
+
+The whole app is the navigation shell — there are no routes or pages in the usual sense.
+
+- **`App.tsx`** renders a fixed full-screen `Hero` as the background layer (`z-0`), then mounts `VerticalTabs` on top. Section components (`About`, `Skills`, `Projects`, `Experience`, `Contact`) are passed in as `tabContents`, keyed by `TabId`.
+- **`hooks/useNavigation.ts`** is the single source of truth for navigation: `TabId` union, the `tabsConfig` array (id + Arabic label + accent color), and `activeTab` state. `activeTab === null` means "home" (no panel open). **Add or reorder a section by editing `tabsConfig` and the `tabContents` map in `App.tsx` together** — both are keyed by `TabId`.
+- **`components/layout/VerticalTabs.tsx`** is the signature UI: bottom tabs stacked like physical folder tabs (horizontal fan-out via `horizontalOffset`, staircase via `heightIncrement`), each draggable. Opening a tab springs its page up; dragging it down past a threshold (or flicking) calls `onTabChange('home')` to close. Page height is measured dynamically from content (`scrollHeight`) via `useLayoutEffect`/resize listeners. The drag physics, z-index ordering, and `pointerEvents` gating are intentional and tightly coupled — change them carefully. Its CSS lives in the colocated `VerticalTabs.css` (the only non-Tailwind stylesheet).
+
+**Dead code to ignore:** `components/layout/PaperPage.tsx` and `TabBar.tsx` are defined but never imported — earlier navigation experiments superseded by `VerticalTabs`.
+
+## Styling
+
+Tailwind utility classes everywhere, with a custom theme in `tailwind.config.js` — use these tokens rather than raw hex: `primary` (purple `#7E66AC`, with `.dark`/`.light`), `secondary`, `accent`, and the `dark` palette (`dark`, `dark-secondary`, `dark-card`, `dark-card-hover`). Fonts are Arabic-first (`font-cairo`, `font-tajawal`, `font-sf`); Cairo is loaded from Google Fonts in `index.html`. Because the app is RTL, prefer logical layout (avoid hardcoded left/right that breaks RTL).
+
+> `ARCHITECTURE.md` (Arabic) is an aspirational design doc and is **out of date** vs. the code: it describes CSS Modules and scroll-based sections, but the app actually uses Tailwind and the tab-panel navigation above. Trust the code over that document.

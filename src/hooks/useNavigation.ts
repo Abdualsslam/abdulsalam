@@ -1,6 +1,6 @@
 import { useState, useCallback } from 'react'
 
-export type TabId = 'home' | 'about' | 'skills' | 'projects' | 'experience' | 'contact'
+export type TabId = 'home' | 'about' | 'skills' | 'projects' | 'experience' | 'qualifications' | 'contact'
 
 export interface TabConfig {
     id: TabId
@@ -10,11 +10,12 @@ export interface TabConfig {
 
 export const tabsConfig: TabConfig[] = [
     { id: 'home', label: 'الرئيسية', color: '#9b59b6' },
-    { id: 'about', label: 'عني', color: '#b073d0' },
-    { id: 'skills', label: 'المهارات', color: '#a566c3' },
-    { id: 'projects', label: 'المشاريع', color: '#9b59b6' },
-    { id: 'experience', label: 'الخبرات', color: '#8e44ad' },
-    { id: 'contact', label: 'تواصل', color: '#7d3c98' },
+    { id: 'about', label: 'عني', color: '#b98fd6' },
+    { id: 'skills', label: 'المهارات', color: '#a878c9' },
+    { id: 'projects', label: 'المشاريع', color: '#9a63bd' },
+    { id: 'experience', label: 'الخبرات', color: '#8a4fae' },
+    { id: 'qualifications', label: 'المؤهلات', color: '#7a429e' },
+    { id: 'contact', label: 'تواصل', color: '#6a3590' },
 ]
 
 export function useNavigation() {

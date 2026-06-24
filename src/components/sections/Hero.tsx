@@ -1,31 +1,29 @@
-import { motion, useMotionValue, useMotionTemplate, useTransform, useSpring, useReducedMotion } from 'framer-motion'
+import { motion, useTransform } from 'framer-motion'
 import { Github, Linkedin, Mail, Download } from 'lucide-react'
 import { useRef } from 'react'
 import { usePointerParallax } from '../../hooks/usePointerParallax'
 import MagneticButton from '../common/MagneticButton'
-import myPhoto from '../../assets/my_photo.png'
-import flutterLogo from '../../assets/flutter-logo.png'
-import vscodeLogo from '../../assets/visual-studio-code.png'
-import pythonLogo from '../../assets/python.png'
+import StatCounter from '../common/StatCounter'
+import myPhoto from '../../assets/my_photo.webp'
+import flutterLogo from '../../assets/flutter-logo.webp'
+import vscodeLogo from '../../assets/visual-studio-code.webp'
+import pythonLogo from '../../assets/python.webp'
 import n8nLogo from '../../assets/n8n.svg'
 
-export default function Hero() {
-    const reduce = useReducedMotion()
+interface HeroProps {
+    onOpenContact?: () => void
+}
+
+const stats = [
+    { value: 5, prefix: '+', label: 'سنوات خبرة' },
+    { value: 6, prefix: '', label: 'مشاريع رئيسية' },
+    { value: 2, prefix: '', label: 'حزمة على pub.dev' },
+    { value: 80, prefix: '~', label: 'شاشة في أكبر تطبيق' },
+]
+
+export default function Hero({ onOpenContact }: HeroProps) {
     const sectionRef = useRef<HTMLElement>(null)
     const { x: px, y: py } = usePointerParallax(sectionRef)
-
-    // Raw pointer pixels for the cursor spotlight
-    const spotX = useMotionValue(0)
-    const spotY = useMotionValue(0)
-    const ssx = useSpring(spotX, { stiffness: 150, damping: 25 })
-    const ssy = useSpring(spotY, { stiffness: 150, damping: 25 })
-    const spotlight = useMotionTemplate`radial-gradient(600px circle at ${ssx}px ${ssy}px, rgba(126,102,172,0.18), transparent 70%)`
-    const handleSpotlight = (e: React.PointerEvent) => {
-        if (reduce) return
-        const r = e.currentTarget.getBoundingClientRect()
-        spotX.set(e.clientX - r.left)
-        spotY.set(e.clientY - r.top)
-    }
 
     // Parallax translations (different factors = depth)
     const orbX = useTransform(px, (v) => v * -40)
@@ -40,7 +38,6 @@ export default function Hero() {
         <section
             id="home"
             ref={sectionRef}
-            onPointerMove={handleSpotlight}
             className="min-h-screen flex items-center justify-center relative overflow-hidden"
         >
             {/* Background */}
@@ -53,15 +50,7 @@ export default function Hero() {
                 </div>
             </div>
 
-            {/* Cursor spotlight */}
-            {!reduce && (
-                <motion.div
-                    className="pointer-events-none absolute inset-0 -z-[5]"
-                    style={{ background: spotlight }}
-                />
-            )}
-
-            <div className="max-w-7xl mx-auto px-5 pt-12 pb-24 md:pt-16 md:pb-20 lg:pt-24 lg:pb-0 h-full">
+            <div className="max-w-7xl mx-auto px-5 pt-12 pb-24 md:pt-16 md:pb-20 lg:pt-20 lg:pb-12 h-full">
                 <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center min-h-[calc(100vh-12rem)] lg:min-h-[calc(100vh-6rem)]">
                     {/* Text Content */}
                     <motion.div
@@ -71,12 +60,16 @@ export default function Hero() {
                         transition={{ duration: 0.8 }}
                     >
                         <motion.span
-                            className="inline-block text-base md:text-lg text-primary-light mb-2 md:mb-4 px-4 md:px-5 py-1.5 md:py-2 bg-primary/15 rounded-full border border-primary/30"
+                            className="inline-flex items-center gap-2 text-sm md:text-base text-emerald-300 mb-3 md:mb-5 px-4 md:px-5 py-1.5 md:py-2 bg-emerald-500/10 rounded-full border border-emerald-500/30"
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
                             transition={{ delay: 0.2 }}
                         >
-                            مرحباً، أنا
+                            <span className="relative flex h-2.5 w-2.5">
+                                <span className="absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75 animate-ping" />
+                                <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-emerald-400" />
+                            </span>
+                            متاح للعمل الحر والمشاريع
                         </motion.span>
 
                         <motion.h1
@@ -94,17 +87,34 @@ export default function Hero() {
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: 0.6 }}
                         >
-                            مطور <span className="gradient-text-animated">Flutter</span> | محلل <span className="gradient-text-animated">نظم</span> | خبير <span className="gradient-text-animated">أتمتة</span>
+                            مطور <span className="gradient-text-animated">Flutter</span> · محلل <span className="gradient-text-animated">نظم</span> · مهندس <span className="gradient-text-animated">أتمتة</span>
                         </motion.h2>
 
                         <motion.p
-                            className="text-sm md:text-lg text-gray-400 max-w-xl mx-auto lg:mx-0 lg:mr-0 mb-6 md:mb-10 leading-relaxed"
+                            className="text-sm md:text-lg text-gray-300/90 max-w-xl mx-auto lg:mx-0 lg:mr-0 mb-7 md:mb-10 leading-relaxed"
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
                             transition={{ delay: 0.8 }}
                         >
-                            مهندس برمجيات هاتف محمول متخصص في بناء تطبيقات متكاملة وآمنة ببنى برمجية متينة (Clean Architecture) وإدارة حالة متقدمة (Bloc/Cubit)، وخبير في أتمتة العمليات (Python, n8n) وتحليل الأنظمة.
+                            أبني تطبيقات <span className="text-primary-light font-medium">Flutter</span> سريعة وآمنة بمعمارية نظيفة وإدارة حالة متقدمة، وأصمّم أنظمة أتمتة (<span className="text-primary-light font-medium">Python · n8n</span>) توفّر وقت فرق العمل. من تطبيق ضخم بـ~80 شاشة إلى حزمتين منشورتين على pub.dev — أحوّل الأفكار المعقّدة إلى منتجات حقيقية.
                         </motion.p>
+
+                        <motion.div
+                            className="grid grid-cols-2 sm:grid-cols-4 gap-3 md:gap-4 max-w-xl mx-auto lg:mx-0 mb-7 md:mb-10"
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: 0.9 }}
+                        >
+                            {stats.map((stat, i) => (
+                                <StatCounter
+                                    key={stat.label}
+                                    value={stat.value}
+                                    prefix={stat.prefix}
+                                    label={stat.label}
+                                    delay={900 + i * 120}
+                                />
+                            ))}
+                        </motion.div>
 
                         <motion.div
                             className="flex gap-3 md:gap-5 justify-center lg:justify-start flex-wrap mb-8 md:mb-12"
@@ -112,7 +122,14 @@ export default function Hero() {
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: 1 }}
                         >
-                            <MagneticButton href="#contact" className="btn btn-primary">
+                            <MagneticButton
+                                href="#contact"
+                                className="btn btn-primary"
+                                onClick={(e) => {
+                                    e.preventDefault()
+                                    onOpenContact?.()
+                                }}
+                            >
                                 <Mail size={20} />
                                 تواصل معي
                             </MagneticButton>

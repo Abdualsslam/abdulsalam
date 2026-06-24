@@ -2,18 +2,49 @@ import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { Mail, Phone, MapPin, Send, Github, Linkedin } from 'lucide-react'
 
+type SubmitStatus = 'idle' | 'sending' | 'success' | 'error'
+
+const FORMSPREE_ID = import.meta.env.VITE_FORMSPREE_ID
+
 export default function Contact() {
     const [formData, setFormData] = useState({
         name: '',
         email: '',
         message: ''
     })
+    const [status, setStatus] = useState<SubmitStatus>('idle')
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault()
-        console.log(formData)
-        alert('شكراً لتواصلك! سأرد عليك قريباً.')
-        setFormData({ name: '', email: '', message: '' })
+
+        // No Formspree configured → fall back to the user's mail client
+        if (!FORMSPREE_ID) {
+            const subject = encodeURIComponent(`رسالة من ${formData.name || 'زائر الموقع'}`)
+            const body = encodeURIComponent(`${formData.message}\n\nالبريد للرد: ${formData.email}`)
+            window.location.href = `mailto:abdulsalammuaad@gmail.com?subject=${subject}&body=${body}`
+            return
+        }
+
+        try {
+            setStatus('sending')
+            const res = await fetch(`https://formspree.io/f/${FORMSPREE_ID}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Accept: 'application/json',
+                },
+                body: JSON.stringify(formData),
+            })
+
+            if (res.ok) {
+                setStatus('success')
+                setFormData({ name: '', email: '', message: '' })
+            } else {
+                setStatus('error')
+            }
+        } catch {
+            setStatus('error')
+        }
     }
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -133,10 +164,25 @@ export default function Contact() {
                             />
                         </div>
 
-                        <button type="submit" className="btn btn-primary w-full justify-center">
+                        <button
+                            type="submit"
+                            disabled={status === 'sending'}
+                            className="btn btn-primary w-full justify-center disabled:opacity-60 disabled:cursor-not-allowed"
+                        >
                             <Send size={20} />
-                            إرسال الرسالة
+                            {status === 'sending' ? 'جارٍ الإرسال...' : 'إرسال الرسالة'}
                         </button>
+
+                        {status === 'success' && (
+                            <p className="mt-4 text-center text-emerald-400 text-sm" role="status">
+                                شكراً لتواصلك! وصلتني رسالتك وسأرد عليك قريباً.
+                            </p>
+                        )}
+                        {status === 'error' && (
+                            <p className="mt-4 text-center text-red-400 text-sm" role="alert">
+                                تعذّر إرسال الرسالة. حاول مجدداً أو راسلني مباشرة على abdulsalammuaad@gmail.com
+                            </p>
+                        )}
                     </motion.form>
                 </div>
             </div>

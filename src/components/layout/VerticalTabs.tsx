@@ -165,10 +165,20 @@ function TabPageUnit({ tab, pageContent, index, isActive, tabIndex, horizontalOf
         >
             <div
                 className="attached-tab"
+                role="tab"
+                tabIndex={0}
+                aria-selected={isActive}
+                aria-label={`قسم ${tab.label}`}
                 onPointerDown={(e) => dragControls.start(e)}
                 onClick={(e) => {
                     e.stopPropagation()
                     isActive ? onTabChange('home') : onTabChange(tab.id)
+                }}
+                onKeyDown={(e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault()
+                        isActive ? onTabChange('home') : onTabChange(tab.id)
+                    }
                 }}
                 style={{
                     backgroundColor: tab.color,
@@ -184,6 +194,9 @@ function TabPageUnit({ tab, pageContent, index, isActive, tabIndex, horizontalOf
             {/* The Page Content */}
             <div
                 className="tab-page-content"
+                role="tabpanel"
+                aria-label={tab.label}
+                aria-hidden={!isActive}
                 style={{
                     borderTopColor: tab.color,
                     pointerEvents: isActive ? 'auto' : 'none',
@@ -221,7 +234,7 @@ export default function VerticalTabs({ activeTab, onTabChange, tabContents }: Ve
             </motion.button>
 
             {/* Stacked tab-pages */}
-            <div className="stacked-pages">
+            <div className="stacked-pages" role="tablist" aria-label="أقسام الموقع">
                 {tabs.map((tab, index) => {
                     const isActive = activeTab === tab.id
                     const tabIndex = tabs.findIndex(t => t.id === activeTab)
