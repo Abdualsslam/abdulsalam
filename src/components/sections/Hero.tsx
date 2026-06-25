@@ -4,6 +4,7 @@ import { useRef } from 'react'
 import { usePointerParallax } from '../../hooks/usePointerParallax'
 import MagneticButton from '../common/MagneticButton'
 import StatCounter from '../common/StatCounter'
+import PixelTrail from '../common/PixelTrail'
 import myPhoto from '../../assets/my_photo.webp'
 import flutterLogo from '../../assets/flutter-logo.webp'
 import vscodeLogo from '../../assets/visual-studio-code.webp'
@@ -26,8 +27,6 @@ export default function Hero({ onOpenContact }: HeroProps) {
     const { x: px, y: py } = usePointerParallax(sectionRef)
 
     // Parallax translations (different factors = depth)
-    const orbX = useTransform(px, (v) => v * -40)
-    const orbY = useTransform(py, (v) => v * -40)
     const photoX = useTransform(px, (v) => v * 25)
     const photoY = useTransform(py, (v) => v * 25)
     // 3D tilt for the photo
@@ -41,12 +40,22 @@ export default function Hero({ onOpenContact }: HeroProps) {
             className="min-h-screen flex items-center justify-center relative overflow-hidden"
         >
             {/* Background */}
-            <div className="absolute inset-0 -z-10">
-                <div className="absolute inset-0 bg-gradient-to-br from-dark via-dark-secondary to-[#16213e]">
-                    <motion.div style={{ x: orbX, y: orbY }} className="absolute inset-0">
-                        <div className="absolute top-[-50%] right-[-50%] w-full h-full bg-[radial-gradient(circle,rgba(126,102,172,0.15)_0%,transparent_60%)] animate-pulse-slow" />
-                        <div className="absolute bottom-[-50%] left-[-50%] w-[80%] h-[80%] bg-[radial-gradient(circle,rgba(143,0,255,0.1)_0%,transparent_60%)] animate-pulse-slow animation-delay-[-5s]" />
-                    </motion.div>
+            <div className="absolute inset-0 -z-10 bg-dark">
+                {/* Interactive Pixel Trail Background */}
+                <div className="absolute inset-0 opacity-45 pointer-events-none">
+                    <PixelTrail
+                        gridSize={80}
+                        trailSize={0.09}
+                        maxAge={250}
+                        interpolate={2.8}
+                        color="#7c3aed"
+                        gooeyFilter={{ id: "custom-goo-filter", strength: 2 }}
+                        gooeyEnabled
+                        gooStrength={2}
+                        canvasProps={{
+                            eventSource: document.getElementById('root') || undefined
+                        }}
+                    />
                 </div>
             </div>
 

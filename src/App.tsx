@@ -7,16 +7,12 @@ import Qualifications from './components/sections/Qualifications'
 import Contact from './components/sections/Contact'
 import { useNavigation } from './hooks/useNavigation'
 import VerticalTabs from './components/layout/VerticalTabs'
-import CursorGlow from './components/common/CursorGlow'
 
 function App() {
     const { activeTab, openTab } = useNavigation()
 
     return (
         <div className="app min-h-screen overflow-hidden relative">
-            {/* Interactive cursor effect (desktop, motion-safe) */}
-            <CursorGlow />
-
             {/* Hero stays fixed as background */}
             <div className="fixed inset-0 z-0">
                 <Hero onOpenContact={() => openTab('contact')} />
