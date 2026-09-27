@@ -1,76 +1,58 @@
-import { motion } from 'framer-motion'
-import { Code, Zap, Smartphone } from 'lucide-react'
-
+import { Smartphone, Workflow, Layers3, ArrowUpLeft } from "lucide-react";
 export default function About() {
-    const features = [
-        {
-            icon: <Smartphone size={32} />,
-            title: 'تطوير التطبيقات',
-            description: 'بناء تطبيقات متعددة المنصات باستخدام Flutter'
-        },
-        {
-            icon: <Zap size={32} />,
-            title: 'الأتمتة',
-            description: 'أتمتة العمليات وتحسين الإنتاجية'
-        },
-        {
-            icon: <Code size={32} />,
-            title: 'حلول برمجية',
-            description: 'تطوير حلول مخصصة للاحتياجات الخاصة'
-        }
-    ]
-
-    return (
-        <section id="about" className="py-24">
-            <div className="max-w-6xl mx-auto px-5">
-                <motion.h2
-                    className="section-title"
-                    initial={{ opacity: 0, y: 30 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                >
-                    نبذة عني
-                </motion.h2>
-
-                <div className="grid gap-16">
-                    <motion.div
-                        className="max-w-2xl mx-auto text-center"
-                        initial={{ opacity: 0, x: -50 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: 0.2 }}
-                    >
-                        <p className="text-xl mb-5 text-gray-300">
-                            مرحباً! أنا <strong className="text-primary">عبدالسلام معاد</strong>، مطور برمجيات متخصص في تطوير تطبيقات الهاتف المحمول وحلول الأتمتة.
-                        </p>
-                        <p className="text-gray-400 mb-4 leading-relaxed">
-                            أمتلك خبرة واسعة في تطوير تطبيقات Flutter عالية الجودة والأداء، بالإضافة إلى بناء أنظمة أتمتة تساعد الشركات على تحسين كفاءتها التشغيلية.
-                        </p>
-                        <p className="text-gray-400 leading-relaxed">
-                            أؤمن بأن التكنولوجيا يجب أن تكون أداة لتسهيل الحياة وتحسين تجربة المستخدم. لذلك أحرص دائماً على تطوير حلول تجمع بين الجمال والوظيفية.
-                        </p>
-                    </motion.div>
-
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                        {features.map((feature, index) => (
-                            <motion.div
-                                key={index}
-                                className="card text-center"
-                                initial={{ opacity: 0, y: 30 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ delay: 0.3 + index * 0.1 }}
-                            >
-                                <div className="w-16 h-16 mx-auto mb-5 flex items-center justify-center bg-gradient-to-r from-primary to-secondary rounded-xl text-white">
-                                    {feature.icon}
-                                </div>
-                                <h3 className="text-xl font-semibold mb-3">{feature.title}</h3>
-                                <p className="text-gray-400 text-sm">{feature.description}</p>
-                            </motion.div>
-                        ))}
-                    </div>
-                </div>
+  return (
+    <section id="about" className="about-section page-width section-space">
+      <div className="section-heading">
+        <div>
+          <span className="eyebrow">01 / خلف الكود</span>
+          <h2>
+            شغف بالتفاصيل.
+            <br />
+            <span>وحلول للصورة الكبيرة.</span>
+          </h2>
+        </div>
+        <div className="about-summary">
+          <p>
+            أنا عبدالسلام، مطور برمجيات أؤمن أن أفضل التقنيات هي التي تجعل
+            الحياة أسهل. أبني تطبيقات Flutter وأصمم أنظمة أتمتة تربط احتياجات
+            العمل بتجربة استخدام مدروسة.
+          </p>
+          <a className="text-link" href="#experience">
+            تعرّف على رحلتي <ArrowUpLeft size={18} />
+          </a>
+        </div>
+      </div>
+      <div className="services-grid">
+        {[
+          {
+            icon: Smartphone,
+            n: "01",
+            title: "تطبيقات تُحب استخدامها",
+            text: "تطبيقات Flutter متعددة المنصات، بمعمارية نظيفة وأداء سريع وتجربة متسقة.",
+          },
+          {
+            icon: Workflow,
+            n: "02",
+            title: "وقت أقل، إنجاز أكثر",
+            text: "مسارات عمل ذكية باستخدام Python وn8n تختصر المهام المتكررة وتربط أدواتك.",
+          },
+          {
+            icon: Layers3,
+            n: "03",
+            title: "من الفكرة إلى النظام",
+            text: "تحليل المتطلبات ورسم تدفقات المستخدم وتحويل التعقيد إلى حلول برمجية واضحة.",
+          },
+        ].map((item) => (
+          <article className="service-card" key={item.n}>
+            <div className="service-top">
+              <item.icon size={28} />
+              <span>{item.n}</span>
             </div>
-        </section>
-    )
+            <h3>{item.title}</h3>
+            <p>{item.text}</p>
+          </article>
+        ))}
+      </div>
+    </section>
+  );
 }

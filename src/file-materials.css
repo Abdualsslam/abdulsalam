@@ -1,0 +1,429 @@
+/* File stock, reinforced shoulders and paper labels inspired by physical filing folders. */
+.folder-dock {
+  background: transparent;
+  filter: drop-shadow(0 -7px 15px #0004);
+}
+.folder-tabs {
+  gap: 0;
+  height: 100px;
+  position: relative;
+  align-items: end;
+  isolation: isolate;
+}
+.folder-tab,
+.folder-tab.is-active,
+.folder-tab:hover {
+  --stock-top: #9c82b8;
+  --stock-bottom: #4d3864;
+  --stock-edge: #d7c7e8;
+  position: relative;
+  height: calc(77px + var(--tab-depth) * 3px);
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  background: transparent;
+  color: #30203f;
+  display: block;
+  filter: drop-shadow(-3px -4px 3px #0005);
+  margin: 0 -2px;
+  overflow: visible;
+}
+.folder-tab.is-active {
+  --stock-top: #d6c0ed;
+  --stock-bottom: #84649f;
+  --stock-edge: #f1e4ff;
+  height: calc(84px + var(--tab-depth) * 3px);
+}
+.folder-tab:hover {
+  --stock-top: #c1a2df;
+  --stock-bottom: #71518c;
+  --stock-edge: #e9d7f9;
+}
+.folder-tab:before {
+  display: none;
+}
+.folder-tab:after {
+  content: "";
+  position: absolute;
+  inset: 62% 1% 3%;
+  background: repeating-linear-gradient(
+    0deg,
+    #ffffff06 0px,
+    #ffffff06 1px,
+    transparent 1px,
+    transparent 3px
+  );
+  pointer-events: none;
+  border-bottom: 1px solid #180f2430;
+}
+.file-tab-profile {
+  position: absolute;
+  inset: 0;
+  width: 100% !important;
+  height: 100% !important;
+  overflow: visible;
+  pointer-events: none;
+  filter: none !important;
+  transition: none !important;
+}
+.file-tab-sticker {
+  position: absolute;
+  top: 17%;
+  left: 20%;
+  right: 20%;
+  height: 32%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  padding: 3px 5px;
+  background: linear-gradient(100deg, #ede5f3, #d9cce5);
+  border: 1px solid #f7f0fe99;
+  border-radius: 2px;
+  box-shadow:
+    0 1px 2px #1b0e3035,
+    inset 0 -1px 1px #95809c20;
+  color: #3a254e;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1;
+  rotate: -0.5deg;
+}
+.folder-tab:nth-child(2n) .file-tab-sticker {
+  rotate: 0.7deg;
+}
+.file-tab-sticker .tab-number {
+  font: 8px monospace;
+  opacity: 0.5;
+}
+.file-tab-stamp {
+  position: absolute;
+  bottom: 21%;
+  right: 22%;
+  opacity: 0.45;
+}
+.folder-tab .tab-notch {
+  bottom: 23%;
+  left: 23%;
+  right: auto;
+  width: 28px;
+  height: 8px;
+  background: repeating-linear-gradient(
+    90deg,
+    #37224299 0,
+    #37224299 1px,
+    transparent 1px,
+    transparent 3px
+  );
+  opacity: 0.35;
+}
+.folder-tab:hover .tab-notch {
+  height: 8px;
+  opacity: 0.6;
+}
+.dock-topline {
+  position: relative;
+  z-index: 2;
+  height: 24px;
+  padding-bottom: 0;
+  text-shadow: 0 2px 8px #000;
+}
+.folder-spine {
+  position: relative;
+  margin-top: -9px;
+  z-index: 10;
+  border-radius: 7px 7px 0 0;
+  background: linear-gradient(#69507f, #493356 12%, #392841 88%, #2b1c36);
+  border: 1px solid #b294cc66;
+  border-bottom: 0;
+  box-shadow:
+    0 -1px 0 #dfccec44,
+    0 -5px 10px #0003,
+    inset 0 4px 5px #c8a9e70d;
+  min-height: 40px;
+  color: #c0a9d0;
+}
+.folder-spine:before {
+  content: "";
+  position: absolute;
+  top: 5px;
+  left: 8px;
+  right: 8px;
+  border-top: 1px solid #20122966;
+  box-shadow: 0 1px 0 #caa7e91a;
+  pointer-events: none;
+}
+.folder-spine > span {
+  letter-spacing: 1.5px;
+  font-size: 8px;
+  text-shadow: 0 1px 0 #170d22;
+}
+.folder-spine button {
+  color: #e7d8f4;
+}
+.paper-stack {
+  bottom: 52px;
+  height: 62px;
+  left: 37px;
+  right: 37px;
+  z-index: 2;
+}
+.paper-stack > div,
+.paper-stack > div:nth-child(1),
+.paper-stack > div:nth-child(2),
+.paper-stack > div:nth-child(3) {
+  background: repeating-linear-gradient(
+    0deg,
+    #b6a4c1 0,
+    #b6a4c1 1px,
+    #675571 1px,
+    #675571 2px,
+    #c7b9d2 2px,
+    #c7b9d2 3px
+  );
+  border-color: #d7c9e766;
+  border-radius: 7px 7px 0 0;
+  box-shadow: 0 -2px 7px #0004;
+}
+.paper-stack > div:nth-child(1) {
+  transform: translateY(-11px) rotate(-0.4deg);
+}
+.paper-stack > div:nth-child(2) {
+  transform: translateY(-6px) rotate(0.3deg);
+}
+.open-paper {
+  bottom: 164px;
+  top: 62px;
+  border-radius: 5px 13px 9px 9px;
+  border: 1px solid #b49acb66;
+  border-top: 1px solid #d5bbe888;
+  box-shadow:
+    3px 3px 0 #a897b5,
+    5px 5px 0 #46364f,
+    7px 7px 0 #a18fac,
+    10px 10px 0 #35253e,
+    0 25px 70px #0009;
+  background: linear-gradient(
+    100deg,
+    #191421,
+    #17111e 4%,
+    #17111e 96%,
+    #21192a
+  );
+}
+.paper-tab-label {
+  top: -40px;
+  left: 25px;
+  height: 39px;
+  min-width: 180px;
+  border-radius: 13px 13px 0 0;
+  box-shadow: 0 -1px 0 #f1e5ff66;
+  background: linear-gradient(#c9acdf, #ac8cc7);
+  color: #392247;
+  clip-path: polygon(
+    0 100%,
+    8% 14%,
+    11% 3%,
+    14% 0,
+    86% 0,
+    89% 3%,
+    92% 14%,
+    100% 100%
+  );
+  justify-content: center;
+  padding-inline: 28px;
+  gap: 15px;
+}
+.paper-tab-label:after {
+  content: "";
+  position: absolute;
+  inset: 7px 25px;
+  background: #f4ebfcaa;
+  border: 1px solid #ffffff55;
+  border-radius: 2px;
+  z-index: -1;
+}
+.paper-toolbar {
+  background: linear-gradient(#7e66ac0e, #7e66ac05);
+  border-bottom: 1px solid #ae8ecd19;
+}
+.paper-scroll {
+  background-image: repeating-linear-gradient(
+    0deg,
+    #ffffff01 0px,
+    #ffffff01 1px,
+    transparent 1px,
+    transparent 4px
+  );
+}
+.paper-close {
+  border-radius: 50%;
+  width: 29px;
+  height: 29px;
+  display: grid;
+  place-items: center;
+  padding: 0;
+}
+.paper-close > span {
+  display: none;
+}
+@media (max-width: 760px) {
+  .folder-tabs {
+    height: 83px;
+    gap: 0;
+  }
+  .folder-tab,
+  .folder-tab:hover {
+    height: calc(66px + var(--tab-depth) * 2px);
+    margin-inline: -2px;
+  }
+  .folder-tab.is-active {
+    height: calc(72px + var(--tab-depth) * 2px);
+  }
+  .file-tab-sticker {
+    left: 17%;
+    right: 17%;
+    top: 18%;
+    height: 29%;
+    font-size: 9px;
+    padding: 2px 0;
+    gap: 0;
+    border-radius: 1px;
+  }
+  .file-tab-sticker .tab-number {
+    display: none;
+  }
+  .file-tab-stamp {
+    width: 11px !important;
+    height: 11px !important;
+    right: 25%;
+    bottom: 20%;
+  }
+  .folder-tab .tab-notch {
+    width: 10px;
+    left: 24%;
+    bottom: 23%;
+    height: 6px;
+  }
+  .folder-tab:hover .tab-notch {
+    height: 6px;
+  }
+  .folder-spine {
+    min-height: 36px;
+    padding-inline: 7px;
+  }
+  .folder-spine > span {
+    font-size: 6px;
+    letter-spacing: 0.4px;
+  }
+  .dock-topline {
+    height: 22px;
+    font-size: 7px;
+  }
+  .paper-stack {
+    bottom: 44px;
+    left: 20px;
+    right: 20px;
+    height: 47px;
+  }
+  .open-paper {
+    top: 54px;
+    bottom: 149px;
+    left: 8px;
+    right: 12px;
+    box-shadow:
+      2px 2px 0 #a897b5,
+      4px 4px 0 #46364f,
+      6px 6px 0 #9e8cac,
+      0 20px 50px #0008;
+  }
+  .paper-tab-label {
+    left: 14px;
+    min-width: 147px;
+    height: 36px;
+    top: -37px;
+    font-size: 10px;
+  }
+  .folder-cover {
+    padding-bottom: 170px;
+  }
+}
+/* Only the exposed sheet edges should read as paper, not a striped backdrop. */
+.paper-stack {
+  height: 18px;
+  bottom: 96px;
+}
+.paper-stack > div {
+  background: repeating-linear-gradient(
+    0deg,
+    #a18eae 0,
+    #a18eae 1px,
+    #675571 1px,
+    #675571 3px,
+    #bbaac7 3px,
+    #bbaac7 4px
+  );
+}
+@media (max-width: 760px) {
+  .paper-stack {
+    height: 14px;
+    bottom: 80px;
+  }
+}
+
+/* A single continuous sheet extends from each index head into the binding. */
+.folder-tabs { display:block; height:112px; isolation:isolate; }
+.dock-sheet { position:absolute; inset:auto 0 -22px; height:300px; pointer-events:none; }
+.bound-sheet { position:absolute; inset:0; width:100%; height:300px; overflow:visible; filter:drop-shadow(0 -2px 2px #1b10284d); }
+.sheet-head { position:absolute; height:48px; padding:5px 9px 12px; border:0; background:none; color:#42304f; pointer-events:auto; touch-action:none; cursor:grab; user-select:none; transform-origin:50% 100%; }
+.sheet-head:active { cursor:grabbing; }
+.sheet-head-print { display:flex; align-items:center; justify-content:center; gap:12px; height:29px; border-bottom:1px solid #5f446b30; rotate:-1.3deg; font-size:12px; font-weight:700; }
+.sheet-head-print small { font:9px monospace; color:#7e648b; }
+.sheet-head-grain { position:absolute; inset:0; pointer-events:none; background:repeating-linear-gradient(0deg,#ffffff0b 0 1px,transparent 1px 3px); }
+.sheet-head:focus-visible { outline:2px solid #bd85f1; outline-offset:2px; border-radius:5px; }
+.is-selected .sheet-head-print { color:#6e26a2; border-color:#9061b8; }
+.folder-dock { filter:drop-shadow(0 -5px 15px #0003); }
+.folder-spine { margin-top:-7px; z-index:15; min-height:43px; background:linear-gradient(175deg,#705586,#43304f 22%,#32243e); box-shadow:0 -1px 0 #d4b8e9,0 -5px 12px #26133240,inset 0 6px 8px #bea1da0a; }
+.paper-stack { display:none; }
+.dock-topline { padding-inline:15px; transform:translateY(-5px); }
+.open-paper { bottom:43px; transform-origin:50% 100%; border-radius:4px 7px 0 0; }
+.open-paper .paper-scroll { padding-bottom:112px; }
+.paper-tab-label { touch-action:none; cursor:grab; }
+.paper-tab-label:active { cursor:grabbing; }
+@media(max-width:760px) {
+ .folder-tabs {height:105px;}
+ .sheet-head {padding:5px 0 12px; height:48px;}
+ .sheet-head-print {font-size:9px; gap:0;}
+ .sheet-head-print small {display:none;}
+ .dock-topline {font-size:7px;}
+ .open-paper {bottom:39px;}
+ .open-paper .paper-scroll {padding-bottom:115px;}
+ .folder-spine {min-height:39px;}
+}
+.open-paper .paper-tab-label {width:14.3%; min-width:0; padding-inline:6px; font-size:11px; gap:8px;}
+@media(max-width:760px) {
+ .open-paper .paper-tab-label {font-size:8px; gap:0;}
+ .open-paper .paper-tab-label > span {display:none;}
+ .open-paper .paper-tab-label:after {inset:7px 4px;}
+}
+
+/* The tab itself owns the expanding page; no detached opening panel exists. */
+.continuous-sheet .bound-sheet {height:100%;}
+.continuous-sheet .sheet-head {z-index:2;}
+.sheet-content {position:absolute;left:2px;right:2px;bottom:0;display:flex;flex-direction:column;overflow:hidden;pointer-events:auto;background:linear-gradient(110deg,#21182a,#17111e 12%,#17111e 90%,#21182a);color:#e8deef;border-top:1px solid #d1b6e645;}
+.sheet-content[inert] {pointer-events:none;}
+.sheet-content .paper-scroll {padding-bottom:30px;}
+.sheet-content .paper-toolbar {min-height:42px;}
+.sheet-return-hint {font-size:10px;color:#b9a6c6;}
+.has-open-paper .dock-topline {visibility:hidden;}
+.folder-tabs {isolation:auto;}
+@media(max-width:760px){.sheet-return-hint{font-size:8px;}.sheet-content .paper-toolbar{padding-inline:10px;}.sheet-content .paper-scroll{padding-bottom:28px;}}
+
+/* Foreground sheets remain above a pulled middle sheet, including their heads. */
+.continuous-sheet .paper-scroll {padding-bottom:112px;}
+@media(max-width:760px){.continuous-sheet .paper-scroll{padding-bottom:108px;}}
+
+/* A restrained light/shadow fold follows the actual surface displacement. */
+.paper-flex-light {position:absolute;inset:0;z-index:3;pointer-events:none;background:linear-gradient(180deg,transparent 5%,#f4dfff 30%,#0b0615 48%,#e8caff 67%,transparent 90%);background-size:100% 150%;mix-blend-mode:soft-light;}
+@media(prefers-reduced-motion:reduce){.paper-flex-light{display:none;}.continuous-sheet .sheet-content{filter:none!important;}}

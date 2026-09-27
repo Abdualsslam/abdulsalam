@@ -1,0 +1,365 @@
+{
+  "width": 450,
+  "height": 800,
+  "directions": {
+    "down-left": [
+      "down-left-00.webp",
+      "down-left-01.webp",
+      "down-left-02.webp",
+      "down-left-03.webp",
+      "down-left-04.webp"
+    ],
+    "down-right": [
+      "down-right-00.webp",
+      "down-right-01.webp",
+      "down-right-02.webp",
+      "down-right-03.webp",
+      "down-right-04.webp"
+    ],
+    "neutral": [
+      "neutral-00.webp"
+    ],
+    "blink": [
+      "blink-00.webp",
+      "blink-01.webp",
+      "blink-02.webp",
+      "blink-03.webp",
+      "blink-04.webp",
+      "blink-05.webp",
+      "blink-06.webp",
+      "blink-07.webp",
+      "blink-08.webp"
+    ],
+    "left": [
+      "left-00.webp",
+      "left-01.webp",
+      "left-02.webp",
+      "left-03.webp",
+      "left-04.webp"
+    ],
+    "right": [
+      "right-00.webp",
+      "right-01.webp",
+      "right-02.webp",
+      "right-03.webp",
+      "right-04.webp"
+    ],
+    "up": [
+      "up-00.webp",
+      "up-01.webp",
+      "up-02.webp",
+      "up-03.webp",
+      "up-04.webp"
+    ],
+    "down": [
+      "down-00.webp",
+      "down-01.webp",
+      "down-02.webp",
+      "down-03.webp",
+      "down-04.webp"
+    ],
+    "up-right": [
+      "up-right-00.webp",
+      "up-right-01.webp",
+      "up-right-02.webp",
+      "up-right-03.webp",
+      "up-right-04.webp"
+    ],
+    "up-left": [
+      "up-left-00.webp",
+      "up-left-01.webp",
+      "up-left-02.webp",
+      "up-left-03.webp",
+      "up-left-04.webp"
+    ]
+  },
+  "sources": [
+    "اسفل يمين شمال.mp4",
+    "فتح اغلاق العينين.mp4",
+    "فوق تحت يمين شمال.mp4",
+    "فوق يمين شمال.mp4"
+  ],
+  "frames": [
+    {
+      "file": "down-left-00",
+      "source": "اسفل يمين شمال.mp4",
+      "time": 1.2
+    },
+    {
+      "file": "down-left-01",
+      "source": "اسفل يمين شمال.mp4",
+      "time": 1.3
+    },
+    {
+      "file": "down-left-02",
+      "source": "اسفل يمين شمال.mp4",
+      "time": 1.45
+    },
+    {
+      "file": "down-left-03",
+      "source": "اسفل يمين شمال.mp4",
+      "time": 1.65
+    },
+    {
+      "file": "down-left-04",
+      "source": "اسفل يمين شمال.mp4",
+      "time": 1.85
+    },
+    {
+      "file": "down-right-00",
+      "source": "اسفل يمين شمال.mp4",
+      "time": 4.64
+    },
+    {
+      "file": "down-right-01",
+      "source": "اسفل يمين شمال.mp4",
+      "time": 4.75
+    },
+    {
+      "file": "down-right-02",
+      "source": "اسفل يمين شمال.mp4",
+      "time": 4.88
+    },
+    {
+      "file": "down-right-03",
+      "source": "اسفل يمين شمال.mp4",
+      "time": 5.05
+    },
+    {
+      "file": "down-right-04",
+      "source": "اسفل يمين شمال.mp4",
+      "time": 5.25
+    },
+    {
+      "file": "neutral-00",
+      "source": "فتح اغلاق العينين.mp4",
+      "time": 0.3
+    },
+    {
+      "file": "blink-00",
+      "source": "فتح اغلاق العينين.mp4",
+      "time": 0.75
+    },
+    {
+      "file": "blink-01",
+      "source": "فتح اغلاق العينين.mp4",
+      "time": 0.88
+    },
+    {
+      "file": "blink-02",
+      "source": "فتح اغلاق العينين.mp4",
+      "time": 1
+    },
+    {
+      "file": "blink-03",
+      "source": "فتح اغلاق العينين.mp4",
+      "time": 1.1
+    },
+    {
+      "file": "blink-04",
+      "source": "فتح اغلاق العينين.mp4",
+      "time": 1.2
+    },
+    {
+      "file": "blink-05",
+      "source": "فتح اغلاق العينين.mp4",
+      "time": 1.75
+    },
+    {
+      "file": "blink-06",
+      "source": "فتح اغلاق العينين.mp4",
+      "time": 1.85
+    },
+    {
+      "file": "blink-07",
+      "source": "فتح اغلاق العينين.mp4",
+      "time": 1.96
+    },
+    {
+      "file": "blink-08",
+      "source": "فتح اغلاق العينين.mp4",
+      "time": 2.08
+    },
+    {
+      "file": "left-00",
+      "source": "فوق تحت يمين شمال.mp4",
+      "time": 1.24
+    },
+    {
+      "file": "left-01",
+      "source": "فوق تحت يمين شمال.mp4",
+      "time": 1.3
+    },
+    {
+      "file": "left-02",
+      "source": "فوق تحت يمين شمال.mp4",
+      "time": 1.4
+    },
+    {
+      "file": "left-03",
+      "source": "فوق تحت يمين شمال.mp4",
+      "time": 1.5
+    },
+    {
+      "file": "left-04",
+      "source": "فوق تحت يمين شمال.mp4",
+      "time": 1.65
+    },
+    {
+      "file": "right-00",
+      "source": "فوق تحت يمين شمال.mp4",
+      "time": 3.08
+    },
+    {
+      "file": "right-01",
+      "source": "فوق تحت يمين شمال.mp4",
+      "time": 3.16
+    },
+    {
+      "file": "right-02",
+      "source": "فوق تحت يمين شمال.mp4",
+      "time": 3.25
+    },
+    {
+      "file": "right-03",
+      "source": "فوق تحت يمين شمال.mp4",
+      "time": 3.4
+    },
+    {
+      "file": "right-04",
+      "source": "فوق تحت يمين شمال.mp4",
+      "time": 3.55
+    },
+    {
+      "file": "up-00",
+      "source": "فوق تحت يمين شمال.mp4",
+      "time": 4.83
+    },
+    {
+      "file": "up-01",
+      "source": "فوق تحت يمين شمال.mp4",
+      "time": 5.04
+    },
+    {
+      "file": "up-02",
+      "source": "فوق تحت يمين شمال.mp4",
+      "time": 5.12
+    },
+    {
+      "file": "up-03",
+      "source": "فوق تحت يمين شمال.mp4",
+      "time": 5.25
+    },
+    {
+      "file": "up-04",
+      "source": "فوق تحت يمين شمال.mp4",
+      "time": 5.45
+    },
+    {
+      "file": "down-00",
+      "source": "فوق تحت يمين شمال.mp4",
+      "time": 7.29
+    },
+    {
+      "file": "down-01",
+      "source": "فوق تحت يمين شمال.mp4",
+      "time": 7.38
+    },
+    {
+      "file": "down-02",
+      "source": "فوق تحت يمين شمال.mp4",
+      "time": 7.5
+    },
+    {
+      "file": "down-03",
+      "source": "فوق تحت يمين شمال.mp4",
+      "time": 7.63
+    },
+    {
+      "file": "down-04",
+      "source": "فوق تحت يمين شمال.mp4",
+      "time": 7.8
+    },
+    {
+      "file": "up-right-00",
+      "source": "فوق يمين شمال.mp4",
+      "time": 0.84
+    },
+    {
+      "file": "up-right-01",
+      "source": "فوق يمين شمال.mp4",
+      "time": 0.94
+    },
+    {
+      "file": "up-right-02",
+      "source": "فوق يمين شمال.mp4",
+      "time": 1.1
+    },
+    {
+      "file": "up-right-03",
+      "source": "فوق يمين شمال.mp4",
+      "time": 1.3
+    },
+    {
+      "file": "up-right-04",
+      "source": "فوق يمين شمال.mp4",
+      "time": 1.55
+    },
+    {
+      "file": "up-left-00",
+      "source": "فوق يمين شمال.mp4",
+      "time": 3.49
+    },
+    {
+      "file": "up-left-01",
+      "source": "فوق يمين شمال.mp4",
+      "time": 3.6
+    },
+    {
+      "file": "up-left-02",
+      "source": "فوق يمين شمال.mp4",
+      "time": 3.75
+    },
+    {
+      "file": "up-left-03",
+      "source": "فوق يمين شمال.mp4",
+      "time": 3.9
+    },
+    {
+      "file": "up-left-04",
+      "source": "فوق يمين شمال.mp4",
+      "time": 4.05
+    }
+  ],
+  "alignment": {
+    "version": "torso-aligned-v2",
+    "reference": "neutral-00",
+    "method": "Robust torso feature registration; constant isotropic scale and translation per source clip.",
+    "transforms": {
+      "اسفل يمين شمال.mp4": {
+        "scale": 1.0117915272712708,
+        "tx": 5.5138702392578125,
+        "ty": -7.451446533203125
+      },
+      "فتح اغلاق العينين.mp4": {
+        "scale": 1.0,
+        "tx": 0.0,
+        "ty": 0.0
+      },
+      "فوق تحت يمين شمال.mp4": {
+        "scale": 0.8848952054977417,
+        "tx": 34.45850372314453,
+        "ty": 19.832855224609375
+      },
+      "فوق يمين شمال.mp4": {
+        "scale": 0.9190191626548767,
+        "tx": 23.697341918945312,
+        "ty": 0.2375946044921875
+      }
+    },
+    "bottomFade": [
+      840,
+      920
+    ]
+  }
+}

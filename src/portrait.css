@@ -1,0 +1,519 @@
+/* The source portrait is a presentation pose: anchor each projection to its palm.
+   All anchors share the source image's 900 × 1342 coordinate system. */
+.portrait-scene {
+  position: relative;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: end;
+  margin: 0;
+  isolation: isolate;
+  direction: ltr;
+  align-self: center;
+}
+.scene-backlight {
+  position: absolute;
+  inset: 3% -7% 7%;
+  z-index: -1;
+  background: radial-gradient(ellipse at 50% 42%, #7e66ac36, transparent 63%);
+  pointer-events: none;
+}
+.scene-backlight:after {
+  content: "";
+  position: absolute;
+  left: 20%;
+  right: 20%;
+  bottom: 10%;
+  height: 14%;
+  background: #8f00ff13;
+  filter: blur(28px);
+  border-radius: 50%;
+}
+.scene-caption-top {
+  font: 8px monospace;
+  letter-spacing: 1.8px;
+  color: #91809f;
+  position: relative;
+  z-index: 2;
+  align-self: center;
+  margin-bottom: 5px;
+}
+.portrait-stage {
+  position: relative;
+  width: min(100%, 365px);
+  aspect-ratio: 900/1342;
+  flex-shrink: 0;
+  transform-origin: 50% 65%;
+}
+.portrait-cutout {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 0 17px #a86cdc12);
+  mask-image: linear-gradient(#000 0%, #000 80%, #000b 89%, transparent 100%);
+  user-select: none;
+  pointer-events: none;
+}
+.hand-projection {
+  --projection-light: #86d9ff;
+  position: absolute;
+  left: 27.5%;
+  top: 47%;
+  width: 24%;
+  height: 18%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 2;
+  pointer-events: none;
+}
+.projection-automation {
+  --projection-light: #c795ff;
+  left: 73%;
+  top: 46.3%;
+}
+.projection-title {
+  position: absolute;
+  bottom: calc(100% + 12px);
+  color: #e0d5ec;
+  font-size: 10px;
+  white-space: nowrap;
+  direction: rtl;
+  text-shadow: 0 2px 9px #000;
+  background: #100b1b66;
+  border: 1px solid #ffffff0a;
+  border-radius: 4px;
+  padding: 3px 7px;
+}
+.projection-symbol {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 74%;
+  aspect-ratio: 1;
+  flex-shrink: 0;
+  border-radius: 14px;
+  background: linear-gradient(135deg, #ffffff0b, #a98bd208);
+  border: 1px solid color-mix(in srgb, var(--projection-light) 22%, transparent);
+  box-shadow:
+    0 0 28px color-mix(in srgb, var(--projection-light) 12%, transparent),
+    inset 0 0 17px #ffffff06;
+  backdrop-filter: blur(3px);
+  animation: projection-hover 5.5s ease-in-out infinite;
+}
+.projection-automation .projection-symbol {
+  animation-delay: -2.5s;
+}
+.projection-symbol img {
+  width: 68%;
+  height: 68%;
+  object-fit: contain;
+  filter: drop-shadow(
+    0 0 8px color-mix(in srgb, var(--projection-light) 30%, transparent)
+  );
+}
+.projection-automation .projection-symbol img {
+  width: 83%;
+  height: 70%;
+}
+.projection-corner {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-color: var(--projection-light);
+  opacity: 0.6;
+}
+.corner-one {
+  top: -3px;
+  left: -3px;
+  border-top: 1px solid;
+  border-left: 1px solid;
+  border-radius: 3px 0 0;
+}
+.corner-two {
+  bottom: -3px;
+  right: -3px;
+  border-bottom: 1px solid;
+  border-right: 1px solid;
+  border-radius: 0 0 3px;
+}
+.projection-name {
+  font: 9px monospace;
+  letter-spacing: 0.7px;
+  color: var(--projection-light);
+  margin-top: 8px;
+  white-space: nowrap;
+  text-shadow: 0 0 10px #000;
+}
+.projection-beam {
+  position: absolute;
+  top: 40%;
+  bottom: -1%;
+  width: 90%;
+  background: linear-gradient(
+    transparent,
+    color-mix(in srgb, var(--projection-light) 11%, transparent)
+  );
+  clip-path: polygon(5% 0, 95% 0, 65% 100%, 35% 100%);
+  z-index: -1;
+}
+.palm-light {
+  position: absolute;
+  bottom: -5%;
+  left: 10%;
+  width: 80%;
+  height: 12%;
+  border: 1px solid color-mix(in srgb, var(--projection-light) 45%, transparent);
+  border-radius: 50%;
+  box-shadow:
+    0 0 15px color-mix(in srgb, var(--projection-light) 25%, transparent),
+    inset 0 0 10px color-mix(in srgb, var(--projection-light) 20%, transparent);
+  animation: palm-breathe 4s ease-in-out infinite;
+}
+.projection-particle {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  bottom: 10%;
+  background: var(--projection-light);
+  border-radius: 50%;
+  box-shadow: 0 0 7px var(--projection-light);
+  animation: projection-rise 3.4s ease-in-out infinite;
+}
+.particle-one {
+  left: 16%;
+}
+.particle-two {
+  right: 18%;
+  animation-delay: -1.7s;
+}
+.scene-caption {
+  position: relative;
+  font-size: 10px;
+  color: #ae99c4;
+  direction: rtl;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin-top: -19px;
+  z-index: 2;
+}
+.scene-caption > span {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #bc8ae5;
+  box-shadow: 0 0 9px #8f00ff55;
+}
+@keyframes projection-hover {
+  0%,
+  100% {
+    translate: 0 0;
+    rotate: -3deg;
+  }
+  50% {
+    translate: 0 -5px;
+    rotate: 3deg;
+  }
+}
+@keyframes palm-breathe {
+  0%,
+  100% {
+    opacity: 0.45;
+    scale: 0.95;
+  }
+  50% {
+    opacity: 0.9;
+    scale: 1.05;
+  }
+}
+@keyframes projection-rise {
+  0% {
+    translate: 0 0;
+    opacity: 0;
+  }
+  30% {
+    opacity: 0.7;
+  }
+  100% {
+    translate: 3px -48px;
+    opacity: 0;
+  }
+}
+@media (min-width: 1000px) and (max-height: 850px) {
+  .portrait-stage {
+    width: 294px;
+  }
+  .projection-title {
+    font-size: 9px;
+    bottom: calc(100% + 9px);
+  }
+  .projection-name {
+    font-size: 8px;
+    margin-top: 6px;
+  }
+  .scene-caption-top {
+    font-size: 7px;
+    letter-spacing: 1.3px;
+  }
+  .scene-caption {
+    font-size: 9px;
+  }
+}
+@media (min-width: 761px) and (max-width: 999px) {
+  .portrait-stage {
+    width: min(100%, 320px);
+  }
+  .projection-title {
+    font-size: 9px;
+  }
+}
+@media (max-width: 760px) {
+  .portrait-scene {
+    margin-top: 20px;
+    width: 100%;
+  }
+  .portrait-stage {
+    width: min(100%, 330px);
+  }
+  .scene-caption-top {
+    font-size: 7px;
+    letter-spacing: 1.1px;
+  }
+  .scene-caption {
+    font-size: 9px;
+    margin-top: -12px;
+  }
+  .projection-title {
+    font-size: 9px;
+  }
+  .projection-name {
+    font-size: 8px;
+  }
+  .scene-backlight {
+    inset: 5% -8% 9%;
+  }
+  .projection-symbol {
+    backdrop-filter: none;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .projection-symbol,
+  .palm-light,
+  .projection-particle {
+    animation: none !important;
+  }
+  .projection-particle {
+    display: none;
+  }
+}
+.portrait-scene {
+  perspective: 1100px;
+}
+.portrait-stage {
+  will-change: transform;
+  transition: filter 0.35s;
+}
+.portrait-scene:hover .portrait-stage {
+  filter: drop-shadow(0 12px 26px #8f00ff12);
+}
+.hand-projection {
+  pointer-events: auto;
+  cursor: pointer;
+  text-decoration: none;
+  outline-offset: 6px;
+}
+.hand-projection:hover .projection-symbol,
+.hand-projection:focus-visible .projection-symbol {
+  border-color: var(--projection-light);
+  box-shadow:
+    0 0 38px color-mix(in srgb, var(--projection-light) 34%, transparent),
+    inset 0 0 18px #ffffff12;
+  scale: 1.12;
+}
+.projection-symbol {
+  transition:
+    scale 0.35s,
+    box-shadow 0.35s,
+    border-color 0.35s;
+}
+.hand-projection:hover .palm-light {
+  scale: 1.2;
+  opacity: 1;
+}
+.hand-projection:active .projection-symbol {
+  scale: 0.97;
+}
+.portrait-interaction-hint {
+  font-size: 9px;
+  color: #8c7a9f;
+  margin-top: 10px;
+  direction: rtl;
+}
+.portrait-cutout {
+  animation: character-breathe 7s ease-in-out infinite;
+  transform-origin: 50% 75%;
+}
+@keyframes character-breathe {
+  0%,
+  100% {
+    scale: 1;
+  }
+  50% {
+    scale: 1.006;
+  }
+}
+@media (pointer: coarse) {
+  .portrait-interaction-hint {
+    font-size: 0;
+  }
+  .portrait-interaction-hint:after {
+    content: "اختر تقنية من بين يديّ لاستكشاف المزيد.";
+    font-size: 9px;
+  }
+  .portrait-stage {
+    will-change: auto;
+  }
+}
+[data-effects="off"] .portrait-stage {
+  will-change: auto;
+}
+.hand-projection .projection-beam,
+.hand-projection .palm-light,
+.hand-projection .projection-particle {
+  pointer-events: none;
+}
+/* Genuine source-frame animation; no rotation or simulated breathing on this layer. */
+.has-real-motion {
+  aspect-ratio: 2/3;
+  will-change: auto !important;
+  margin-bottom: 73px;
+  filter: none !important;
+}
+.has-real-motion .portrait-cutout {
+  animation: none !important;
+}
+.portrait-frame-canvas,
+.portrait-source-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  opacity: 0;
+  pointer-events: none;
+  mask-image: linear-gradient(to bottom, #000 0%, #000 92%, transparent 100%);
+}
+.portrait-frame-canvas.is-visible,
+.portrait-source-video.is-visible {
+  opacity: 1;
+}
+.has-real-motion:before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  background: #000;
+  box-shadow: 0 0 35px 20px #000;
+  mask-image: linear-gradient(#000 90%, transparent);
+}
+.has-real-motion .hand-projection {
+  width: 21%;
+  height: 16%;
+}
+.has-real-motion .projection-title {
+  font-size: 8px;
+  bottom: calc(100% + 7px);
+}
+.has-real-motion .projection-symbol {
+  width: 66%;
+  animation: none !important;
+  background: #1a1333aa;
+}
+.has-real-motion .projection-name {
+  font-size: 7px;
+  margin-top: 5px;
+}
+.portrait-motion-controls {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 9px;
+  direction: rtl;
+  z-index: 5;
+  margin-top: 4px;
+}
+.pose-slider {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  direction: ltr;
+  width: 85%;
+  font-size: 9px;
+  color: #baa1d1;
+}
+.pose-slider input {
+  width: 100%;
+  accent-color: #b08cda;
+  cursor: ew-resize;
+  min-height: 24px;
+}
+.portrait-motion-controls button {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  border: 1px solid #a47acb45;
+  border-radius: 6px;
+  background: #251834;
+  color: #dfc9f1;
+  font-size: 10px;
+  padding: 7px 12px;
+  cursor: pointer;
+}
+.portrait-motion-controls button:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+.portrait-motion-controls > span {
+  font-size: 9px;
+  color: #c7aecf;
+}
+.portrait-scene:has(.has-real-motion) .scene-caption,
+.portrait-scene:has(.has-real-motion) .portrait-interaction-hint {
+  display: none;
+}
+@media (min-width: 1000px) and (max-height: 850px) {
+  .portrait-stage.has-real-motion {
+    width: 260px;
+    margin-bottom: 80px;
+  }
+}
+@media (max-width: 760px) {
+  .has-real-motion {
+    width: min(100%, 290px);
+  }
+  .portrait-interaction-hint:after {
+    content: "استخدم شريط التحكم لتحريك الرأس واليدين.";
+  }
+}
+
+.portrait-stage.has-gaze-motion {aspect-ratio:9/16;width:280px;margin-bottom:85px;}
+.has-gaze-motion:before {display:none;}
+.has-gaze-motion .portrait-frame-canvas,.has-gaze-motion .portrait-cutout {mask-image:linear-gradient(#000 0%,#000 88%,transparent 100%);}
+.gaze-controls {position:absolute;top:100%;left:-20px;right:-20px;display:flex;align-items:center;justify-content:center;gap:17px;direction:ltr;margin-top:2px;}
+.gaze-direction-pad {display:grid;grid-template-columns:repeat(3,23px);gap:2px;}
+.gaze-direction-pad button {width:23px;height:22px;border:1px solid #a889c035;background:#21152e;color:#ceb5e2;border-radius:4px;font-size:15px;line-height:1;}
+.gaze-direction-pad button[aria-pressed=true] {background:#745397;color:#fff;border-color:#c4a3e1;}
+.gaze-controls button {cursor:pointer;}
+.gaze-controls button:disabled {opacity:.4;cursor:default;}
+.gaze-control-copy {direction:rtl;display:flex;flex-direction:column;gap:9px;align-items:center;font-size:9px;color:#b7a1ca;}
+.gaze-control-copy button {border:1px solid #9872bb50;border-radius:5px;padding:5px 12px;color:#dec9ef;background:#291d37;font-size:10px;}
+@media(min-width:1000px) and (max-height:850px){.portrait-stage.has-gaze-motion{width:220px;margin-bottom:80px;}}
+@media(max-width:760px){.portrait-stage.has-gaze-motion{width:260px;margin-bottom:124px;}.gaze-direction-pad{grid-template-columns:repeat(3,32px);gap:3px;}.gaze-direction-pad button{width:32px;height:32px;}}
