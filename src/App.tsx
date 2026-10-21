@@ -3,7 +3,6 @@ import {
   ArrowUpLeft,
   Code2,
   FolderOpen,
-  ArrowDown,
   Sparkles,
   Pause,
 } from "lucide-react";
@@ -41,7 +40,6 @@ export default function App() {
         data-effects={effectsEnabled ? "on" : "off"}
         onClick={handleLocalLink}
       >
-        {" "}
         <AmbientEffects enabled={effectsEnabled} />
         <header className="site-header">
           <div className="header-inner">
@@ -76,11 +74,13 @@ export default function App() {
                 onClick={() => setEffectsPaused(!effectsPaused)}
                 aria-pressed={effectsPaused || !!reducedMotion}
                 aria-label={
-                  effectsPaused
+                  reducedMotion
+                    ? "الحركة متوقفة وفق إعدادات جهازك"
+                    : effectsPaused
                     ? "تشغيل المؤثرات الحركية"
                     : "تهدئة المؤثرات الحركية"
                 }
-                title={effectsPaused ? "تشغيل المؤثرات" : "تهدئة الحركة"}
+                title={reducedMotion ? "الحركة مخففة وفق إعدادات جهازك" : effectsPaused ? "تشغيل المؤثرات" : "تهدئة الحركة"}
               >
                 {effectsEnabled ? <Sparkles size={17} /> : <Pause size={17} />}
               </button>
@@ -100,13 +100,7 @@ export default function App() {
             <span dir="ltr">PORTFOLIO / PERSONAL FILE</span>
             <span>أفكار، أعمال، وما بينهما.</span>
           </div>
-          <Hero effectsEnabled={effectsEnabled && !activeTab} />
-          <div className="cover-invitation page-width">
-            <span>كل ورقة تحكي جانباً من رحلتي.</span>
-            <span>
-              اختر فاصلاً، أو اسحبه للأعلى <ArrowDown size={16} />
-            </span>
-          </div>
+          <Hero effectsEnabled={effectsEnabled} concealed={activeTab !== null} />
         </main>
         <VerticalTabs
           effectsEnabled={effectsEnabled}

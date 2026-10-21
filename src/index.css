@@ -260,6 +260,14 @@ textarea:focus-visible {
 .hero-social a:hover {
   color: #bda2ec;
 }
+.hero-social a {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border: 1px solid #bda2ec1f;
+  border-radius: 50%;
+}
 .hero-social > span:last-child {
   display: flex;
   align-items: center;
@@ -1205,6 +1213,7 @@ textarea:focus-visible {
   overflow-wrap: anywhere;
   font-size: 14px;
 }
+
 .contact-value a {
   display: inline-block;
 }

@@ -5,7 +5,6 @@ import {
   type KeyboardEvent,
 } from "react";
 import {
-  ArrowUpLeft,
   FolderClosed,
 } from "lucide-react";
 import DockSheet from "./DockSheet";
@@ -60,21 +59,8 @@ export default function VerticalTabs({
         <div />
       </div>
       {activeTab && <div className="folder-scrim" />}
-      <div className="folder-dock">
-        <div className="dock-topline">
-          <span>
-            <FolderClosed size={13} /> ملف عبدالسلام
-          </span>
-          <span>
-            {activeTab ? "ورقة مفتوحة — Esc للعودة" : "٦ أوراق، رحلة واحدة"}
-            <ArrowUpLeft size={13} />
-          </span>
-        </div>
-        <div
-          className="folder-tabs"
-          role="tablist"
-          aria-label="أوراق الملف الشخصي"
-        >
+      <div className="folder-dock" role="group" aria-label="أقسام الملف الشخصي">
+        <div className="folder-tabs">
           {papers.map((tab, index) => (
             <DockSheet
               key={tab.id} id={tab.id} label={tab.label} index={index}

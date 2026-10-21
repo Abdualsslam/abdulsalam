@@ -43,6 +43,16 @@ export default function DockSheet({id, label, index, active, enabled, content, o
     else lift.jump(active ? limit.current : 0);
   }, [active, enabled, lift]);
   useEffect(() => {
+    if (!active) return;
+    // Links on the cover become inert when a sheet opens. Move focus into the
+    // newly visible section so keyboard and screen-reader navigation can continue.
+    const content = panel.current;
+    if (content) {
+      content.scrollTop = 0;
+      content.focus({ preventScroll: true });
+    }
+  }, [active]);
+  useEffect(() => {
     let last = lift.get();
     let time = performance.now();
     if (!enabled) ripple.jump(0);
@@ -108,7 +118,7 @@ export default function DockSheet({id, label, index, active, enabled, content, o
       </defs>
       <motion.path d={path} fill={`url(#sheet-${id})`} stroke="#bba2cb" strokeWidth="1"/>
     </motion.svg>
-    <motion.button className="sheet-head" id={`tab-${id}`} role="tab" aria-selected={active}
+    <motion.button className="sheet-head" id={`tab-${id}`} type="button" aria-expanded={active}
       aria-controls={`panel-${id}`} style={{left:`${left/12}%`,width:`${172/12}%`,top}}
       onKeyDown={onKeyDown}
       onPointerEnter={() => {if(enabled && !active && !gesture.current) lift.set(8);}}
@@ -141,7 +151,7 @@ export default function DockSheet({id, label, index, active, enabled, content, o
         <span className="sheet-return-hint">اسحب رأس الورقة للأسفل لإعادتها</span>
         <button className="paper-close" onClick={onClose} aria-label="إعادة الورقة إلى الملف"><X size={17}/></button>
       </div>
-      <div ref={panel} className="paper-scroll" role="tabpanel" id={`panel-${id}`} aria-labelledby={`tab-${id}`} tabIndex={active?0:-1}>
+      <div ref={panel} className="paper-scroll" role="region" id={`panel-${id}`} aria-labelledby={`tab-${id}`} tabIndex={active?0:-1}>
         {revealed && content}
         <footer className="paper-footer"><span>عبدالسلام معاد · {label}</span><button onClick={onClose}>إلى غلاف الملف</button></footer>
       </div>

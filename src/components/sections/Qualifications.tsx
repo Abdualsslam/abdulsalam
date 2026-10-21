@@ -128,7 +128,7 @@ export default function Qualifications() {
           <div className="card p-8 grid gap-6 max-w-2xl">
             {languages.map((lang, index) => (
               <div key={index} className="w-full">
-                <div className="flex justify-between items-baseline mb-2">
+                <div className="flex flex-wrap justify-between items-baseline gap-x-4 gap-y-1 mb-2">
                   <span className="font-medium text-white">{lang.name}</span>
                   <span className="text-gray-500 text-sm">{lang.note}</span>
                 </div>

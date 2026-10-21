@@ -13,37 +13,52 @@ export function usePointerParallax(
   const reduce = useReducedMotion();
   const x = useMotionValue(0);
   const y = useMotionValue(0);
-  const springConfig = { stiffness: 120, damping: 20, mass: 0.4 };
+  const springConfig = { stiffness: 110, damping: 26, mass: 0.6 };
   const sx = useSpring(x, springConfig);
   const sy = useSpring(y, springConfig);
 
   useEffect(() => {
-    if (reduce || !enabled || !window.matchMedia("(pointer: fine)").matches) {
-      x.set(0);
-      y.set(0);
-      return;
-    }
     const el = ref.current;
     if (!el) return;
-
-    const onMove = (e: PointerEvent) => {
-      if (e.pointerType === "touch") return;
-      const r = el.getBoundingClientRect();
-      x.set((e.clientX - r.left) / r.width - 0.5);
-      y.set((e.clientY - r.top) / r.height - 0.5);
-    };
-    const onLeave = () => {
+    const finePointer = window.matchMedia("(hover: hover) and (pointer: fine)");
+    const reset = () => {
       x.set(0);
       y.set(0);
     };
+    const stop = () => {
+      reset();
+      sx.jump(0);
+      sy.jump(0);
+    };
+    stop();
+    if (reduce || !enabled) return;
 
-    el.addEventListener("pointermove", onMove);
-    el.addEventListener("pointerleave", onLeave);
+    const onMove = (e: PointerEvent) => {
+      if (e.pointerType === "touch" || !finePointer.matches) return;
+      const r = el.getBoundingClientRect();
+      x.set(Math.max(-0.5, Math.min(0.5, (e.clientX - r.left) / r.width - 0.5)));
+      y.set(Math.max(-0.5, Math.min(0.5, (e.clientY - r.top) / r.height - 0.5)));
+    };
+    const visibility = () => { if (document.hidden) stop(); };
+
+    el.addEventListener("pointermove", onMove, { passive: true });
+    el.addEventListener("pointerleave", reset);
+    el.addEventListener("pointercancel", reset);
+    window.addEventListener("blur", stop);
+    window.addEventListener("resize", stop);
+    finePointer.addEventListener("change", stop);
+    document.addEventListener("visibilitychange", visibility);
     return () => {
       el.removeEventListener("pointermove", onMove);
-      el.removeEventListener("pointerleave", onLeave);
+      el.removeEventListener("pointerleave", reset);
+      el.removeEventListener("pointercancel", reset);
+      window.removeEventListener("blur", stop);
+      window.removeEventListener("resize", stop);
+      finePointer.removeEventListener("change", stop);
+      document.removeEventListener("visibilitychange", visibility);
+      stop();
     };
-  }, [ref, reduce, enabled, x, y]);
+  }, [ref, reduce, enabled, x, y, sx, sy]);
 
   return { x: sx, y: sy, reduce };
 }

@@ -16,6 +16,7 @@ export default function Contact() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (status === "sending") return;
 
     // No Formspree configured → fall back to the user's mail client
     if (!FORMSPREE_ID) {
@@ -55,6 +56,7 @@ export default function Contact() {
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
+    if (status === "error" || status === "success") setStatus("idle");
   };
 
   const contactInfo = [
@@ -156,6 +158,7 @@ export default function Contact() {
           <motion.form
             className="card p-10"
             onSubmit={handleSubmit}
+            aria-busy={status === "sending"}
             initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -169,6 +172,8 @@ export default function Contact() {
                 id="name"
                 name="name"
                 autoComplete="name"
+                maxLength={120}
+                disabled={status === "sending"}
                 value={formData.name}
                 onChange={handleChange}
                 placeholder="اسمك الكامل"
@@ -186,6 +191,8 @@ export default function Contact() {
                 id="email"
                 name="email"
                 autoComplete="email"
+                maxLength={254}
+                disabled={status === "sending"}
                 dir="ltr"
                 value={formData.email}
                 onChange={handleChange}
@@ -202,6 +209,8 @@ export default function Contact() {
               <textarea
                 id="message"
                 name="message"
+                maxLength={5000}
+                disabled={status === "sending"}
                 value={formData.message}
                 onChange={handleChange}
                 placeholder="اكتب رسالتك هنا..."
@@ -240,8 +249,10 @@ export default function Contact() {
             )}
             {status === "error" && (
               <p className="mt-4 text-center text-red-400 text-sm" role="alert">
-                تعذّر إرسال الرسالة. حاول مجدداً أو راسلني مباشرة على
-                abdulsalammuaad@gmail.com
+                تعذّر إرسال الرسالة. حاول مجدداً أو راسلني مباشرة على{" "}
+                <a className="underline" dir="ltr" href="mailto:abdulsalammuaad@gmail.com">
+                  abdulsalammuaad@gmail.com
+                </a>
               </p>
             )}
           </motion.form>

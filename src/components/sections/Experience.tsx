@@ -68,7 +68,7 @@ export default function Experience() {
           {experienceData.map((exp, index) => (
             <motion.div
               key={index}
-              className="relative pr-16 mb-10 last:mb-0"
+              className="relative pr-12 sm:pr-16 mb-10 last:mb-0"
               initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -77,9 +77,9 @@ export default function Experience() {
               <div className="absolute right-0 top-8 w-10 h-10 bg-dark border-[3px] border-primary rounded-full flex items-center justify-center text-primary z-10">
                 <Briefcase size={20} />
               </div>
-              <div className="card p-7 text-right" dir="rtl">
+              <div className="card p-5 sm:p-7 text-right" dir="rtl">
                 <div className="mb-3">
-                  <h3 className="text-xl font-semibold mb-1 text-white">
+                  <h3 className="text-lg sm:text-xl font-semibold mb-1 text-white">
                     {exp.title}
                   </h3>
                   <span className="text-primary-light font-medium">
@@ -91,7 +91,7 @@ export default function Experience() {
                   <span>{exp.period}</span>
                 </div>
                 {Array.isArray(exp.description) ? (
-                  <ul className="list-disc list-inside text-gray-400 space-y-2 leading-relaxed text-sm pr-2">
+                  <ul className="list-none text-gray-400 space-y-2 leading-relaxed text-sm pr-2">
                     {exp.description.map((point, pIndex) => (
                       <li
                         key={pIndex}
