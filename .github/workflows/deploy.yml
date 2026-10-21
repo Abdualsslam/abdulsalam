@@ -47,3 +47,14 @@ jobs:
       - name: Publish portfolio
         id: deployment
         uses: actions/deploy-pages@368f82528645a54fb793d4d04e342629a3f51346 # v5
+      - name: Verify public site and media
+        env:
+          SITE_URL: ${{ steps.deployment.outputs.page_url }}
+        run: |
+          for path in '' cv.pdf portrait-video/loops/idle.mp4 portrait-video/loops/glance.mp4 portrait-video/loops/idle.webp portrait-video/loops/glance.webp; do
+            curl --fail --head --location --silent --show-error \
+              --retry 5 --retry-delay 5 --retry-all-errors \
+              --connect-timeout 10 --max-time 30 \
+              --output /dev/null --write-out '%{http_code} %{url_effective}\n' \
+              "${SITE_URL}${path}"
+          done
