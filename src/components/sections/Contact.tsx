@@ -94,7 +94,7 @@ export default function Contact() {
   ];
 
   return (
-    <section id="contact" className="py-24">
+    <section id="contact" className="py-24 text-ink">
       <div className="max-w-6xl mx-auto px-5">
         <motion.h2
           className="section-title"
@@ -112,7 +112,7 @@ export default function Contact() {
             viewport={{ once: true }}
           >
             <h3 className="text-2xl font-semibold mb-5">دعنا نتحدث</h3>
-            <p className="text-gray-400 leading-relaxed mb-9">
+            <p className="text-ink-muted leading-relaxed mb-9">
               هل لديك مشروع أو فكرة تريد تنفيذها؟ لا تتردد في التواصل معي. أنا
               دائماً متحمس للعمل على مشاريع جديدة ومثيرة.
             </p>
@@ -120,11 +120,11 @@ export default function Contact() {
             <div className="flex flex-col gap-6 mb-9">
               {contactInfo.map((info, index) => (
                 <div key={index} className="flex items-center gap-4">
-                  <div className="w-12 h-12 flex items-center justify-center bg-primary/15 rounded-xl text-primary">
+                  <div className="w-12 h-12 flex items-center justify-center bg-primary-light rounded-xl text-primary">
                     {info.icon}
                   </div>
                   <div className="flex flex-col">
-                    <span className="text-xs text-gray-500">{info.label}</span>
+                    <span className="text-xs text-ink-muted">{info.label}</span>
                     <span className="font-medium contact-value">
                       {info.href ? (
                         <a dir="ltr" href={info.href}>
@@ -147,7 +147,7 @@ export default function Contact() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={social.label}
-                  className="w-11 h-11 flex items-center justify-center bg-dark-card rounded-xl text-gray-400 border border-white/10 transition-all hover:bg-primary hover:text-white hover:-translate-y-1"
+                  className="w-11 h-11 flex items-center justify-center bg-paper-raised rounded-xl text-ink-muted border border-[var(--paper-rule)] transition-all hover:bg-primary-light hover:text-primary hover:-translate-y-1"
                 >
                   {social.icon}
                 </a>
@@ -178,7 +178,7 @@ export default function Contact() {
                 onChange={handleChange}
                 placeholder="اسمك الكامل"
                 required
-                className="w-full px-5 py-4 bg-dark-secondary border border-white/10 rounded-xl text-white font-cairo transition-all focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 placeholder:text-gray-500"
+                className="w-full px-5 py-4 bg-paper-raised border border-[var(--paper-rule)] rounded-xl text-ink font-cairo transition-all focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 placeholder:text-ink-muted"
               />
             </div>
 
@@ -198,7 +198,7 @@ export default function Contact() {
                 onChange={handleChange}
                 placeholder="example@email.com"
                 required
-                className="w-full px-5 py-4 bg-dark-secondary border border-white/10 rounded-xl text-white font-cairo transition-all focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 placeholder:text-gray-500"
+                className="w-full px-5 py-4 bg-paper-raised border border-[var(--paper-rule)] rounded-xl text-ink font-cairo transition-all focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 placeholder:text-ink-muted"
               />
             </div>
 
@@ -216,7 +216,7 @@ export default function Contact() {
                 placeholder="اكتب رسالتك هنا..."
                 rows={5}
                 required
-                className="w-full px-5 py-4 bg-dark-secondary border border-white/10 rounded-xl text-white font-cairo transition-all resize-y min-h-[120px] focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 placeholder:text-gray-500"
+                className="w-full px-5 py-4 bg-paper-raised border border-[var(--paper-rule)] rounded-xl text-ink font-cairo transition-all resize-y min-h-[120px] focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 placeholder:text-ink-muted"
               />
             </div>
 
@@ -234,21 +234,21 @@ export default function Contact() {
             </button>
 
             {!FORMSPREE_ID && (
-              <p className="mt-4 text-xs text-gray-400 leading-relaxed">
+              <p className="mt-4 text-xs text-ink-muted leading-relaxed">
                 يفتح الزر تطبيق البريد لديك برسالتك جاهزة، لتراجعها وترسلها
                 بنفسك.
               </p>
             )}
             {status === "success" && (
               <p
-                className="mt-4 text-center text-emerald-400 text-sm"
+                className="mt-4 text-center text-emerald-700 text-sm"
                 role="status"
               >
                 شكراً لتواصلك! وصلتني رسالتك وسأرد عليك قريباً.
               </p>
             )}
             {status === "error" && (
-              <p className="mt-4 text-center text-red-400 text-sm" role="alert">
+              <p className="mt-4 text-center text-primary text-sm" role="alert">
                 تعذّر إرسال الرسالة. حاول مجدداً أو راسلني مباشرة على{" "}
                 <a className="underline" dir="ltr" href="mailto:abdulsalammuaad@gmail.com">
                   abdulsalammuaad@gmail.com

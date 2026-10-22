@@ -13,13 +13,13 @@ export interface TabConfig {
   color: string;
 }
 export const tabsConfig: TabConfig[] = [
-  { id: "home", label: "الغلاف", color: "#b98fd6" },
-  { id: "about", label: "عني", color: "#b98fd6" },
-  { id: "projects", label: "أعمالي", color: "#b48be4" },
-  { id: "skills", label: "مهاراتي", color: "#a878c9" },
-  { id: "experience", label: "خبراتي", color: "#c19ae7" },
-  { id: "qualifications", label: "مؤهلاتي", color: "#ad8dd4" },
-  { id: "contact", label: "تواصل", color: "#d0a8ed" },
+  { id: "home", label: "الغلاف", color: "var(--paper-accent)" },
+  { id: "about", label: "عني", color: "var(--paper-accent)" },
+  { id: "projects", label: "أعمالي", color: "var(--paper-accent)" },
+  { id: "skills", label: "مهاراتي", color: "var(--paper-accent)" },
+  { id: "experience", label: "خبراتي", color: "var(--paper-accent)" },
+  { id: "qualifications", label: "مؤهلاتي", color: "var(--paper-accent)" },
+  { id: "contact", label: "تواصل", color: "var(--paper-accent)" },
 ];
 const readHash = (): TabId | null => {
   const id = window.location.hash.slice(1);

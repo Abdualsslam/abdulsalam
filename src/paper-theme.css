@@ -1,0 +1,32 @@
+/* Uncoated paper, printed ink and coral drafting marks. */
+:root {
+  --paper-bg-rgb: 246 241 232;
+  --paper-surface-rgb: 255 250 242;
+  --paper-muted-rgb: 238 231 218;
+  --paper-raised-rgb: 255 253 247;
+  --paper-ink-rgb: 32 32 30;
+  --paper-ink-muted-rgb: 98 95 89;
+  --paper-accent-rgb: 166 62 70;
+  --paper-accent-dark-rgb: 142 52 60;
+  --paper-headline-rgb: 211 86 95;
+  --paper-coral-rgb: 229 107 114;
+  --paper-accent-soft-rgb: 243 220 218;
+  --paper-rule-rgb: 212 203 191;
+  --paper-blue-rgb: 49 94 145;
+  --paper-bg: rgb(var(--paper-bg-rgb));
+  --paper-surface: rgb(var(--paper-surface-rgb));
+  --paper-muted: rgb(var(--paper-muted-rgb));
+  --paper-raised: rgb(var(--paper-raised-rgb));
+  --paper-ink: rgb(var(--paper-ink-rgb));
+  --paper-ink-muted: rgb(var(--paper-ink-muted-rgb));
+  --paper-accent: rgb(var(--paper-accent-rgb));
+  --paper-headline: rgb(var(--paper-headline-rgb));
+  --paper-coral: rgb(var(--paper-coral-rgb));
+  --paper-accent-soft: rgb(var(--paper-accent-soft-rgb));
+  --paper-rule: rgb(var(--paper-rule-rgb));
+  --paper-blue: rgb(var(--paper-blue-rgb));
+  --paper-stock: #e6dccb;
+  --paper-edge: #bfb3a1;
+  --paper-shadow-rgb: 74 59 43;
+  --paper-grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='grain'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.82' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Cpath fill='%23645c4e' opacity='.035' filter='url(%23grain)' d='M0 0h180v180H0z'/%3E%3C/svg%3E");
+}

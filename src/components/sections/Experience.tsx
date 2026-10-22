@@ -53,7 +53,7 @@ const experienceData = [
 
 export default function Experience() {
   return (
-    <section id="experience" className="py-24">
+    <section id="experience" className="py-24 text-ink">
       <div className="max-w-6xl mx-auto px-5">
         <motion.h2
           className="section-title"
@@ -64,7 +64,7 @@ export default function Experience() {
           الخبرات العملية
         </motion.h2>
 
-        <div className="relative max-w-3xl mx-auto before:content-[''] before:absolute before:top-0 before:right-5 before:w-0.5 before:h-full before:bg-gradient-to-b before:from-primary before:to-secondary before:rounded-full">
+        <div className="relative max-w-3xl mx-auto before:content-[''] before:absolute before:top-0 before:right-5 before:w-0.5 before:h-full before:bg-[var(--paper-rule)] before:rounded-full">
           {experienceData.map((exp, index) => (
             <motion.div
               key={index}
@@ -74,24 +74,24 @@ export default function Experience() {
               viewport={{ once: true }}
               transition={{ delay: index * 0.2 }}
             >
-              <div className="absolute right-0 top-8 w-10 h-10 bg-dark border-[3px] border-primary rounded-full flex items-center justify-center text-primary z-10">
+              <div className="absolute right-0 top-8 w-10 h-10 bg-paper-surface border-[3px] border-primary rounded-full flex items-center justify-center text-primary z-10">
                 <Briefcase size={20} />
               </div>
               <div className="card p-5 sm:p-7 text-right" dir="rtl">
                 <div className="mb-3">
-                  <h3 className="text-lg sm:text-xl font-semibold mb-1 text-white">
+                  <h3 className="text-lg sm:text-xl font-semibold mb-1 text-ink">
                     {exp.title}
                   </h3>
-                  <span className="text-primary-light font-medium">
+                  <span className="text-primary font-medium">
                     {exp.company}
                   </span>
                 </div>
-                <div className="flex items-center gap-2 text-gray-500 text-sm mb-4">
+                <div className="flex items-center gap-2 text-ink-muted text-sm mb-4">
                   <Calendar size={16} />
                   <span>{exp.period}</span>
                 </div>
                 {Array.isArray(exp.description) ? (
-                  <ul className="list-none text-gray-400 space-y-2 leading-relaxed text-sm pr-2">
+                  <ul className="list-none text-ink-muted space-y-2 leading-relaxed text-sm pr-2">
                     {exp.description.map((point, pIndex) => (
                       <li
                         key={pIndex}
@@ -102,7 +102,7 @@ export default function Experience() {
                     ))}
                   </ul>
                 ) : (
-                  <p className="text-gray-400 leading-relaxed text-sm">
+                  <p className="text-ink-muted leading-relaxed text-sm">
                     {exp.description}
                   </p>
                 )}

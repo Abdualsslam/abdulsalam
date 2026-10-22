@@ -85,12 +85,17 @@ export default function DockSheet({id, label, index, active, enabled, content, o
   const path = useTransform(lift, value => {
     const bottom = 300 + value;
     const edge = top + 54;
+    const shoulderLeft = Math.max(14, left - 18);
+    const shoulderRight = Math.min(1184, right + 18);
+    // Flat crown and soft, symmetric shoulders stay part of the same sheet.
     return `M2 ${bottom} L2 ${edge + 9} Q2 ${edge} 14 ${edge}
-      L${Math.max(14,left-18)} ${edge} Q${left-5} ${edge} ${left} ${top+14}
-      Q${left+2} ${top+3} ${left+14} ${top+2}
-      L${right-14} ${top-2} Q${right-2} ${top-3} ${right} ${top+12}
-      Q${right+5} ${edge-8} ${Math.min(1184,right+18)} ${edge-8}
-      L1184 ${edge-8} Q1198 ${edge-8} 1198 ${edge+1} L1198 ${bottom} Z`;
+      L${shoulderLeft} ${edge}
+      C${Math.max(shoulderLeft,left-6)} ${edge} ${Math.max(shoulderLeft,left-4)} ${top+48} ${left+2} ${top+28}
+      C${left+6} ${top+10} ${left+12} ${top+4} ${left+30} ${top+4}
+      L${right-30} ${top+4}
+      C${right-12} ${top+4} ${right-6} ${top+10} ${right-2} ${top+28}
+      C${Math.min(shoulderRight,right+4)} ${top+48} ${Math.min(shoulderRight,right+6)} ${edge} ${shoulderRight} ${edge}
+      L1184 ${edge} Q1198 ${edge} 1198 ${edge+9} L1198 ${bottom} Z`;
   });
   const finish = (event: PointerEvent<HTMLButtonElement>, cancelled = false) => {
     const drag = gesture.current;
@@ -112,11 +117,11 @@ export default function DockSheet({id, label, index, active, enabled, content, o
           <motion.feDisplacementMap in="SourceGraphic" in2="paperWave" scale={rippleScale} xChannelSelector="R" yChannelSelector="G"/>
         </filter>
         <linearGradient id={`sheet-${id}`} gradientUnits="userSpaceOnUse" x1="0" y1={top} x2="0" y2={top+110}>
-          <stop offset="0" stopColor="#e0d4e8"/><stop offset=".48" stopColor="#baa6cb"/>
-          <stop offset=".5" stopColor="#2b2035"/><stop offset="1" stopColor="#17111e"/>
+          <stop offset="0" stopColor="var(--paper-raised)"/><stop offset=".48" stopColor="var(--paper-muted)"/>
+          <stop offset=".5" stopColor="var(--paper-surface)"/><stop offset="1" stopColor="var(--paper-surface)"/>
         </linearGradient>
       </defs>
-      <motion.path d={path} fill={`url(#sheet-${id})`} stroke="#bba2cb" strokeWidth="1"/>
+      <motion.path d={path} fill={`url(#sheet-${id})`} stroke="var(--paper-edge)" strokeWidth="1"/>
     </motion.svg>
     <motion.button className="sheet-head" id={`tab-${id}`} type="button" aria-expanded={active}
       aria-controls={`panel-${id}`} style={{left:`${left/12}%`,width:`${172/12}%`,top}}

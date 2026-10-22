@@ -1,3 +1,5 @@
+const paperColor = (name) => `rgb(var(--${name}-rgb) / <alpha-value>)`;
+
 /** @type {import('tailwindcss').Config} */
 export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
@@ -5,17 +7,28 @@ export default {
     extend: {
       colors: {
         primary: {
-          DEFAULT: "#7E66AC",
-          dark: "#502e91",
-          light: "#c4a4ee",
+          DEFAULT: paperColor("paper-accent"),
+          dark: paperColor("paper-accent-dark"),
+          light: paperColor("paper-accent-soft"),
         },
-        secondary: "#8F00FF",
-        accent: "#00D9FF",
+        secondary: paperColor("paper-coral"),
+        accent: paperColor("paper-blue"),
+        ink: {
+          DEFAULT: paperColor("paper-ink"),
+          muted: paperColor("paper-ink-muted"),
+        },
+        paper: {
+          DEFAULT: paperColor("paper-bg"),
+          surface: paperColor("paper-surface"),
+          muted: paperColor("paper-muted"),
+          raised: paperColor("paper-raised"),
+          rule: paperColor("paper-rule"),
+        },
         dark: {
-          DEFAULT: "#0a0a0f",
-          secondary: "#12121a",
-          card: "#1a1a25",
-          "card-hover": "#22222f",
+          DEFAULT: paperColor("paper-bg"),
+          secondary: paperColor("paper-muted"),
+          card: paperColor("paper-surface"),
+          "card-hover": paperColor("paper-raised"),
         },
       },
       fontFamily: {

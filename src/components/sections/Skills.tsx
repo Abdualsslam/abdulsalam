@@ -28,7 +28,7 @@ const skillsData = {
 
 export default function Skills() {
     return (
-        <section id="skills" className="py-24">
+        <section id="skills" className="py-24 text-ink">
             <div className="max-w-6xl mx-auto px-5">
                 <motion.h2
                     className="section-title"
@@ -49,7 +49,7 @@ export default function Skills() {
                             viewport={{ once: true }}
                             transition={{ delay: categoryIndex * 0.2 }}
                         >
-                            <h3 className="text-xl font-semibold mb-6 text-primary-light relative pb-4 after:content-[''] after:absolute after:bottom-0 after:right-0 after:w-12 after:h-0.5 after:bg-gradient-to-r after:from-primary after:to-secondary after:rounded-full">
+                            <h3 className="text-xl font-semibold mb-6 text-primary relative pb-4 after:content-[''] after:absolute after:bottom-0 after:right-0 after:w-12 after:h-0.5 after:bg-primary after:rounded-full">
                                 {category}
                             </h3>
                             <div className="flex flex-col gap-5">
@@ -57,11 +57,11 @@ export default function Skills() {
                                     <div key={skill.name} className="w-full">
                                         <div className="flex justify-between mb-2">
                                             <span className="font-medium">{skill.name}</span>
-                                            <span className="text-gray-500 text-sm">{skill.level}%</span>
+                                            <span className="text-ink-muted text-sm">{skill.level}%</span>
                                         </div>
-                                        <div className="h-2 bg-white/10 rounded-full overflow-hidden">
+                                        <div className="h-2 bg-paper-muted rounded-full overflow-hidden">
                                             <motion.div
-                                                className="h-full bg-gradient-to-r from-primary to-secondary rounded-full"
+                                                className="h-full bg-primary rounded-full"
                                                 initial={{ width: 0 }}
                                                 whileInView={{ width: `${skill.level}%` }}
                                                 viewport={{ once: true }}

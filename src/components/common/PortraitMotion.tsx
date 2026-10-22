@@ -6,6 +6,9 @@ import flutterLogo from "../../assets/flutter-logo.webp";
 export default function PortraitMotion({ enabled, concealed }: { enabled: boolean; concealed: boolean }) {
   return (
     <div className="portrait-artwork">
+      <div className="portrait-drafting" aria-hidden="true">
+        <span /><span /><span /><span />
+      </div>
       <div className="portrait-backdrop" aria-hidden="true" />
       <div className="portrait-edition" aria-hidden="true">
         <span>THE PERSON BEHIND THE CODE</span>

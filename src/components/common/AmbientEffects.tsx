@@ -6,13 +6,13 @@ import {
   useMotionTemplate,
 } from "framer-motion";
 
-/** A single compositor-driven light and a small, deterministic particle field. */
+/** A soft paper highlight that follows the pointer without lighting the text. */
 export default function AmbientEffects({ enabled }: { enabled: boolean }) {
   const pointerX = useMotionValue(-500);
   const pointerY = useMotionValue(-500);
   const x = useSpring(pointerX, { stiffness: 65, damping: 24 });
   const y = useSpring(pointerY, { stiffness: 65, damping: 24 });
-  const light = useMotionTemplate`radial-gradient(430px circle at ${x}px ${y}px, rgba(143,0,255,.12), transparent 72%)`;
+  const light = useMotionTemplate`radial-gradient(430px circle at ${x}px ${y}px, rgb(var(--paper-coral-rgb) / .035), transparent 72%)`;
   useEffect(() => {
     if (!enabled || !window.matchMedia("(pointer:fine)").matches) return;
     const move = (event: PointerEvent) => {

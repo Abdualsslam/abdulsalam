@@ -28,7 +28,7 @@ const languages = [
 
 export default function Qualifications() {
   return (
-    <section id="qualifications" className="py-24">
+    <section id="qualifications" className="py-24 text-ink">
       <div className="max-w-6xl mx-auto px-5">
         <motion.h2
           className="section-title"
@@ -46,7 +46,7 @@ export default function Qualifications() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
         >
-          <h3 className="flex items-center gap-3 text-2xl font-semibold mb-7 text-primary-light">
+          <h3 className="flex items-center gap-3 text-2xl font-semibold mb-7 text-primary">
             <GraduationCap size={26} />
             التعليم
           </h3>
@@ -61,17 +61,17 @@ export default function Qualifications() {
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
               >
-                <div className="shrink-0 w-12 h-12 flex items-center justify-center bg-gradient-to-r from-primary to-secondary rounded-xl text-white">
+                <div className="shrink-0 w-12 h-12 flex items-center justify-center bg-primary-light rounded-xl text-primary">
                   <GraduationCap size={24} />
                 </div>
                 <div>
-                  <h4 className="text-lg font-semibold text-white mb-1">
+                  <h4 className="text-lg font-semibold text-ink mb-1">
                     {edu.degree}
                   </h4>
-                  <span className="text-primary-light font-medium">
+                  <span className="text-primary font-medium">
                     {edu.institution}
                   </span>
-                  <div className="text-gray-500 text-sm mt-1">{edu.year}</div>
+                  <div className="text-ink-muted text-sm mt-1">{edu.year}</div>
                 </div>
               </motion.div>
             ))}
@@ -85,7 +85,7 @@ export default function Qualifications() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
         >
-          <h3 className="flex items-center gap-3 text-2xl font-semibold mb-7 text-primary-light">
+          <h3 className="flex items-center gap-3 text-2xl font-semibold mb-7 text-primary">
             <Award size={26} />
             الشهادات
           </h3>
@@ -100,15 +100,15 @@ export default function Qualifications() {
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.08 }}
               >
-                <div className="shrink-0 w-11 h-11 flex items-center justify-center bg-primary/15 rounded-xl text-primary">
+                <div className="shrink-0 w-11 h-11 flex items-center justify-center bg-primary-light rounded-xl text-primary">
                   <Award size={22} />
                 </div>
                 <div>
-                  <h4 className="font-semibold text-white leading-snug mb-1">
+                  <h4 className="font-semibold text-ink leading-snug mb-1">
                     {cert.name}
                   </h4>
-                  <span className="text-gray-400 text-sm">{cert.issuer}</span>
-                  <div className="text-gray-500 text-xs mt-1">{cert.year}</div>
+                  <span className="text-ink-muted text-sm">{cert.issuer}</span>
+                  <div className="text-ink-muted text-xs mt-1">{cert.year}</div>
                 </div>
               </motion.div>
             ))}
@@ -121,7 +121,7 @@ export default function Qualifications() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
         >
-          <h3 className="flex items-center gap-3 text-2xl font-semibold mb-7 text-primary-light">
+          <h3 className="flex items-center gap-3 text-2xl font-semibold mb-7 text-primary">
             <Languages size={26} />
             اللغات
           </h3>
@@ -129,12 +129,12 @@ export default function Qualifications() {
             {languages.map((lang, index) => (
               <div key={index} className="w-full">
                 <div className="flex flex-wrap justify-between items-baseline gap-x-4 gap-y-1 mb-2">
-                  <span className="font-medium text-white">{lang.name}</span>
-                  <span className="text-gray-500 text-sm">{lang.note}</span>
+                  <span className="font-medium text-ink">{lang.name}</span>
+                  <span className="text-ink-muted text-sm">{lang.note}</span>
                 </div>
-                <div className="h-2 bg-white/10 rounded-full overflow-hidden">
+                <div className="h-2 bg-paper-muted rounded-full overflow-hidden">
                   <motion.div
-                    className="h-full bg-gradient-to-r from-primary to-secondary rounded-full"
+                    className="h-full bg-primary rounded-full"
                     initial={{ width: 0 }}
                     whileInView={{ width: `${lang.level}%` }}
                     viewport={{ once: true }}
