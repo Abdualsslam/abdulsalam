@@ -20,9 +20,11 @@ Sources: `docs/qit3ati-brand-logos.json`. Local backup of prepared PNGs, provena
 
 ## Actual recordings
 
-- `browse.mp4`: 8.60s — scroll the home brand grid after removing Brand Test. Its poster uses the corresponding raw recording's opening home frame.
-- `compatibility.mp4`: 12.53s — iPhone 8 charging-port compatibilities, saving the device and returning to Favorites. The final actual app frame is held for 1.6s for readability.
-- `preferences.mp4`: 14.80s — dark appearance, English language, then light appearance.
+- `browse.mp4`: 11.93s — home overview and scrolling the brand grid after removing Brand Test.
+- `compatibility.mp4`: 9.53s — iPhone 8 charging-port compatibilities, saving the device and returning to Favorites. The final actual app frame is held for 1.6s for readability.
+- `preferences.mp4`: 13.10s — dark appearance, English language, then light appearance.
+
+All three clips were freshly recorded on 2026-10-25 after the user's final recording request. Only initial idle holds were trimmed, using output-side accurate seeking to preserve the opening overview. Posters come from the published clips.
 
 All MP4s fully decoded successfully: H.264/yuv420p, 720 × 1606, 30 fps, 1× playback. Animations are not accelerated. Static waiting is trimmed where needed; there are no cuts within the tours. Posters are corresponding actual video frames. Metadata/hashes: `docs/qit3ati-recordings.json`.
 

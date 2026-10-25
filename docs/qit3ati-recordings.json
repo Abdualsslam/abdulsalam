@@ -1,7 +1,7 @@
 [
   {
     "file": "browse",
-    "duration": 8.6,
+    "duration": 11.93,
     "fps": 30.0,
     "size": [
       720,
@@ -10,28 +10,28 @@
     "playbackRate": 1,
     "initialIdleTrimSeconds": 3.0,
     "finalScreenHoldSeconds": 0,
-    "bytes": 1549902,
-    "sha256": "95982eea0385b20e358bec232223e5ee2df210ade99cd1471abfaad9d77d897c",
+    "bytes": 1571978,
+    "sha256": "42535641a0755e5fe2fafbe27c283beb07f0285473309df18f8a076ba73a87cc",
     "source": "Real Android recording; static holds trimmed, final favorites screen held for readability. No animation acceleration or cuts inside the tour."
   },
   {
     "file": "compatibility",
-    "duration": 12.53,
+    "duration": 9.53,
     "fps": 30.0,
     "size": [
       720,
       1606
     ],
     "playbackRate": 1,
-    "initialIdleTrimSeconds": 0.0,
+    "initialIdleTrimSeconds": 3.0,
     "finalScreenHoldSeconds": 1.6,
-    "bytes": 141838,
-    "sha256": "bd813a3c0795116ef4cc6281013494ee2c931e83ce2d405dcda7e897b18fd337",
+    "bytes": 111906,
+    "sha256": "cc3bdff45ab93a9ed6489735251573d120b4ff38acd327419a80e6a2c751e220",
     "source": "Real Android recording; static holds trimmed, final favorites screen held for readability. No animation acceleration or cuts inside the tour."
   },
   {
     "file": "preferences",
-    "duration": 14.8,
+    "duration": 13.1,
     "fps": 30.0,
     "size": [
       720,
@@ -40,8 +40,8 @@
     "playbackRate": 1,
     "initialIdleTrimSeconds": 3.1,
     "finalScreenHoldSeconds": 0,
-    "bytes": 524137,
-    "sha256": "75c4f209ca5ff97c166c593e6512462eb83cb0d2e7d09ddcc80073a890ff13ee",
+    "bytes": 566240,
+    "sha256": "b29ab0def7fb22827da0274093ac155941d9a34b3b6eed990ea399553f07478c",
     "source": "Real Android recording; static holds trimmed, final favorites screen held for readability. No animation acceleration or cuts inside the tour."
   }
 ]
