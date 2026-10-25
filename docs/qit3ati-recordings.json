@@ -16,18 +16,24 @@
   },
   {
     "file": "compatibility",
-    "duration": 9.53,
+    "duration": 14.67,
     "fps": 30.0,
     "size": [
       720,
       1606
     ],
     "playbackRate": 1,
-    "initialIdleTrimSeconds": 3.0,
-    "finalScreenHoldSeconds": 1.6,
-    "bytes": 111906,
-    "sha256": "cc3bdff45ab93a9ed6489735251573d120b4ff38acd327419a80e6a2c751e220",
-    "source": "Real Android recording; static holds trimmed, final favorites screen held for readability. No animation acceleration or cuts inside the tour."
+    "initialIdleTrimSeconds": 0.8,
+    "finalScreenHoldSeconds": 0.8,
+    "bytes": 606527,
+    "sha256": "6ca97daf2d2f9a6ee80fdfae4fd3b55b5d1cfb3bcf8b51943b5171ec26970bde",
+    "source": "Real Android recording at 1x: home, search A12, select Samsung A12, expand Power Button compatibilities, save and view Favorites. One static search-result waiting interval removed; no interaction or animation accelerated or skipped.",
+    "removedIdleIntervalsSeconds": [
+      [
+        6.0,
+        7.3
+      ]
+    ]
   },
   {
     "file": "preferences",

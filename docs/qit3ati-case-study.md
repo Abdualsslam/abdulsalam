@@ -21,18 +21,20 @@ Sources: `docs/qit3ati-brand-logos.json`. Local backup of prepared PNGs, provena
 ## Actual recordings
 
 - `browse.mp4`: 11.93s — home overview and scrolling the brand grid after removing Brand Test.
-- `compatibility.mp4`: 9.53s — iPhone 8 charging-port compatibilities, saving the device and returning to Favorites. The final actual app frame is held for 1.6s for readability.
+- `compatibility.mp4`: 14.67s — a complete native flow: home → search → enter A12 → select Samsung A12 → expand Power Button (four models) → save → Favorites. The final actual app frame is held for 0.8s for readability.
 - `preferences.mp4`: 13.10s — dark appearance, English language, then light appearance.
 
-All three clips were freshly recorded on 2026-10-25 after the user's final recording request. Only initial idle holds were trimmed, using output-side accurate seeking to preserve the opening overview. Posters come from the published clips.
+All three clips were freshly recorded on 2026-10-25. The compatibility clip was subsequently replaced at the user's request to show the whole journey with a more useful device. Its source is `artifacts/qit3ati-captures/compatibility-complete-raw.mp4`; a single static results hold at source seconds 6.0–7.3 is removed, together with 0.8s of initial idle. Every interaction remains at normal speed and in order. Variable-frame-rate input is normalized to 30 fps before trimming to retain the opening home hold accurately. Posters come from the published clips.
 
-All MP4s fully decoded successfully: H.264/yuv420p, 720 × 1606, 30 fps, 1× playback. Animations are not accelerated. Static waiting is trimmed where needed; there are no cuts within the tours. Posters are corresponding actual video frames. Metadata/hashes: `docs/qit3ati-recordings.json`.
+All MP4s fully decoded successfully: H.264/yuv420p, 720 × 1606, 30 fps, 1× playback. Animations are not accelerated. Only static waiting is trimmed; no steps are omitted. Posters are corresponding actual video frames. Metadata/hashes: `docs/qit3ati-recordings.json`.
 
 The app was restored to Arabic/light appearance and the temporary recording favorite removed. Recent-device history reflects the review.
 
 ## Existing data issue
 
 The iPhone 8 compatibility list includes Apple iPhone 8 Plus, but opening that linked detail returned HTTP 404. This data issue was not changed or represented as working; the recording demonstrates the verified compatibility list and Favorites flow instead.
+
+During the replacement recording review, the Samsung A12 Power Button list displayed A12, A13, A04 and A04S. Opening its A13 entry also returned 404; this pre-existing linked-record issue is outside the recording change. The published tour shows the actual list and working Favorites flow, without claiming successful navigation into the linked models.
 
 ## Website verification
 
