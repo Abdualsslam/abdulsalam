@@ -10,7 +10,7 @@ export default function ProjectExperience({ active, projectId, projectName, clip
   const [failed, setFailed] = useState(false);
   const player = useRef<HTMLVideoElement>(null);
   const clip = clips[selected];
-  const mediaPath = `/projects/${projectId}`;
+  const mediaPath = `${import.meta.env.BASE_URL}projects/${projectId}`;
   const headingId = `${projectId}-experience-title`;
 
   useEffect(() => {

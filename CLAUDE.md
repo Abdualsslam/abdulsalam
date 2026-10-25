@@ -21,6 +21,10 @@ npm run lint       # ESLint over ts/tsx
 
 There are no automated tests. `npm run build` runs `tsc` first, so a type error fails the build — treat a clean build as the verification gate. Note `.vscode/launch.json` points Chrome at port 8080, which is stale; the dev server actually runs on Vite's default 5173.
 
+## Git and deployment
+
+The user wants pushes to **main**. It is the default branch and the source for `.github/workflows/deploy.yml`, which builds and publishes GitHub Pages on each push. The production URL is `https://abdualsslam.github.io/abdulsalam/`; the workflow builds with `--base=/abdulsalam/`. Resolve public media through `import.meta.env.BASE_URL` (or `src/lib/publicAsset.ts`) so assets work under both the local root and the published subpath. `master` is a legacy branch, synchronized once during the switch to main; future work belongs on main.
+
 ## Path alias
 
 `@/*` → `src/*` (configured in both `tsconfig.json` and `vite.config.ts`). Keep them in sync if changed.

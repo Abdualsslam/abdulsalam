@@ -1,6 +1,7 @@
 import { Smartphone, ShoppingBag, Headphones, Home, Heart, User, MessageSquare, Workflow, Database } from "lucide-react";
 import type { PortfolioProject } from "../../data/projects";
 import { getProjectCaseStudy } from "../../data/caseStudies";
+import { publicAsset } from "../../lib/publicAsset";
 
 export default function ProjectArtwork({ project }: { project: PortfolioProject }) {
   const study = getProjectCaseStudy(project.id);
@@ -12,12 +13,12 @@ export default function ProjectArtwork({ project }: { project: PortfolioProject 
       </span>
       {hasCapturedMedia ? (
         <div className="project-real-preview">
-          <img src={project.id === "tagadod" ? "/projects/tagadod/home.webp" : `/projects/${project.id}/${study.experiences[0].file}-poster.webp`} alt="" width="1280" height="2856" loading="lazy" />
-          <img src={project.id === "tagadod" ? "/projects/tagadod/catalog.webp" : `/projects/${project.id}/${study.experiences[1]?.file ?? study.experiences[0].file}-poster.webp`} alt="" width="1280" height="2856" loading="lazy" />
+          <img src={publicAsset(project.id === "tagadod" ? "projects/tagadod/home.webp" : `projects/${project.id}/${study.experiences[0].file}-poster.webp`)} alt="" width="1280" height="2856" loading="lazy" />
+          <img src={publicAsset(project.id === "tagadod" ? "projects/tagadod/catalog.webp" : `projects/${project.id}/${study.experiences[1]?.file ?? study.experiences[0].file}-poster.webp`)} alt="" width="1280" height="2856" loading="lazy" />
         </div>
       ) : study ? (
         <div className="project-logo-preview">
-          <img src={`/projects/${project.id}/logo.png`} alt="" width={study.logo.width} height={study.logo.height} loading="lazy" />
+          <img src={publicAsset(`projects/${project.id}/logo.png`)} alt="" width={study.logo.width} height={study.logo.height} loading="lazy" />
           <b>{study.name}</b>
         </div>
       ) : project.index < 3 ? (
