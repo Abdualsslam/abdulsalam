@@ -92,6 +92,16 @@ export const projectsData = [
     github: "https://github.com/Abdualsslam",
     demo: "#",
   },
+  {
+    id: "qit3ati",
+    category: "تطبيقات",
+    title: "تطبيق قطعتي | Qit3ati",
+    description:
+      "مرجع لفنيي صيانة الهواتف للبحث عن توافقات قطع الغيار بين الأجهزة. يجمع التصفح حسب العلامة ونوع القطعة، والبحث بالاسم أو الموديل، مع تفاصيل التوافقات والمفضلة وسجل الأجهزة الأخيرة، بواجهة عربية وإنجليزية.",
+    tags: ["Flutter", "Bloc/Cubit", "Clean Architecture", "Dio", "Hive", "GetIt"],
+    github: "https://github.com/Abdualsslam",
+    demo: "#",
+  },
 ].map((project, index) => ({
   ...project,
   index,

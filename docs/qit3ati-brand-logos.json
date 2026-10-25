@@ -1,0 +1,188 @@
+{
+  "date": "2026-10-25",
+  "count": 28,
+  "processing": "Existing logo artwork rasterized or format-converted at proportional size and placed on a white 192px canvas. Not generated or redrawn.",
+  "pending": [
+    "Fly: source downloads unavailable; existing fallback preserved."
+  ],
+  "entries": [
+    {
+      "name": "Apple",
+      "file": "apple.png",
+      "source": "https://icon-sets.iconify.design/logos/apple/",
+      "license": "CC0; underlying brand trademarks remain with their owners"
+    },
+    {
+      "name": "Acer",
+      "file": "acer.png",
+      "source": "https://icon-sets.iconify.design/simple-icons/acer/",
+      "license": "CC0; underlying brand trademarks remain with their owners"
+    },
+    {
+      "name": "Asus",
+      "file": "asus.png",
+      "source": "https://icon-sets.iconify.design/simple-icons/asus/",
+      "license": "CC0; underlying brand trademarks remain with their owners"
+    },
+    {
+      "name": "Oppo",
+      "file": "oppo.png",
+      "source": "https://icon-sets.iconify.design/simple-icons/oppo/",
+      "license": "CC0; underlying brand trademarks remain with their owners"
+    },
+    {
+      "name": "HTC",
+      "file": "htc.png",
+      "source": "https://icon-sets.iconify.design/simple-icons/htc/",
+      "license": "CC0; underlying brand trademarks remain with their owners"
+    },
+    {
+      "name": "LG",
+      "file": "lg.png",
+      "source": "https://icon-sets.iconify.design/simple-icons/lg/",
+      "license": "CC0; underlying brand trademarks remain with their owners"
+    },
+    {
+      "name": "Google Pixel",
+      "file": "google-pixel.png",
+      "source": "https://icon-sets.iconify.design/logos/google-icon/",
+      "license": "CC0; underlying brand trademarks remain with their owners"
+    },
+    {
+      "name": "Samsung",
+      "file": "samsung.png",
+      "source": "https://icon-sets.iconify.design/logos/samsung/",
+      "license": "CC0; underlying brand trademarks remain with their owners"
+    },
+    {
+      "name": "Sony",
+      "file": "sony.png",
+      "source": "https://icon-sets.iconify.design/simple-icons/sony/",
+      "license": "CC0; underlying brand trademarks remain with their owners"
+    },
+    {
+      "name": "Xiaomi",
+      "file": "xiaomi.png",
+      "source": "https://icon-sets.iconify.design/simple-icons/xiaomi/",
+      "license": "CC0; underlying brand trademarks remain with their owners"
+    },
+    {
+      "name": "Vivo",
+      "file": "vivo.png",
+      "source": "https://icon-sets.iconify.design/simple-icons/vivo/",
+      "license": "CC0; underlying brand trademarks remain with their owners"
+    },
+    {
+      "name": "Lenovo",
+      "file": "lenovo.png",
+      "source": "https://icon-sets.iconify.design/simple-icons/lenovo/",
+      "license": "CC0; underlying brand trademarks remain with their owners"
+    },
+    {
+      "name": "Microsoft",
+      "file": "microsoft.png",
+      "source": "https://icon-sets.iconify.design/logos/microsoft-icon/",
+      "license": "CC0; underlying brand trademarks remain with their owners"
+    },
+    {
+      "name": "Motorola",
+      "file": "motorola.png",
+      "source": "https://icon-sets.iconify.design/simple-icons/motorola/",
+      "license": "CC0; underlying brand trademarks remain with their owners"
+    },
+    {
+      "name": "Nokia",
+      "file": "nokia.png",
+      "source": "https://icon-sets.iconify.design/simple-icons/nokia/",
+      "license": "CC0; underlying brand trademarks remain with their owners"
+    },
+    {
+      "name": "Huawei",
+      "file": "huawei.png",
+      "source": "https://icon-sets.iconify.design/simple-icons/huawei/",
+      "license": "CC0; underlying brand trademarks remain with their owners"
+    },
+    {
+      "name": "Honor",
+      "file": "honor.png",
+      "source": "https://icon-sets.iconify.design/simple-icons/honor/",
+      "license": "CC0; underlying brand trademarks remain with their owners"
+    },
+    {
+      "name": "OnePlus",
+      "file": "oneplus.png",
+      "source": "https://icon-sets.iconify.design/simple-icons/oneplus/",
+      "license": "CC0; underlying brand trademarks remain with their owners"
+    },
+    {
+      "name": "Alcatel",
+      "file": "alcatel.png",
+      "source": "https://commons.wikimedia.org/wiki/File:Alcatel_logo_2016.svg",
+      "original": "https://upload.wikimedia.org/wikipedia/commons/e/e9/Alcatel_logo_2016.svg",
+      "license": "See the source file page for logo attribution and terms."
+    },
+    {
+      "name": "Tecno",
+      "file": "tecno.png",
+      "source": "https://commons.wikimedia.org/wiki/File:Tecno_Mobile_logo.svg",
+      "original": "https://upload.wikimedia.org/wikipedia/commons/5/5e/Tecno_Mobile_logo.svg",
+      "license": "See the source file page for logo attribution and terms."
+    },
+    {
+      "name": "Tcl",
+      "file": "tcl.png",
+      "source": "https://commons.wikimedia.org/wiki/File:Logo_of_the_TCL_Corporation.svg",
+      "original": "https://upload.wikimedia.org/wikipedia/commons/2/2a/Logo_of_the_TCL_Corporation.svg",
+      "license": "See the source file page for logo attribution and terms."
+    },
+    {
+      "name": "Realme",
+      "file": "realme.png",
+      "source": "https://commons.wikimedia.org/wiki/File:Realme_2024_logo.svg",
+      "original": "https://upload.wikimedia.org/wikipedia/commons/0/03/Realme_2024_logo.svg",
+      "license": "See the source file page for logo attribution and terms."
+    },
+    {
+      "name": "Poco",
+      "file": "poco.png",
+      "source": "https://commons.wikimedia.org/wiki/File:POCO_logo.svg",
+      "original": "https://upload.wikimedia.org/wikipedia/commons/2/29/POCO_logo.svg",
+      "license": "See the source file page for logo attribution and terms."
+    },
+    {
+      "name": "Itel",
+      "file": "itel.png",
+      "source": "https://commons.wikimedia.org/wiki/File:Itel_Mobile_logo_2023.svg",
+      "original": "https://upload.wikimedia.org/wikipedia/commons/0/0e/Itel_Mobile_logo_2023.svg",
+      "license": "See the source file page for logo attribution and terms."
+    },
+    {
+      "name": "Redmi",
+      "file": "redmi.png",
+      "source": "https://commons.wikimedia.org/wiki/File:Redmi_Logo.svg",
+      "original": "https://upload.wikimedia.org/wikipedia/commons/b/ba/Redmi_Logo.svg",
+      "license": "See the source file page for logo attribution and terms."
+    },
+    {
+      "name": "Zte",
+      "file": "zte.png",
+      "source": "https://commons.wikimedia.org/wiki/File:ZTE_logo.svg",
+      "original": "https://upload.wikimedia.org/wikipedia/commons/f/f1/ZTE_logo.svg",
+      "license": "See the source file page for logo attribution and terms."
+    },
+    {
+      "name": "Infinix",
+      "file": "infinix.png",
+      "source": "https://commons.wikimedia.org/wiki/File:Infinix_logo.svg",
+      "original": "https://upload.wikimedia.org/wikipedia/commons/e/e0/Infinix_logo.svg",
+      "license": "PD-textlogo; brand trademark retained."
+    },
+    {
+      "name": "Blackview",
+      "file": "blackview.png",
+      "source": "https://www.prnewswire.com/news-releases/mwc-2026--blackview-invites-you-to-explore-a-new-era-of-smart-innovation-302700797.html",
+      "original": "https://mma.prnewswire.com/media/2012838/9a4c1a6a5647d207eb5fca8d8c54920_Logo.jpg",
+      "license": "Logo supplied in the manufacturer press release; brand trademark retained."
+    }
+  ]
+}

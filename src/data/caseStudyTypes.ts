@@ -11,7 +11,7 @@ export interface ProjectExperienceClip {
 export interface ProjectCaseStudy {
   name: string;
   mediaReady: boolean;
-  logo: { width: number; height: number; square?: boolean };
+  logo: { width: number; height: number; square?: boolean; showName?: boolean };
   lead: string;
   summary: string;
   facts: readonly { label: string; value: string }[];

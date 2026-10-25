@@ -7,6 +7,7 @@ import {
   MapPin,
 } from "lucide-react";
 import PortraitMotion from "../common/PortraitMotion";
+import { projectsData } from "../../data/projects";
 
 export default function Hero({
   effectsEnabled = true,
@@ -82,7 +83,7 @@ export default function Hero({
         <div className="hero-stats">
           {[
             ["+5", "سنوات من الخبرة"],
-            ["6", "مشاريع رئيسية"],
+            [String(projectsData.length), "مشاريع رئيسية"],
             ["2", "حزمة على pub.dev"],
             ["~80", "شاشة في أكبر تطبيق"],
           ].map(([value, label]) => (

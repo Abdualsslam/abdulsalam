@@ -52,7 +52,7 @@ export default function ProjectDetails({ project, onBack, effectsEnabled }: Prop
         <header className={`project-detail-hero ${study ? "project-detail-hero-video" : ""}`}>
           <div className="project-detail-copy">
             <span className="eyebrow">{project.category} / دراسة مشروع</span>
-            <h1 id="project-detail-title" className={study ? `project-detail-brand-title ${study.logo.square ? "project-detail-brand-square" : ""}` : undefined} tabIndex={-1} ref={heading}>{study ? <img src={`/projects/${project.id}/logo.png`} alt={study.name} width={study.logo.width} height={study.logo.height} /> : project.title}</h1>
+            <h1 id="project-detail-title" className={study ? `project-detail-brand-title ${study.logo.square ? "project-detail-brand-square" : ""}` : undefined} tabIndex={-1} ref={heading}>{study ? <><img src={`/projects/${project.id}/logo.png`} alt={study.logo.showName ? "" : study.name} width={study.logo.width} height={study.logo.height} />{study.logo.showName && <span className="project-detail-brand-name">{study.name}</span>}</> : project.title}</h1>
             <p className={`project-detail-lead ${study ? "" : "project-detail-lead-generic"}`}>{study ? study.lead : projectIntro}</p>
             {study && <p className="project-detail-summary">{study.summary}</p>}
             <div className="project-detail-tags" dir="ltr">{project.tags.map((tag) => <span key={tag}>{tag}</span>)}</div>

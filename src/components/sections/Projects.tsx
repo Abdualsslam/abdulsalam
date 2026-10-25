@@ -36,7 +36,7 @@ export default function Projects() {
               className={filter === category ? "selected" : ""}
             >
               {category}
-              {category === "الكل" && <span>06</span>}
+              {category === "الكل" && <span>{String(projectsData.length).padStart(2, "0")}</span>}
             </button>
           ))}
         </div>

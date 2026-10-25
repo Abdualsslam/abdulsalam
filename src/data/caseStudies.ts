@@ -1,6 +1,7 @@
 import type { ProjectCaseStudy } from "./caseStudyTypes";
 import { tagadodEngineering, tagadodExperiences, tagadodFeatures } from "./tagadod";
 import { trasPhoneCaseStudy } from "./trasPhone";
+import { qit3atiCaseStudy } from "./qit3ati";
 
 const studies: Record<string, ProjectCaseStudy> = {
   tagadod: {
@@ -21,6 +22,7 @@ const studies: Record<string, ProjectCaseStudy> = {
     dataLayer: "Dio / Hive / Repositories",
   },
   "tras-phone": trasPhoneCaseStudy,
+  qit3ati: qit3atiCaseStudy,
 };
 
 export const getProjectCaseStudy = (id: string): ProjectCaseStudy | undefined => studies[id];
