@@ -78,7 +78,7 @@ export default function ProjectDetails({ project, onBack, effectsEnabled }: Prop
               <div className="project-story-heading"><span className="eyebrow">03 / خلف الواجهات</span><h2 id={`${project.id}-engineering-title`}>بنية تخدم التجربة.</h2></div>
               <div className="project-engineering-grid">{study.engineering.map((item, index) => <article key={item.title}><span className="project-note-index" aria-hidden="true">0{index + 1}</span><h3>{item.title}</h3><p>{item.description}</p></article>)}</div>
               <div className="project-architecture" aria-label="طبقات التطبيق: العرض وإدارة الحالة، منطق العمل، البيانات والخدمات">
-                <div><b dir="ltr">Presentation</b><span>واجهات + Bloc / Cubit</span></div><span aria-hidden="true">←</span>
+                <div><b dir="ltr">Presentation</b><span>{study.presentationLayer ?? "واجهات + Bloc / Cubit"}</span></div><span aria-hidden="true">←</span>
                 <div><b dir="ltr">Domain</b><span>حالات الاستخدام ومنطق العمل</span></div><span aria-hidden="true">←</span>
                 <div><b dir="ltr">Data</b><span>{study.dataLayer}</span></div>
               </div>

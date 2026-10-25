@@ -2,6 +2,7 @@ import type { ProjectCaseStudy } from "./caseStudyTypes";
 import { tagadodEngineering, tagadodExperiences, tagadodFeatures } from "./tagadod";
 import { trasPhoneCaseStudy } from "./trasPhone";
 import { qit3atiCaseStudy } from "./qit3ati";
+import { shootLiveCaseStudy } from "./shootLive";
 
 const studies: Record<string, ProjectCaseStudy> = {
   tagadod: {
@@ -23,6 +24,7 @@ const studies: Record<string, ProjectCaseStudy> = {
   },
   "tras-phone": trasPhoneCaseStudy,
   qit3ati: qit3atiCaseStudy,
+  "shoot-live": shootLiveCaseStudy,
 };
 
 export const getProjectCaseStudy = (id: string): ProjectCaseStudy | undefined => studies[id];

@@ -102,6 +102,16 @@ export const projectsData = [
     github: "https://github.com/Abdualsslam",
     demo: "#",
   },
+  {
+    id: "shoot-live",
+    category: "تطبيقات",
+    title: "تطبيق شوت لايف | ShootLive",
+    description:
+      "منصة رياضية تجمع المباريات وتفاصيلها والبطولات والفرق، مع الأخبار والمجتمعات والتوقعات. مبنية بـ Flutter وGetX، مع Dio وRetrofit للخدمات وتخزين مؤقت عبر Hive CE ودعم العربية والإنجليزية.",
+    tags: ["Flutter", "GetX", "Dio", "Retrofit", "Hive CE", "Firebase"],
+    github: "https://github.com/Abdualsslam",
+    demo: "#",
+  },
 ].map((project, index) => ({
   ...project,
   index,

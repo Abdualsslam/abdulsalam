@@ -1,0 +1,74 @@
+[
+  {
+    "file": "fixture",
+    "duration": 14.33,
+    "fps": 30.0,
+    "size": [
+      720,
+      1606
+    ],
+    "bytes": 1837864,
+    "sha256": "175f5af323b02599b53e3d889a3622106e080a9e405f31ed5c3e774d7d244492",
+    "playbackRate": 1,
+    "source": "Native Android screenrecord from the current app. Only loading/static waiting is removed; interactions and transitions run at natural speed.",
+    "retainedSourceRangesSeconds": [
+      [
+        0.5,
+        2.2
+      ],
+      [
+        3.6,
+        10.2
+      ],
+      [
+        11.7,
+        null
+      ]
+    ],
+    "finalFrameHoldSeconds": 0.6
+  },
+  {
+    "file": "leagues",
+    "duration": 10.77,
+    "fps": 30.0,
+    "size": [
+      720,
+      1606
+    ],
+    "bytes": 607087,
+    "sha256": "9ac33913fbee98225ce3f8d15c917dbcbf9a61b404e88a997c43679c8e12ee7e",
+    "playbackRate": 1,
+    "source": "Native Android screenrecord from the current app. Only loading/static waiting is removed; interactions and transitions run at natural speed.",
+    "retainedSourceRangesSeconds": [
+      [
+        0.5,
+        null
+      ]
+    ],
+    "finalFrameHoldSeconds": 0.6
+  },
+  {
+    "file": "community",
+    "duration": 11.1,
+    "fps": 30.0,
+    "size": [
+      720,
+      1606
+    ],
+    "bytes": 316455,
+    "sha256": "45548cd3ec99061de88cdccdec3ffcc129572a8dc46705522df55ba2b48533fb",
+    "playbackRate": 1,
+    "source": "Native Android screenrecord from the current app. Only loading/static waiting is removed; interactions and transitions run at natural speed.",
+    "retainedSourceRangesSeconds": [
+      [
+        0.5,
+        2.2
+      ],
+      [
+        7.3,
+        null
+      ]
+    ],
+    "finalFrameHoldSeconds": 0.6
+  }
+]
