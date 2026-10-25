@@ -58,7 +58,6 @@
 .hero-stats > div { padding-inline-end: 28px; padding-left: 0; }
 .hero-stats > div:last-child { padding-inline-end: 0; }
 .header-contact { transition: border-color 0.2s, color 0.2s; }
-.effects-toggle { min-width: 44px; min-height: 44px; }
 .folder-cover .hero-copy h1 {
   font-size: clamp(38px, 4vw, 57px);
 }

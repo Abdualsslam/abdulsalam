@@ -12,6 +12,7 @@ import { tabsConfig, type TabId } from "../../hooks/useNavigation";
 
 interface Props {
   effectsEnabled?: boolean;
+  navigationEnabled?: boolean;
   activeTab: TabId | null;
   onTabChange: (id: TabId) => void;
   tabContents: Record<TabId, ReactNode>;
@@ -23,9 +24,11 @@ export default function VerticalTabs({
   onTabChange,
   tabContents,
   effectsEnabled = true,
+  navigationEnabled = true,
 }: Props) {
   const previous = useRef<TabId | null>(null);
   useEffect(() => {
+    if (!navigationEnabled) return;
     const close = (event: globalThis.KeyboardEvent) => {
       if (event.key === "Escape" && activeTab) onTabChange("home");
     };
@@ -36,7 +39,7 @@ export default function VerticalTabs({
         ?.focus({ preventScroll: true });
     previous.current = activeTab;
     return () => window.removeEventListener("keydown", close);
-  }, [activeTab, onTabChange]);
+  }, [activeTab, navigationEnabled, onTabChange]);
   const navigateKeys = (
     event: KeyboardEvent<HTMLButtonElement>,
     index: number,

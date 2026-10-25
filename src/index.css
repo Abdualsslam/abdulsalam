@@ -86,15 +86,24 @@ textarea:focus-visible {
   font-weight: 800;
   line-height: 1.3;
 }
-.brand-icon {
-  border: 1px solid var(--paper-rule);
-  color: var(--paper-accent);
-  width: 43px;
-  height: 43px;
-  display: grid;
-  place-items: center;
-  border-radius: 12px;
-  transform: rotate(-7deg);
+.brand-mark {
+  width: 52px;
+  height: 52px;
+  flex-shrink: 0;
+  stroke-linecap: square;
+  stroke-linejoin: miter;
+}
+.brand-paper {
+  stroke: var(--paper-accent);
+  stroke-width: 1.5;
+}
+.brand-monogram {
+  stroke: var(--paper-ink);
+  stroke-width: 3.5;
+}
+.brand-underline {
+  stroke: var(--paper-accent);
+  stroke-width: 2;
 }
 .brand small {
   display: block;
@@ -988,9 +997,9 @@ textarea:focus-visible {
   .brand {
     font-size: 20px;
   }
-  .brand-icon {
-    width: 37px;
-    height: 37px;
+  .brand-mark {
+    width: 44px;
+    height: 44px;
   }
   .menu-toggle {
     display: block;

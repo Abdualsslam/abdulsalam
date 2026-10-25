@@ -1,6 +1,8 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <rect x="1" y="1" width="62" height="62" rx="14" fill="#f6f1e8" stroke="#d4cbbf"/>
-  <path d="M14 12h13" stroke="#e56b72" stroke-width="3"/>
-  <text x="50%" y="50%" text-anchor="middle" dominant-baseline="central" dy="0.04em"
-        font-family="Cairo, Tajawal, Segoe UI, sans-serif" font-size="40" font-weight="800" fill="#20201e">ع</text>
+  <rect width="64" height="64" rx="8" fill="#f6f1e8"/>
+  <g fill="none" stroke-linecap="square" stroke-linejoin="miter">
+    <path d="M9 20V7h34l12 12v38H9V46M43 7v12h12" stroke="#a63e46" stroke-width="1.5"/>
+    <path d="m13 43 8-22 8 22m-13-7h10m7 7V22l8 11 8-11v21" stroke="#20201e" stroke-width="3.5"/>
+    <path d="M18 50h24" stroke="#a63e46" stroke-width="2"/>
+  </g>
 </svg>

@@ -1,10 +1,10 @@
-import { motion } from "framer-motion";
-import { Briefcase, Calendar } from "lucide-react";
+import "./Experience.css";
+import { ArrowUpLeft, Plus } from "lucide-react";
 
 const experienceData = [
   {
     title: "مدير قسم تقنية المعلومات",
-    company: "تجديد | Tagadod (صنعاء، اليمن)",
+    company: "تجدُّد | Tagadod (صنعاء، اليمن)",
     period: "أغسطس 2025 - الحالي",
     description: [
       "قيادة وإدارة العمليات اليومية لقسم تقنية المعلومات، بما يشمل الإشراف على البنية التحتية، والدعم الفني، وبناء الأدوات البرمجية الداخلية.",
@@ -51,64 +51,83 @@ const experienceData = [
   },
 ];
 
-export default function Experience() {
-  return (
-    <section id="experience" className="py-24 text-ink">
-      <div className="max-w-6xl mx-auto px-5">
-        <motion.h2
-          className="section-title"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-        >
-          الخبرات العملية
-        </motion.h2>
+const responsibilityLabels = ["قيادة التقنية", "بناء المنتج", "أتمتة العمل", "تحليل النظم"];
 
-        <div className="relative max-w-3xl mx-auto before:content-[''] before:absolute before:top-0 before:right-5 before:w-0.5 before:h-full before:bg-[var(--paper-rule)] before:rounded-full">
-          {experienceData.map((exp, index) => (
-            <motion.div
-              key={index}
-              className="relative pr-12 sm:pr-16 mb-10 last:mb-0"
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.2 }}
-            >
-              <div className="absolute right-0 top-8 w-10 h-10 bg-paper-surface border-[3px] border-primary rounded-full flex items-center justify-center text-primary z-10">
-                <Briefcase size={20} />
-              </div>
-              <div className="card p-5 sm:p-7 text-right" dir="rtl">
-                <div className="mb-3">
-                  <h3 className="text-lg sm:text-xl font-semibold mb-1 text-ink">
-                    {exp.title}
-                  </h3>
-                  <span className="text-primary font-medium">
-                    {exp.company}
-                  </span>
+export default function Experience() {
+  const currentRole = experienceData[0];
+
+  return (
+    <section id="experience" className="experience-section" aria-labelledby="experience-title">
+      <div className="experience-page mx-auto">
+        <header className="experience-intro">
+          <div>
+            <span className="eyebrow">04 / الخبرات العملية</span>
+            <h2 id="experience-title">خبرة تتراكم.<br /><span>وأثر يمتد.</span></h2>
+          </div>
+          <p>بين بناء المنتجات، وقيادة التقنية، ومشاركة المعرفة؛ محطات شكّلت طريقتي في التفكير والعمل.</p>
+        </header>
+
+        <article className="experience-current" aria-labelledby="current-role-title">
+          <div className="experience-current-meta">
+            <span className="experience-current-label"><span aria-hidden="true" />الدور الحالي</span>
+            <span>{currentRole.period}</span>
+          </div>
+          <header className="experience-current-heading">
+            <div>
+              <h3 id="current-role-title">{currentRole.title}</h3>
+              <p>{currentRole.company}</p>
+            </div>
+            <div className="experience-product-scale">
+              <strong dir="ltr">~80</strong>
+              <span>شاشة في تطبيق تجدُّد</span>
+            </div>
+          </header>
+          <ul className="experience-responsibilities">
+            {currentRole.description.map((point, index) => (
+              <li key={point}>
+                <span className="experience-responsibility-index" aria-hidden="true">0{index + 1}</span>
+                <div>
+                  <h4>{responsibilityLabels[index]}</h4>
+                  <p>{point}</p>
                 </div>
-                <div className="flex items-center gap-2 text-ink-muted text-sm mb-4">
-                  <Calendar size={16} />
-                  <span>{exp.period}</span>
-                </div>
-                {Array.isArray(exp.description) ? (
-                  <ul className="list-none text-ink-muted space-y-2 leading-relaxed text-sm pr-2">
-                    {exp.description.map((point, pIndex) => (
-                      <li
-                        key={pIndex}
-                        className="relative pr-4 before:content-['•'] before:absolute before:right-0 before:text-primary"
-                      >
-                        {point}
-                      </li>
-                    ))}
+              </li>
+            ))}
+          </ul>
+        </article>
+
+        <section className="experience-history" aria-labelledby="experience-history-title">
+          <header className="experience-history-heading">
+            <h3 id="experience-history-title">محطات سابقة</h3>
+            <span dir="ltr">2019 — 2025</span>
+          </header>
+          <ol className="experience-history-list">
+            {experienceData.slice(1).map((role) => (
+              <li key={`${role.company}-${role.period}`}>
+                <details className="experience-role">
+                  <summary>
+                    <span className="experience-role-period"><bdi>{role.period}</bdi></span>
+                    <span className="experience-role-info">
+                      <strong>{role.title}</strong>
+                      <span>{role.company}</span>
+                    </span>
+                    <span className="experience-role-control">
+                      <span className="experience-role-show">التفاصيل</span>
+                      <span className="experience-role-hide">إغلاق</span>
+                      <Plus size={17} aria-hidden="true" />
+                    </span>
+                  </summary>
+                  <ul className="experience-role-points">
+                    {role.description.map((point) => <li key={point}>{point}</li>)}
                   </ul>
-                ) : (
-                  <p className="text-ink-muted leading-relaxed text-sm">
-                    {exp.description}
-                  </p>
-                )}
-              </div>
-            </motion.div>
-          ))}
+                </details>
+              </li>
+            ))}
+          </ol>
+        </section>
+
+        <div className="experience-closing">
+          <p>من الخبرة إلى التنفيذ.</p>
+          <a href="#projects">استكشف أعمالي <ArrowUpLeft size={18} aria-hidden="true" /></a>
         </div>
       </div>
     </section>

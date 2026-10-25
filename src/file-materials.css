@@ -421,6 +421,6 @@
 .continuous-sheet .paper-scroll {padding-bottom:112px;}
 @media(max-width:760px){.continuous-sheet .paper-scroll{padding-bottom:108px;}}
 
-/* A restrained light/shadow fold follows the actual surface displacement. */
-.paper-flex-light {position:absolute;inset:0;z-index:3;pointer-events:none;background:linear-gradient(180deg,transparent 5%,var(--paper-raised) 30%,var(--paper-edge) 48%,var(--paper-surface) 67%,transparent 90%);background-size:100% 150%;mix-blend-mode:soft-light;}
-@media(prefers-reduced-motion:reduce){.paper-flex-light{display:none;}.continuous-sheet .sheet-content{filter:none!important;}}
+/* Hover changes depth only; the head stays still until it is dragged. */
+.bound-sheet {transition:filter .18s ease;}
+.dock-sheet:has(.sheet-head:hover) .bound-sheet {filter:drop-shadow(0 -3px 4px rgb(var(--paper-shadow-rgb) / .2));}

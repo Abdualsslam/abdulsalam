@@ -1,5 +1,5 @@
-import { motion, useSpring, useTransform } from "framer-motion";
-import { useEffect, useRef, useState, type KeyboardEvent, type PointerEvent, type ReactNode } from "react";
+import { animate, motion, useMotionValue, useTransform } from "framer-motion";
+import { useCallback, useEffect, useRef, useState, type KeyboardEvent, type PointerEvent, type ReactNode } from "react";
 import { X } from "lucide-react";
 import type { TabId } from "../../hooks/useNavigation";
 
@@ -11,9 +11,7 @@ interface Props {
 
 /** One persistent sheet: its original head, outline and content travel together. */
 export default function DockSheet({id, label, index, active, enabled, content, onSelect, onClose, onKeyDown}: Props) {
-  const lift = useSpring(0, {stiffness: 260, damping: 30, mass: .85});
-  const ripple = useSpring(0, {stiffness: 165, damping: 11, mass: .8});
-  const rippleTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const lift = useMotionValue(0);
   const root = useRef<HTMLDivElement>(null);
   const panel = useRef<HTMLDivElement>(null);
   const limit = useRef(450);
@@ -23,25 +21,32 @@ export default function DockSheet({id, label, index, active, enabled, content, o
   const left = (5 - index) * 200 + 13;
   const right = left + 172;
   const top = 188 + index * 3;
-  const settle = (value: number) => enabled ? lift.set(value) : lift.jump(value);
+  const settle = useCallback((value: number) => {
+    lift.stop();
+    if (enabled) {
+      void animate(lift, value, {type: "tween", duration: .3, ease: [.22, 1, .36, 1]});
+    } else {
+      lift.jump(value);
+    }
+  }, [enabled, lift]);
   useEffect(() => {
     const measure = () => {
       if (!root.current) return;
       const header = document.querySelector('.site-header')?.getBoundingClientRect().bottom ?? 78;
       limit.current = Math.max(120, root.current.getBoundingClientRect().top + top + lift.get() - header - 18);
       if (active && !gesture.current) {
-        if (enabled) lift.set(limit.current); else lift.jump(limit.current);
+        settle(limit.current);
       }
     };
     measure();
     window.addEventListener('resize', measure);
     return () => window.removeEventListener('resize', measure);
-  }, [active, enabled, lift, top]);
+  }, [active, lift, settle, top]);
   useEffect(() => {
     if (active) setRevealed(true);
-    if (enabled) lift.set(active ? limit.current : 0);
-    else lift.jump(active ? limit.current : 0);
-  }, [active, enabled, lift]);
+    settle(active ? limit.current : 0);
+    return () => lift.stop();
+  }, [active, lift, settle]);
   useEffect(() => {
     if (!active) return;
     // Links on the cover become inert when a sheet opens. Move focus into the
@@ -52,33 +57,6 @@ export default function DockSheet({id, label, index, active, enabled, content, o
       content.focus({ preventScroll: true });
     }
   }, [active]);
-  useEffect(() => {
-    let last = lift.get();
-    let time = performance.now();
-    if (!enabled) ripple.jump(0);
-    const unsubscribe = lift.on("change", value => {
-      const now = performance.now();
-      const distance = value - last;
-      const elapsed = Math.max(12, now - time);
-      last = value;
-      time = now;
-      if (!enabled || Math.abs(distance) < .15) return;
-      // Movement loads the paper; stopping releases a damped flex, even while held.
-      ripple.set(Math.max(-10, Math.min(10, distance / elapsed * 7)));
-      if (rippleTimer.current) clearTimeout(rippleTimer.current);
-      rippleTimer.current = setTimeout(() => ripple.set(0), 75);
-    });
-    return () => {
-      unsubscribe();
-      if (rippleTimer.current) clearTimeout(rippleTimer.current);
-    };
-  }, [enabled, lift, ripple]);
-  const rippleScale = useTransform(ripple, n => n * 2);
-  const rippleFilter = useTransform(ripple, n => Math.abs(n) > .025 ? `url(#paper-flex-${id})` : 'none');
-  const rippleLight = useTransform(ripple, n => Math.min(.2, Math.abs(n) * .019));
-  const rippleShift = useTransform(ripple, n => `${50 + n * 2}%`);
-  // Neutral displacement at both ends keeps the head and binding attached.
-  const displacementMap = 'data:image/svg+xml,' + encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" width="32" height="256"><defs><linearGradient id="wave" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="rgb(128,128,128)"/><stop offset=".12" stop-color="rgb(128,128,128)"/><stop offset=".32" stop-color="rgb(220,145,128)"/><stop offset=".57" stop-color="rgb(35,110,128)"/><stop offset=".8" stop-color="rgb(180,140,128)"/><stop offset="1" stop-color="rgb(128,128,128)"/></linearGradient></defs><rect width="32" height="256" fill="url(#wave)"/></svg>`);
   const height = useTransform(lift, n => 300 + n);
   const viewBox = useTransform(lift, n => `0 0 1200 ${300 + n}`);
   const visibility = useTransform(lift, n => Math.min(1, Math.max(0, (n - 12) / 55)));
@@ -112,10 +90,6 @@ export default function DockSheet({id, label, index, active, enabled, content, o
   return <motion.div ref={root} className={`dock-sheet continuous-sheet ${active ? 'is-selected' : ''}`} style={{height,zIndex: index+1}}>
     <motion.svg className="bound-sheet" viewBox={viewBox} preserveAspectRatio="none" aria-hidden="true">
       <defs>
-        <filter id={`paper-flex-${id}`} x="-5%" y="-5%" width="110%" height="110%" colorInterpolationFilters="sRGB">
-          <feImage href={displacementMap} x="0" y="0" width="100%" height="100%" preserveAspectRatio="none" result="paperWave"/>
-          <motion.feDisplacementMap in="SourceGraphic" in2="paperWave" scale={rippleScale} xChannelSelector="R" yChannelSelector="G"/>
-        </filter>
         <linearGradient id={`sheet-${id}`} gradientUnits="userSpaceOnUse" x1="0" y1={top} x2="0" y2={top+110}>
           <stop offset="0" stopColor="var(--paper-raised)"/><stop offset=".48" stopColor="var(--paper-muted)"/>
           <stop offset=".5" stopColor="var(--paper-surface)"/><stop offset="1" stopColor="var(--paper-surface)"/>
@@ -126,8 +100,6 @@ export default function DockSheet({id, label, index, active, enabled, content, o
     <motion.button className="sheet-head" id={`tab-${id}`} type="button" aria-expanded={active}
       aria-controls={`panel-${id}`} style={{left:`${left/12}%`,width:`${172/12}%`,top}}
       onKeyDown={onKeyDown}
-      onPointerEnter={() => {if(enabled && !active && !gesture.current) lift.set(8);}}
-      onPointerLeave={() => {if(!active && !gesture.current) settle(0);}}
       onPointerDown={event => {
         if(event.button!==0 || !event.isPrimary || gesture.current) return;
         suppressClick.current=false; setRevealed(true);
@@ -149,8 +121,7 @@ export default function DockSheet({id, label, index, active, enabled, content, o
       <span className="sheet-head-print"><small>0{index+1}</small><span>{label}</span></span>
       <span className="sheet-head-grain" aria-hidden="true"/>
     </motion.button>
-    <motion.div className="sheet-content" style={{top:top+54,opacity:visibility,filter:rippleFilter}} inert={!active} aria-hidden={!active}>
-      <motion.div className="paper-flex-light" aria-hidden="true" style={{opacity:rippleLight,backgroundPositionY:rippleShift}}/>
+    <motion.div className="sheet-content" style={{top:top+54,opacity:visibility}} inert={!active} aria-hidden={!active}>
       <div className="paper-toolbar">
         <span className="paper-reference">FILE 0{index+1} / 06</span>
         <span className="sheet-return-hint">اسحب رأس الورقة للأسفل لإعادتها</span>
