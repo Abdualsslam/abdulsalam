@@ -1,7 +1,7 @@
 [
   {
     "file": "browse",
-    "duration": 10.57,
+    "duration": 8.6,
     "fps": 30.0,
     "size": [
       720,
@@ -10,8 +10,8 @@
     "playbackRate": 1,
     "initialIdleTrimSeconds": 3.0,
     "finalScreenHoldSeconds": 0,
-    "bytes": 615918,
-    "sha256": "0fa71fc54bc69387c7e68810b1e006ab177f83f29d3bb4b347045bea209774bf",
+    "bytes": 1549902,
+    "sha256": "95982eea0385b20e358bec232223e5ee2df210ade99cd1471abfaad9d77d897c",
     "source": "Real Android recording; static holds trimmed, final favorites screen held for readability. No animation acceleration or cuts inside the tour."
   },
   {

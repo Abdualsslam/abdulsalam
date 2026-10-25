@@ -14,11 +14,13 @@ Implemented direct file upload in the separate backend/admin repositories, commi
 
 After the user deployed, uploaded 28 logos through the actual file chooser at https://qit3ati.cloud/brands. All 29 current image entries (28 new logos plus the unchanged existing test brand image) loaded successfully. Names, order, activation and commercial/compatibility data were preserved. Fly remains without an uploaded logo because its source downloads failed; the existing fallback is retained.
 
+The user subsequently requested removal of Brand Test. The admin exposes activation rather than permanent deletion, so that zero-device/zero-part brand was deactivated. Native home now lists 29 active brands and no test-brand card. The browse video and poster were recaptured to reflect its removal; the inactive admin record remains recoverable.
+
 Sources: `docs/qit3ati-brand-logos.json`. Local backup of prepared PNGs, provenance and uploaded public URLs: `C:/Users/Abdua/Desktop/projects/qit3ati/data/brand-logos/`. Existing artwork was proportionally rasterized/format-converted onto white 192px canvases, not generated or redrawn. Native home inspection confirms the images appear in the app.
 
 ## Actual recordings
 
-- `browse.mp4`: 10.57s — home with brand images, Apple part types, device list and scrolling.
+- `browse.mp4`: 8.60s — scroll the home brand grid after removing Brand Test. Its poster uses the corresponding raw recording's opening home frame.
 - `compatibility.mp4`: 12.53s — iPhone 8 charging-port compatibilities, saving the device and returning to Favorites. The final actual app frame is held for 1.6s for readability.
 - `preferences.mp4`: 14.80s — dark appearance, English language, then light appearance.
 
