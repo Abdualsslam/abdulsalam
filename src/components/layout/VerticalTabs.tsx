@@ -10,6 +10,8 @@ import {
 } from "lucide-react";
 import DockSheet from "./DockSheet";
 import { tabsConfig, type TabId } from "../../hooks/useNavigation";
+import { useMotionValue } from "framer-motion";
+import type { SheetPull } from "../../lib/sheetPhysics";
 import "./DockEntrance.css";
 
 interface Props {
@@ -29,6 +31,7 @@ export default function VerticalTabs({
   navigationEnabled = true,
 }: Props) {
   const [arriving, setArriving] = useState(() => effectsEnabled && !activeTab);
+  const pull = useMotionValue<SheetPull | null>(null);
   const previous = useRef<TabId | null>(null);
   useEffect(() => {
     if (!arriving) return;
@@ -85,6 +88,7 @@ export default function VerticalTabs({
             <DockSheet
               key={tab.id} id={tab.id} label={tab.label} index={index}
               active={activeTab === tab.id} enabled={effectsEnabled}
+              pull={pull}
               content={tabContents[tab.id]}
               onClose={() => onTabChange("home")}
               onKeyDown={event => navigateKeys(event, index)}

@@ -1,17 +1,26 @@
-import { animate, motion, useMotionValue, useTransform, type MotionStyle } from "framer-motion";
+import { animate, motion, useMotionValue, useSpring, useTransform, type MotionStyle, type MotionValue } from "framer-motion";
 import { useCallback, useEffect, useRef, useState, type KeyboardEvent, type PointerEvent, type ReactNode } from "react";
 import { X } from "lucide-react";
 import type { TabId } from "../../hooks/useNavigation";
+import { sheetResponse, type SheetPull } from "../../lib/sheetPhysics";
+
+const paperSpring = { stiffness: 360, damping: 29, mass: .65 };
 
 interface Props {
   id: TabId; label: string; index: number; active: boolean; enabled: boolean;
+  pull: MotionValue<SheetPull | null>;
   content: ReactNode; onSelect: () => void; onClose: () => void;
   onKeyDown: (event: KeyboardEvent<HTMLButtonElement>) => void;
 }
 
 /** One persistent sheet: its original head, outline and content travel together. */
-export default function DockSheet({id, label, index, active, enabled, content, onSelect, onClose, onKeyDown}: Props) {
+export default function DockSheet({id, label, index, active, enabled, pull, content, onSelect, onClose, onKeyDown}: Props) {
   const lift = useMotionValue(0);
+  const activation = useMotionValue(0);
+  const response = useTransform(pull, value => sheetResponse(index, enabled && !active ? value : null));
+  const followX = useSpring(useTransform(response, value => value.x), paperSpring);
+  const followY = useSpring(useTransform(response, value => value.y), paperSpring);
+  const followRotate = useSpring(useTransform(response, value => value.rotate), paperSpring);
   const root = useRef<HTMLDivElement>(null);
   const panel = useRef<HTMLDivElement>(null);
   const limit = useRef(450);
@@ -21,14 +30,43 @@ export default function DockSheet({id, label, index, active, enabled, content, o
   const left = (5 - index) * 200 + 13;
   const right = left + 172;
   const top = 188 + index * 3;
+  useEffect(() => () => {
+    activation.stop();
+    if (pull.get()?.index === index) pull.set(null);
+  }, [activation, index, pull]);
   const settle = useCallback((value: number) => {
+    const start = lift.get();
     lift.stop();
+    activation.stop();
     if (enabled) {
-      void animate(lift, value, {type: "tween", duration: .3, ease: [.22, 1, .36, 1]});
+      if (Math.abs(value - start) > .5 && (!pull.get() || pull.get()?.index === index)) {
+        const direction = Math.sign(value - start);
+        pull.set({index, displacement:0, lift:start, activation:0});
+        activation.jump(0);
+        // Give a click enough contact time to move the adjacent sheets visibly,
+        // independently of the page's faster travel to its open/closed position.
+        void animate(activation, [0, 1, 0], {
+          duration: .48, times: [0, .28, 1], ease: ["easeOut", "easeInOut"],
+          onUpdate: strength => {
+            if (pull.get()?.index === index && !gesture.current) {
+              pull.set({index, displacement:lift.get()-start, lift:lift.get(), activation:direction*strength});
+            }
+          },
+          onComplete: () => {
+            if (pull.get()?.index === index && !gesture.current) pull.set(null);
+          },
+        });
+      } else if (pull.get()?.index === index && !gesture.current) {
+        pull.set(null);
+      }
+      void animate(lift, value, {
+        type: "tween", duration: .3, ease: [.22, 1, .36, 1],
+      });
     } else {
       lift.jump(value);
+      if (pull.get()?.index === index) pull.set(null);
     }
-  }, [enabled, lift]);
+  }, [activation, enabled, index, lift, pull]);
   useEffect(() => {
     const measure = () => {
       if (!root.current) return;
@@ -79,6 +117,7 @@ export default function DockSheet({id, label, index, active, enabled, content, o
     const drag = gesture.current;
     if (!drag || drag.pointerId !== event.pointerId) return;
     gesture.current = null;
+    pull.set(null);
     suppressClick.current = Math.abs(drag.distance) > 7 || cancelled;
     if (event.currentTarget.hasPointerCapture(event.pointerId)) event.currentTarget.releasePointerCapture(event.pointerId);
     if (cancelled) {settle(active ? limit.current : 0); return;}
@@ -88,6 +127,12 @@ export default function DockSheet({id, label, index, active, enabled, content, o
   };
   // Preserve physical stack order throughout dragging, opening and closing.
   return <motion.div ref={root} className={`dock-sheet continuous-sheet ${active ? 'is-selected' : ''}`} style={{height,zIndex: index+1,"--sheet-order":index,"--sheet-splay":`${(index-2.5)*.24}deg`} as MotionStyle}>
+    <motion.div className="sheet-material" style={{
+      x: enabled ? followX : 0,
+      y: enabled ? followY : 0,
+      rotate: enabled ? followRotate : 0,
+      transformOrigin: `${(left + 86) / 12}% 100%`,
+    }}>
     <motion.svg className="bound-sheet" viewBox={viewBox} preserveAspectRatio="none" aria-hidden="true">
       <defs>
         <linearGradient id={`sheet-${id}`} gradientUnits="userSpaceOnUse" x1="0" y1={top} x2="0" y2={top+110}>
@@ -102,9 +147,13 @@ export default function DockSheet({id, label, index, active, enabled, content, o
       onKeyDown={onKeyDown}
       onPointerDown={event => {
         if(event.button!==0 || !event.isPrimary || gesture.current) return;
+        if (pull.get()?.dragging && pull.get()?.index !== index) return;
         suppressClick.current=false; setRevealed(true);
+        activation.stop();
+        followX.jump(0); followY.jump(0); followRotate.jump(0);
         gesture.current={y:event.clientY,start:lift.get(),distance:0,pointerId:event.pointerId};
         lift.jump(lift.get());
+        pull.set({index, displacement:0, lift:lift.get(), dragging:true});
         event.currentTarget.setPointerCapture(event.pointerId);
       }}
       onPointerMove={event => {
@@ -112,7 +161,9 @@ export default function DockSheet({id, label, index, active, enabled, content, o
         if(!drag || drag.pointerId!==event.pointerId) return;
         drag.distance=drag.y-event.clientY;
         // Follow the finger directly, then continue from this exact position on release.
-        lift.jump(Math.max(0,Math.min(limit.current,drag.start+drag.distance)));
+        const next = Math.max(0,Math.min(limit.current,drag.start+drag.distance));
+        lift.jump(next);
+        pull.set({index, displacement:next-drag.start, lift:next, dragging:true});
       }}
       onPointerUp={event=>finish(event)} onPointerCancel={event=>finish(event,true)}
       onLostPointerCapture={event=>finish(event,true)}
@@ -131,6 +182,7 @@ export default function DockSheet({id, label, index, active, enabled, content, o
         {revealed && content}
         <footer className="paper-footer"><span>عبدالسلام معاد · {label}</span><button onClick={onClose}>إلى غلاف الملف</button></footer>
       </div>
+    </motion.div>
     </motion.div>
   </motion.div>;
 }

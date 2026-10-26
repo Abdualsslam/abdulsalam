@@ -25,12 +25,27 @@
 }
 .folder-cover {
   position: absolute;
+  isolation: isolate;
   inset: 78px 0 var(--cover-dock-clearance);
   overflow-y: auto;
   overflow-x: hidden;
   padding-bottom: 16px;
   scrollbar-gutter: stable;
   transition: filter 0.4s;
+}
+.folder-cover::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-color: var(--paper-bg);
+  background-image:
+    linear-gradient(rgb(var(--paper-bg-rgb) / .2), rgb(var(--paper-bg-rgb) / .2)),
+    url('/paper-textures/cotton.webp');
+  background-size: 100% 100%, 640px;
+  background-position: center;
+  background-repeat: repeat;
 }
 .folder-cover[aria-hidden="true"] {
   filter: blur(3px);

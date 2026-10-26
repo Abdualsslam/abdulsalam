@@ -23,7 +23,9 @@ There are no automated tests. `npm run build` runs `tsc` first, so a type error 
 
 ## Git and deployment
 
-The user wants pushes to **main**. It is the default branch and the source for `.github/workflows/deploy.yml`, which builds and publishes GitHub Pages on each push. The production URL is `https://abdualsslam.github.io/abdulsalam/`; the workflow builds with `--base=/abdulsalam/`. Resolve public media through `import.meta.env.BASE_URL` (or `src/lib/publicAsset.ts`) so assets work under both the local root and the published subpath. `master` is a legacy branch, synchronized once during the switch to main; future work belongs on main.
+The user wants pushes to **main**, the default and only branch; the legacy `master` branch was deleted locally and on GitHub. The user's production deployment is managed separately in **Coolify**, under project `Abdulsalam Muaad`, environment `production`, resource `abdulsalam:main-website`. Its Git Source must use `Abdualsslam/abdulsalam`, branch `main`, commit `HEAD`. Verify Coolify deployment status when reporting production releases; GitHub Pages success alone does not confirm a Coolify release.
+
+`.github/workflows/deploy.yml` also builds and publishes a separate GitHub Pages copy on each push to `main`, at `https://abdualsslam.github.io/abdulsalam/`, using `--base=/abdulsalam/`. Resolve public media through `import.meta.env.BASE_URL` (or `src/lib/publicAsset.ts`) so assets work under both the production root and the Pages subpath.
 
 ## Path alias
 
