@@ -1,6 +1,7 @@
 import {
   useEffect,
   useRef,
+  useState,
   type ReactNode,
   type KeyboardEvent,
 } from "react";
@@ -9,6 +10,7 @@ import {
 } from "lucide-react";
 import DockSheet from "./DockSheet";
 import { tabsConfig, type TabId } from "../../hooks/useNavigation";
+import "./DockEntrance.css";
 
 interface Props {
   effectsEnabled?: boolean;
@@ -26,7 +28,18 @@ export default function VerticalTabs({
   effectsEnabled = true,
   navigationEnabled = true,
 }: Props) {
+  const [arriving, setArriving] = useState(() => effectsEnabled && !activeTab);
   const previous = useRef<TabId | null>(null);
+  useEffect(() => {
+    if (!arriving) return;
+    if (activeTab || !effectsEnabled || !navigationEnabled) {
+      setArriving(false);
+      return;
+    }
+    // Finish once per mount; opening or touching a sheet takes priority.
+    const finish = window.setTimeout(() => setArriving(false), 1300);
+    return () => window.clearTimeout(finish);
+  }, [activeTab, arriving, effectsEnabled, navigationEnabled]);
   useEffect(() => {
     if (!navigationEnabled) return;
     const close = (event: globalThis.KeyboardEvent) => {
@@ -55,7 +68,11 @@ export default function VerticalTabs({
     document.getElementById(`tab-${papers[next].id}`)?.focus();
   };
   return (
-    <div className={`folder-system ${activeTab ? "has-open-paper" : ""}`}>
+    <div
+      className={`folder-system ${activeTab ? "has-open-paper" : ""} ${arriving && effectsEnabled && !activeTab && navigationEnabled ? "is-arriving" : ""}`}
+      onPointerDownCapture={() => setArriving(false)}
+      onFocusCapture={() => setArriving(false)}
+    >
       <div className="paper-stack" aria-hidden="true">
         <div />
         <div />

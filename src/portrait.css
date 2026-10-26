@@ -7,10 +7,7 @@
   justify-self: center;
   align-self: center;
   direction: ltr;
-  opacity: 1;
-  transition: opacity 160ms ease;
 }
-.portrait-scene[data-concealed="true"] { opacity: 0; }
 .portrait-artwork {
   position: relative;
   isolation: isolate;

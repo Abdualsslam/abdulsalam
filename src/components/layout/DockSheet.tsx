@@ -1,4 +1,4 @@
-import { animate, motion, useMotionValue, useTransform } from "framer-motion";
+import { animate, motion, useMotionValue, useTransform, type MotionStyle } from "framer-motion";
 import { useCallback, useEffect, useRef, useState, type KeyboardEvent, type PointerEvent, type ReactNode } from "react";
 import { X } from "lucide-react";
 import type { TabId } from "../../hooks/useNavigation";
@@ -87,7 +87,7 @@ export default function DockSheet({id, label, index, active, enabled, content, o
     else settle(active ? limit.current : 0);
   };
   // Preserve physical stack order throughout dragging, opening and closing.
-  return <motion.div ref={root} className={`dock-sheet continuous-sheet ${active ? 'is-selected' : ''}`} style={{height,zIndex: index+1}}>
+  return <motion.div ref={root} className={`dock-sheet continuous-sheet ${active ? 'is-selected' : ''}`} style={{height,zIndex: index+1,"--sheet-order":index,"--sheet-splay":`${(index-2.5)*.24}deg`} as MotionStyle}>
     <motion.svg className="bound-sheet" viewBox={viewBox} preserveAspectRatio="none" aria-hidden="true">
       <defs>
         <linearGradient id={`sheet-${id}`} gradientUnits="userSpaceOnUse" x1="0" y1={top} x2="0" y2={top+110}>

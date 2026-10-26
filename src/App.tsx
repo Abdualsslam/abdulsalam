@@ -108,7 +108,7 @@ export default function App() {
               <span dir="ltr">PORTFOLIO / PERSONAL FILE</span>
               <span>أفكار، أعمال، وما بينهما.</span>
             </div>
-            <Hero effectsEnabled={effectsEnabled} concealed={activeTab !== null} />
+            <Hero effectsEnabled={effectsEnabled} />
           </main>
           <VerticalTabs
             navigationEnabled={!selectedProject}

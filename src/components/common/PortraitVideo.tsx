@@ -4,7 +4,7 @@ const ROOT = `${import.meta.env.BASE_URL}portrait-video/loops/`;
 type Clip = "idle" | "glance";
 
 /** Each original performance loops independently. Change performances only out of view. */
-export default function PortraitVideo({ enabled, concealed }: { enabled: boolean; concealed: boolean }) {
+export default function PortraitVideo({ enabled }: { enabled: boolean }) {
   const container = useRef<HTMLDivElement>(null);
   const video = useRef<HTMLVideoElement>(null);
   const wasAway = useRef(false);
@@ -13,7 +13,8 @@ export default function PortraitVideo({ enabled, concealed }: { enabled: boolean
   const [pageVisible, setPageVisible] = useState(!document.hidden);
   const [ready, setReady] = useState(false);
   const [blocked, setBlocked] = useState(false);
-  const absent = concealed || !intersecting || !pageVisible;
+  // An open sheet blurs the cover but can still leave the portrait in view.
+  const absent = !intersecting || !pageVisible;
   const shouldPlay = enabled && !absent;
 
   useEffect(() => {
@@ -30,15 +31,11 @@ export default function PortraitVideo({ enabled, concealed }: { enabled: boolean
   useEffect(() => {
     if (!absent) { wasAway.current = false; return; }
     if (wasAway.current) return;
-    // Let the portrait's 160ms exit finish before changing its original pose.
-    const timer = setTimeout(() => {
-      wasAway.current = true;
-      setReady(false);
-      setBlocked(false);
-      setClip(current => current === "idle" ? "glance" : "idle");
-    }, concealed && pageVisible ? 240 : 0);
-    return () => clearTimeout(timer);
-  }, [absent, concealed, pageVisible]);
+    wasAway.current = true;
+    setReady(false);
+    setBlocked(false);
+    setClip(current => current === "idle" ? "glance" : "idle");
+  }, [absent]);
 
   useEffect(() => {
     const current = video.current;

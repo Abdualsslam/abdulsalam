@@ -11,10 +11,8 @@ import { projectsData } from "../../data/projects";
 
 export default function Hero({
   effectsEnabled = true,
-  concealed = false,
 }: {
   effectsEnabled?: boolean;
-  concealed?: boolean;
 }) {
   return (
     <section id="home" className="hero-section">
@@ -71,8 +69,8 @@ export default function Hero({
             </span>
           </div>
         </div>
-        <figure className="portrait-scene" data-concealed={concealed} aria-label="عبدالسلام معاد — خلف كل تجربة، إنسان">
-          <PortraitMotion enabled={effectsEnabled} concealed={concealed} />
+        <figure className="portrait-scene" aria-label="عبدالسلام معاد — خلف كل تجربة، إنسان">
+          <PortraitMotion enabled={effectsEnabled} />
           <figcaption className="portrait-figure-caption">
             <span dir="ltr">CRAFTED WITH INTENT</span>
             <span>خلف كل تجربة، إنسان.</span>

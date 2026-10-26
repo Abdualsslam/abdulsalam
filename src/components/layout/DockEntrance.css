@@ -1,0 +1,59 @@
+/* The binding arrives first; each whole sheet briefly separates and settles.
+   Keep this transform separate from the height driven by sheet gestures. */
+@media (prefers-reduced-motion: no-preference) {
+  .folder-system.is-arriving .folder-dock {
+    animation: dock-binding-arrive 720ms cubic-bezier(.16, 1, .3, 1) both;
+    will-change: transform;
+  }
+
+  .folder-system.is-arriving .dock-sheet {
+    transform-origin: 50% 100%;
+    animation: dock-paper-riffle 640ms cubic-bezier(.22, 1, .36, 1) both;
+    animation-delay: calc(220ms + var(--sheet-order) * 65ms);
+    will-change: transform;
+  }
+}
+
+@keyframes dock-binding-arrive {
+  0% {
+    transform: translateY(calc(100% + 40px));
+  }
+  76% {
+    transform: translateY(-4px);
+  }
+  100% {
+    transform: none;
+  }
+}
+
+@keyframes dock-paper-riffle {
+  0% {
+    transform: perspective(1000px) translateY(24px) rotateX(0deg) rotate(0deg);
+  }
+  38% {
+    transform: perspective(1000px) translateY(-38px) rotateX(-12deg) rotate(var(--sheet-splay));
+  }
+  72% {
+    transform: perspective(1000px) translateY(3px) rotateX(2deg) rotate(0deg);
+  }
+  100% {
+    transform: none;
+  }
+}
+
+@media (max-width: 760px) {
+  @keyframes dock-paper-riffle {
+    0% {
+      transform: perspective(1000px) translateY(18px) rotateX(0deg) rotate(0deg);
+    }
+    38% {
+      transform: perspective(1000px) translateY(-24px) rotateX(-8deg) rotate(var(--sheet-splay));
+    }
+    72% {
+      transform: perspective(1000px) translateY(2px) rotateX(1deg) rotate(0deg);
+    }
+    100% {
+      transform: none;
+    }
+  }
+}

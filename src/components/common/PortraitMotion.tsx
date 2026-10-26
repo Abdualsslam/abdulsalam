@@ -3,7 +3,7 @@ import PortraitVideo from "./PortraitVideo";
 import flutterLogo from "../../assets/flutter-logo.webp";
 
 /** The two approved portrait videos, presented without synthetic face motion. */
-export default function PortraitMotion({ enabled, concealed }: { enabled: boolean; concealed: boolean }) {
+export default function PortraitMotion({ enabled }: { enabled: boolean }) {
   return (
     <div className="portrait-artwork">
       <div className="portrait-drafting" aria-hidden="true">
@@ -14,7 +14,7 @@ export default function PortraitMotion({ enabled, concealed }: { enabled: boolea
         <span>THE PERSON BEHIND THE CODE</span>
         <span>01 / AM</span>
       </div>
-      <PortraitVideo enabled={enabled} concealed={concealed} />
+      <PortraitVideo enabled={enabled} />
       <a className="portrait-specialty specialty-flutter" href="#projects"
         aria-label="استكشف أعمالي في تطوير تطبيقات Flutter">
         <img src={flutterLogo} width={27} height={27} alt="" />
