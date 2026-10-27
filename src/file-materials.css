@@ -389,9 +389,10 @@
 .paper-tab-label { touch-action:none; cursor:grab; }
 .paper-tab-label:active { cursor:grabbing; }
 @media(max-width:760px) {
- .folder-tabs {height:105px;}
- .sheet-head {padding:5px 0 12px; height:48px;}
- .sheet-head-print {font-size:9px; gap:0;}
+ .folder-portfolio {--cover-dock-clearance:220px;}
+ .folder-tabs {height:165px;}
+ .sheet-head {padding:5px 7px 12px; height:48px;}
+ .sheet-head-print {font-size:14px; gap:0;}
  .sheet-head-print small {display:none;}
  .dock-topline {font-size:7px;}
  .open-paper {bottom:39px;}
@@ -419,7 +420,7 @@
 
 /* Foreground sheets remain above a pulled middle sheet, including their heads. */
 .continuous-sheet .paper-scroll {padding-bottom:112px;}
-@media(max-width:760px){.continuous-sheet .paper-scroll{padding-bottom:108px;}}
+@media(max-width:760px){.continuous-sheet .paper-scroll{padding-bottom:170px;}}
 
 /* Hover changes depth only; the head stays still until it is dragged. */
 .bound-sheet {transition:filter .18s ease;}

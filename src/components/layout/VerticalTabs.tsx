@@ -31,8 +31,15 @@ export default function VerticalTabs({
   navigationEnabled = true,
 }: Props) {
   const [arriving, setArriving] = useState(() => effectsEnabled && !activeTab);
+  const [mobile, setMobile] = useState(() => window.matchMedia("(max-width: 760px)").matches);
   const pull = useMotionValue<SheetPull | null>(null);
   const previous = useRef<TabId | null>(null);
+  useEffect(() => {
+    const query = window.matchMedia("(max-width: 760px)");
+    const update = () => setMobile(query.matches);
+    query.addEventListener("change", update);
+    return () => query.removeEventListener("change", update);
+  }, []);
   useEffect(() => {
     if (!arriving) return;
     if (activeTab || !effectsEnabled || !navigationEnabled) {
@@ -61,9 +68,15 @@ export default function VerticalTabs({
     index: number,
   ) => {
     let next = index;
-    if (event.key === "ArrowLeft") next = (index + 1) % papers.length;
+    if (mobile && (event.key === "ArrowUp" || event.key === "ArrowDown"))
+      next = (index + 3) % papers.length;
+    else if (event.key === "ArrowLeft") next = mobile
+      ? Math.floor(index / 3) * 3 + (index + 1) % 3
+      : (index + 1) % papers.length;
     else if (event.key === "ArrowRight")
-      next = (index - 1 + papers.length) % papers.length;
+      next = mobile
+        ? Math.floor(index / 3) * 3 + (index + 2) % 3
+        : (index - 1 + papers.length) % papers.length;
     else if (event.key === "Home") next = 0;
     else if (event.key === "End") next = papers.length - 1;
     else return;
@@ -87,6 +100,7 @@ export default function VerticalTabs({
           {papers.map((tab, index) => (
             <DockSheet
               key={tab.id} id={tab.id} label={tab.label} index={index}
+              mobile={mobile}
               active={activeTab === tab.id} enabled={effectsEnabled}
               pull={pull}
               content={tabContents[tab.id]}

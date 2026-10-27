@@ -7,6 +7,7 @@ import {
   MapPin,
 } from "lucide-react";
 import PortraitMotion from "../common/PortraitMotion";
+import PaperTape from "../common/PaperTape";
 import { projectsData } from "../../data/projects";
 
 export default function Hero({
@@ -20,14 +21,16 @@ export default function Hero({
       <div className="hero-grid page-width">
         <div className="hero-copy">
           <div className="hero-scrap hero-scrap--name">
+            <PaperTape className="hero-name-tape" />
             <h1 id="hero-name" className="hero-name">
               عبدالسلام معاد<span className="title-dot" aria-hidden="true">.</span>
             </h1>
           </div>
           <div className="hero-scrap hero-scrap--role">
-            <p className="hero-role">مطوّر <bdi>Flutter</bdi>، محلّل نظم، ومهندس أتمتة</p>
+            <p className="hero-role">مطوّر تطبيقات ومواقع، محلّل نظم، ومدير مشاريع</p>
           </div>
           <div className="hero-scrap hero-scrap--description">
+            <PaperTape className="hero-description-tape" />
             <p className="hero-description">
               أحوّل احتياجاتك إلى تطبيقات سهلة الاستخدام، وأبني أنظمة أتمتة تختصر
               العمل المتكرر.

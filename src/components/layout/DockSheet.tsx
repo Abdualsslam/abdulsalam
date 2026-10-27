@@ -8,13 +8,14 @@ const paperSpring = { stiffness: 360, damping: 29, mass: .65 };
 
 interface Props {
   id: TabId; label: string; index: number; active: boolean; enabled: boolean;
+  mobile: boolean;
   pull: MotionValue<SheetPull | null>;
   content: ReactNode; onSelect: () => void; onClose: () => void;
   onKeyDown: (event: KeyboardEvent<HTMLButtonElement>) => void;
 }
 
 /** One persistent sheet: its original head, outline and content travel together. */
-export default function DockSheet({id, label, index, active, enabled, pull, content, onSelect, onClose, onKeyDown}: Props) {
+export default function DockSheet({id, label, index, active, enabled, mobile, pull, content, onSelect, onClose, onKeyDown}: Props) {
   const lift = useMotionValue(0);
   const activation = useMotionValue(0);
   const response = useTransform(pull, value => sheetResponse(index, enabled && !active ? value : null));
@@ -27,9 +28,12 @@ export default function DockSheet({id, label, index, active, enabled, pull, cont
   const gesture = useRef<{y: number; start: number; distance: number; pointerId: number} | null>(null);
   const suppressClick = useRef(false);
   const [revealed, setRevealed] = useState(active);
-  const left = (5 - index) * 200 + 13;
-  const right = left + 172;
-  const top = 188 + index * 3;
+  // Keep one continuous sheet per head; only its closed position changes on phones.
+  const column = index % 3;
+  const headWidth = mobile ? 350 : 172;
+  const left = mobile ? (2 - column) * 400 + 20 : (5 - index) * 200 + 13;
+  const right = left + headWidth;
+  const top = mobile ? 128 + Math.floor(index / 3) * 62 + column * 3 : 188 + index * 3;
   useEffect(() => () => {
     activation.stop();
     if (pull.get()?.index === index) pull.set(null);
@@ -131,7 +135,7 @@ export default function DockSheet({id, label, index, active, enabled, pull, cont
       x: enabled ? followX : 0,
       y: enabled ? followY : 0,
       rotate: enabled ? followRotate : 0,
-      transformOrigin: `${(left + 86) / 12}% 100%`,
+      transformOrigin: `${(left + headWidth / 2) / 12}% 100%`,
     }}>
     <motion.svg className="bound-sheet" viewBox={viewBox} preserveAspectRatio="none" aria-hidden="true">
       <defs>
@@ -143,7 +147,7 @@ export default function DockSheet({id, label, index, active, enabled, pull, cont
       <motion.path d={path} fill={`url(#sheet-${id})`} stroke="var(--paper-edge)" strokeWidth="1"/>
     </motion.svg>
     <motion.button className="sheet-head" id={`tab-${id}`} type="button" aria-expanded={active}
-      aria-controls={`panel-${id}`} style={{left:`${left/12}%`,width:`${172/12}%`,top}}
+      aria-controls={`panel-${id}`} style={{left:`${left/12}%`,width:`${headWidth/12}%`,top}}
       onKeyDown={onKeyDown}
       onPointerDown={event => {
         if(event.button!==0 || !event.isPrimary || gesture.current) return;
