@@ -15,45 +15,41 @@ export default function Hero({
   effectsEnabled?: boolean;
 }) {
   return (
-    <section id="home" className="hero-section">
+    <section id="home" className="hero-section hero-section--identity hero-section--scraps"
+      aria-labelledby="hero-name">
       <div className="hero-grid page-width">
         <div className="hero-copy">
-          <span className="availability">
-            <span /> من الفكرة، إلى تجربة تستحق الاستخدام
-          </span>
-          <p className="hero-intro">
-            أهلاً بك، أنا عبدالسلام معاد <span className="hello-star">✳</span>
-          </p>
-          <h1>
-            أبني لأفكارك
-            <br />
-            <span>تجارب رقمية</span>
-            <br />
-            تترك أثراً<span className="title-dot">.</span>
-          </h1>
-          <p className="hero-description">
-            مطور Flutter، محلل نظم، ومهندس أتمتة.
-            <br />
-            أجمع بين التفكير الهندسي وحسّ التفاصيل لبناء تطبيقات سلسة، وحلول
-            تجعل العمل أبسط.
-          </p>
+          <div className="hero-scrap hero-scrap--name">
+            <h1 id="hero-name" className="hero-name">
+              عبدالسلام معاد<span className="title-dot" aria-hidden="true">.</span>
+            </h1>
+          </div>
+          <div className="hero-scrap hero-scrap--role">
+            <p className="hero-role">مطوّر <bdi>Flutter</bdi>، محلّل نظم، ومهندس أتمتة</p>
+          </div>
+          <div className="hero-scrap hero-scrap--description">
+            <p className="hero-description">
+              أحوّل احتياجاتك إلى تطبيقات سهلة الاستخدام، وأبني أنظمة أتمتة تختصر
+              العمل المتكرر.
+            </p>
+          </div>
           <div className="hero-actions">
             <a className="btn btn-primary" href="#projects">
-              اكتشف أعمالي <ArrowUpLeft size={20} />
+              شاهد أعمالي <ArrowUpLeft size={20} aria-hidden="true" />
             </a>
             <a className="cv-link" href={`${import.meta.env.BASE_URL}cv.pdf`} download>
-              <Download size={18} /> السيرة الذاتية
+              <Download size={18} aria-hidden="true" /> تحميل السيرة الذاتية
             </a>
           </div>
           <div className="hero-social">
-            <span>لنتواصل</span>
+            <span className="hero-social-label">تجدني أيضًا على</span>
             <a
               href="https://github.com/Abdualsslam"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="GitHub"
             >
-              <Github size={19} />
+              <Github size={19} aria-hidden="true" />
             </a>
             <a
               href="https://www.linkedin.com/in/abdulsalam-muaad/"
@@ -61,11 +57,10 @@ export default function Hero({
               rel="noopener noreferrer"
               aria-label="LinkedIn"
             >
-              <Linkedin size={19} />
+              <Linkedin size={19} aria-hidden="true" />
             </a>
-            <span className="social-divider" />
-            <span>
-              <MapPin size={14} /> صنعاء، اليمن
+            <span className="hero-location">
+              <MapPin size={14} aria-hidden="true" /> صنعاء، اليمن
             </span>
           </div>
         </div>
@@ -81,11 +76,10 @@ export default function Hero({
         <div className="hero-stats">
           {[
             ["+5", "سنوات من الخبرة"],
-            [String(projectsData.length), "مشاريع رئيسية"],
+            [String(projectsData.length), "مشاريع في المعرض"],
             ["2", "حزمة على pub.dev"],
-            ["~80", "شاشة في أكبر تطبيق"],
           ].map(([value, label]) => (
-            <div key={label}>
+            <div key={label} className="hero-scrap hero-scrap--stat">
               <strong dir="ltr">{value}</strong>
               <span>{label}</span>
             </div>

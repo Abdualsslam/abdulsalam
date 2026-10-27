@@ -1,0 +1,70 @@
+[
+  {
+    "file": "catalog",
+    "duration": 12.0,
+    "fps": 30.0,
+    "size": [
+      720,
+      1606
+    ],
+    "bytes": 1507670,
+    "sha256": "b2d9498998b4d863d01ab4aad9db9fc9f92b5aec7274643f1e5b62b64df5abc3",
+    "playbackRate": 1,
+    "source": "Native Android screenrecord from the Wamadat app. Loading/static waiting may be cut; interactions keep their natural speed.",
+    "retainedSourceRangesSeconds": [
+      [
+        0,
+        10.431000000000001
+      ]
+    ],
+    "finalFrameHoldSeconds": 1.5666666666666667
+  },
+  {
+    "file": "learning",
+    "duration": 14.0,
+    "fps": 30.0,
+    "size": [
+      720,
+      1606
+    ],
+    "bytes": 1298709,
+    "sha256": "2712c4f173ba45bb83ce221b64341f6aa7e87aacb4b4d588ff54ea0ab830b8e6",
+    "playbackRate": 1,
+    "source": "Native Android screenrecord from the Wamadat app. Loading/static waiting may be cut; interactions keep their natural speed.",
+    "retainedSourceRangesSeconds": [
+      [
+        0,
+        2
+      ],
+      [
+        5,
+        12
+      ],
+      [
+        18,
+        20.46
+      ]
+    ],
+    "finalFrameHoldSeconds": 2.533333333333333
+  },
+  {
+    "file": "assessment",
+    "duration": 10.1,
+    "fps": 30.0,
+    "size": [
+      720,
+      1606
+    ],
+    "bytes": 700384,
+    "sha256": "551e70334916519f4319cd4541acfe3cd165c75fd242e9f2f4d661dda270e66d",
+    "playbackRate": 1,
+    "source": "Native Android screenrecord from the Wamadat app. Loading/static waiting may be cut; interactions keep their natural speed.",
+    "retainedSourceRangesSeconds": [
+      [
+        0,
+        10.087
+      ]
+    ],
+    "finalFrameHoldSeconds": 0.0
+  }
+]

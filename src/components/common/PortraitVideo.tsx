@@ -12,7 +12,6 @@ export default function PortraitVideo({ enabled }: { enabled: boolean }) {
   const [intersecting, setIntersecting] = useState(true);
   const [pageVisible, setPageVisible] = useState(!document.hidden);
   const [ready, setReady] = useState(false);
-  const [blocked, setBlocked] = useState(false);
   // An open sheet blurs the cover but can still leave the portrait in view.
   const absent = !intersecting || !pageVisible;
   const shouldPlay = enabled && !absent;
@@ -33,7 +32,6 @@ export default function PortraitVideo({ enabled }: { enabled: boolean }) {
     if (wasAway.current) return;
     wasAway.current = true;
     setReady(false);
-    setBlocked(false);
     setClip(current => current === "idle" ? "glance" : "idle");
   }, [absent]);
 
@@ -47,21 +45,14 @@ export default function PortraitVideo({ enabled }: { enabled: boolean }) {
   useEffect(() => {
     const current = video.current;
     if (!current) return;
-    let live = true;
     if (!shouldPlay) current.pause();
-    else void current.play().then(() => {
-      if (live) setBlocked(false);
-    }).catch(() => { if (live) setBlocked(true); });
+    else void current.play().catch(() => {
+      // Keep the poster visible when autoplay is unavailable.
+    });
     return () => {
-      live = false;
       current.pause();
     };
   }, [shouldPlay, clip]);
-
-  const retry = () => {
-    if (!shouldPlay) return;
-    void video.current?.play().then(() => setBlocked(false)).catch(() => setBlocked(true));
-  };
 
   return (
     <div ref={container} className={`portrait-media portrait-photograph ${ready ? "is-playing" : ""}`}>
@@ -69,10 +60,7 @@ export default function PortraitVideo({ enabled }: { enabled: boolean }) {
       <video ref={video} className={`portrait-video ${ready ? "is-active" : ""}`}
         src={`${ROOT}${clip}.mp4`} data-clip={clip} loop muted playsInline disablePictureInPicture
         preload="auto" width={720} height={1280} aria-hidden="true" tabIndex={-1}
-        onLoadedData={() => setReady(true)} onError={() => setReady(false)} />
-      {blocked && shouldPlay && (
-        <button className="portrait-play" type="button" aria-label="تشغيل حركة الصورة" onClick={retry}>تشغيل الحركة</button>
-      )}
+        onPlaying={() => setReady(true)} onError={() => setReady(false)} />
     </div>
   );
 }

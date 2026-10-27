@@ -50,6 +50,7 @@ export default function Projects() {
             return (
             <article
               className={`project-card project-${project.index}`}
+              data-project={project.id}
               key={project.title}
             >
               <a className="project-card-open" id={`project-${project.id}`} href={`#projects/${project.id}`} aria-label={`عرض تفاصيل ${project.title}`}>

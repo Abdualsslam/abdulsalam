@@ -112,6 +112,26 @@ export const projectsData = [
     github: "https://github.com/Abdualsslam",
     demo: "#",
   },
+  {
+    id: "talentgate",
+    category: "تطبيقات",
+    title: "تطبيق TalentGate",
+    description:
+      "تطبيق للاعبي أكاديميات كرة القدم يجمع بطاقة اللاعب وتقييماته، وتحليل الأداء والحضور، وجدول التمارين والمباريات. يقدم دروسًا حسب مركز اللاعب، مع ملف شخصي وإشعارات، وتجربة تنقّل مكانية باستخدام كرة تفاعلية.",
+    tags: ["Flutter", "Bloc/Cubit", "Clean Architecture", "Dio", "Hive CE", "Firebase"],
+    github: "https://github.com/Abdualsslam",
+    demo: "#",
+  },
+  {
+    id: "wamadat",
+    category: "تطبيقات",
+    title: "تطبيق ومضات | Wamadat",
+    description:
+      "تطبيق عربي للتدريب والتطوير يربط المتدرّب ببرامجه ورحلته التعليمية. يجمع تصفّح البرامج والدروس متعددة الوسائط والاختبارات والواجبات والشهادات، مع حفظ التقدّم وتخزين مؤقت مشفّر وارتباط بخدمات منصة Laravel.",
+    tags: ["Flutter", "ChangeNotifier", "Dio", "GoRouter", "Hive CE", "Laravel API"],
+    github: "https://github.com/Abdualsslam",
+    demo: "#",
+  },
 ].map((project, index) => ({
   ...project,
   index,

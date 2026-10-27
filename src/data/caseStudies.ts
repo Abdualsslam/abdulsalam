@@ -3,6 +3,8 @@ import { tagadodEngineering, tagadodExperiences, tagadodFeatures } from "./tagad
 import { trasPhoneCaseStudy } from "./trasPhone";
 import { qit3atiCaseStudy } from "./qit3ati";
 import { shootLiveCaseStudy } from "./shootLive";
+import { talentGateCaseStudy } from "./talentGate";
+import { wamadatCaseStudy } from "./wamadat";
 
 const studies: Record<string, ProjectCaseStudy> = {
   tagadod: {
@@ -25,6 +27,8 @@ const studies: Record<string, ProjectCaseStudy> = {
   "tras-phone": trasPhoneCaseStudy,
   qit3ati: qit3atiCaseStudy,
   "shoot-live": shootLiveCaseStudy,
+  talentgate: talentGateCaseStudy,
+  wamadat: wamadatCaseStudy,
 };
 
 export const getProjectCaseStudy = (id: string): ProjectCaseStudy | undefined => studies[id];

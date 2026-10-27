@@ -1,0 +1,46 @@
+[
+  {
+    "project": "elastic-sheet",
+    "sourceFile": "C:/Users/Abdua/Desktop/projects/elastic_sheet/doc/Care Desk showcase.gif",
+    "frameIndex": 195,
+    "asset": "projects/elastic-sheet/care-desk.webp",
+    "size": [
+      614,
+      774
+    ],
+    "bytes": 40444
+  },
+  {
+    "project": "elastic-sheet",
+    "sourceFile": "C:/Users/Abdua/Desktop/projects/elastic_sheet/doc/anchor compact.gif",
+    "frameIndex": 54,
+    "asset": "projects/elastic-sheet/anchor-compact.webp",
+    "size": [
+      614,
+      712
+    ],
+    "bytes": 33562
+  },
+  {
+    "project": "frost-nav-bar",
+    "sourceFile": "C:/Users/Abdua/Desktop/projects/frost_nav_bar/assets/screenshots/preview.gif",
+    "frameIndex": 59,
+    "asset": "projects/frost-nav-bar/preview.webp",
+    "size": [
+      636,
+      220
+    ],
+    "bytes": 8476
+  },
+  {
+    "project": "frost-nav-bar",
+    "sourceFile": "C:/Users/Abdua/Desktop/projects/frost_nav_bar/assets/screenshots/real_project.gif",
+    "frameIndex": 49,
+    "asset": "projects/frost-nav-bar/real-project.webp",
+    "size": [
+      614,
+      134
+    ],
+    "bytes": 5304
+  }
+]

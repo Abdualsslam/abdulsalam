@@ -21,4 +21,5 @@ export interface ProjectCaseStudy {
   engineering: readonly { title: string; description: string }[];
   dataLayer: string;
   presentationLayer?: string;
+  architectureLayers?: readonly { name: string; description: string }[];
 }

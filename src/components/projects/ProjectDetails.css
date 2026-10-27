@@ -10,12 +10,24 @@
 .project-detail-brand-title.project-detail-brand-square > img { width: 160px; }
 .project-detail-brand-title:has(.project-detail-brand-name) { gap: 20px; flex-wrap: wrap; }
 .project-detail-copy h1 > .project-detail-brand-name { font-size: 44px; color: var(--paper-ink); letter-spacing: 0; }
+[data-project="talentgate"] .project-card-logo,
+[data-project="talentgate"] .project-detail-brand-title > img { background: var(--paper-ink); border-radius: 14px; padding: 6px; }
+[data-project="talentgate"] .project-detail-brand-title { flex-wrap: nowrap; gap: 14px; }
+[data-project="talentgate"] .project-detail-brand-title > img { width: clamp(70px, 9vw, 110px); flex-shrink: 0; }
+[data-project="talentgate"] .project-detail-copy h1 > .project-detail-brand-name { font-size: clamp(26px, 3vw, 34px); }
+[data-project="wamadat"] .project-detail-brand-title { flex-wrap: nowrap; gap: 18px; }
+[data-project="wamadat"] .project-detail-brand-title > img { width: clamp(110px, 12vw, 150px); flex-shrink: 0; }
+[data-project="wamadat"] .project-detail-copy h1 > .project-detail-brand-name { font-size: clamp(30px, 3.5vw, 40px); }
 .project-real-preview { position: absolute; inset: 44px 0 auto; display: flex; justify-content: center; gap: 18px; align-items: flex-start; }
 .project-real-preview img { width: min(35%, 132px); height: auto; border: 4px solid var(--paper-ink); border-radius: 19px; transform: rotate(-7deg); box-shadow: 8px 12px 20px rgb(var(--paper-shadow-rgb) / .15); }
 .project-real-preview img + img { transform: translateY(25px) rotate(7deg); }
 .project-logo-preview { height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 18px; }
 .project-logo-preview img { width: 136px; height: auto; border-radius: 24px; }
 .project-logo-preview b { font-size: 24px; color: var(--paper-ink); }
+.package-source-preview { position: absolute; inset: 40px 18px 28px; display: flex; align-items: center; justify-content: center; gap: 14px; }
+.package-source-surfaces img { display: block; width: calc(50% - 7px); height: 100%; object-fit: contain; }
+.package-source-bars { flex-direction: column; gap: 18px; }
+.package-source-bars img { display: block; width: 100%; height: calc(50% - 9px); object-fit: contain; }
 
 .project-detail-page { position: absolute; inset: 78px 0 0; z-index: 55; overflow-y: auto; overscroll-behavior: contain; background: var(--paper-bg) var(--paper-grain); color: var(--paper-ink); scrollbar-gutter: stable; }
 .project-detail-inner { width: min(1180px, calc(100% - 96px)); margin-inline: auto; padding-bottom: 30px; }

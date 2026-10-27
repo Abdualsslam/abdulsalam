@@ -1,0 +1,62 @@
+[
+  {
+    "file": "home",
+    "duration": 7.97,
+    "fps": 30.0,
+    "size": [
+      720,
+      1606
+    ],
+    "bytes": 815882,
+    "sha256": "c53f85e246962197f282c48b9683256f753a4024f0a5a15cb0d04bee7dbf750a",
+    "playbackRate": 1,
+    "source": "Native Android screenrecord of the current TalentGate player app. Natural interaction and transition speed.",
+    "sourceStartSeconds": 0,
+    "finalFrameHoldSeconds": 0.9666666666666667
+  },
+  {
+    "file": "performance",
+    "duration": 10.0,
+    "fps": 30.0,
+    "size": [
+      720,
+      1606
+    ],
+    "bytes": 1622040,
+    "sha256": "8bf7246b20ee6902a913ce42a0c219955cd929f2632beec2fb1c734e73e5ffa1",
+    "playbackRate": 1,
+    "source": "Native Android screenrecord of the current TalentGate player app. Natural interaction and transition speed.",
+    "sourceStartSeconds": 0,
+    "finalFrameHoldSeconds": 3.2333333333333334
+  },
+  {
+    "file": "learning",
+    "duration": 7.97,
+    "fps": 30.0,
+    "size": [
+      720,
+      1606
+    ],
+    "bytes": 114204,
+    "sha256": "94081a8aef0de83c2f4bf15d1fe2dc7926c68a15cacae2aed95eb02a7b073f30",
+    "playbackRate": 1,
+    "source": "Native Android screenrecord of the current TalentGate player app. Natural interaction and transition speed.",
+    "sourceStartSeconds": 0,
+    "finalFrameHoldSeconds": 4.9
+  },
+  {
+    "file": "profile",
+    "duration": 8.0,
+    "fps": 30.0,
+    "size": [
+      720,
+      1606
+    ],
+    "bytes": 950524,
+    "sha256": "2d91ec5ef1e5ac38b5e6bcfabd09488811e860b549ea4c96eb580b36533d54e5",
+    "playbackRate": 1,
+    "source": "Native Android screenrecord of the current TalentGate player app. Natural interaction and transition speed.",
+    "sourceStartSeconds": 0,
+    "finalFrameHoldSeconds": 1.2
+  }
+]

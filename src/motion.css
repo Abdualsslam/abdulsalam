@@ -43,32 +43,16 @@
   vertical-align: middle;
 }
 
-.hero-copy > .availability, .hero-copy > .hero-intro, .hero-copy > h1, .hero-copy > .hero-description, .hero-copy > .hero-actions, .hero-copy > .hero-social {
+.hero-copy > .hero-actions, .hero-copy > .hero-social {
   animation: content-arrive .7s cubic-bezier(.16,1,.3,1) both;
 }
 
-.hero-copy > .availability {
-  animation-delay: .06s;
-}
-
-.hero-copy > .hero-intro {
-  animation-delay: .15s;
-}
-
-.hero-copy > h1 {
-  animation-delay: .23s;
-}
-
-.hero-copy > .hero-description {
-  animation-delay: .34s;
-}
-
 .hero-copy > .hero-actions {
-  animation-delay: .43s;
+  animation-delay: .33s;
 }
 
 .hero-copy > .hero-social {
-  animation-delay: .52s;
+  animation-delay: .42s;
 }
 
 .availability {

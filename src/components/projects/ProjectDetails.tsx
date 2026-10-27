@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { Fragment, useEffect, useRef } from "react";
 import { motion, useIsPresent } from "framer-motion";
 import { ArrowRight, ArrowUpLeft } from "lucide-react";
 import type { PortfolioProject } from "../../data/projects";
@@ -44,10 +44,10 @@ export default function ProjectDetails({ project, onBack, effectsEnabled }: Prop
       exit={{ opacity: 0, y: 10 }}
       transition={{ duration: effectsEnabled ? .32 : 0, ease: [.22, 1, .36, 1] }}
     >
-      <div className={`project-detail-inner project-${project.index}`}>
+      <div className={`project-detail-inner project-${project.index}`} data-project={project.id}>
         <nav className="project-detail-nav" aria-label="التنقل في تفاصيل المشروع">
           <button onClick={onBack}><ArrowRight size={18} aria-hidden="true" />العودة إلى أعمالي</button>
-          <span dir="ltr">PROJECT 0{project.index + 1} / {project.id.toUpperCase()}</span>
+          <span dir="ltr">PROJECT {String(project.index + 1).padStart(2, "0")} / {project.id.toUpperCase()}</span>
         </nav>
 
         <header className={`project-detail-hero ${study ? "project-detail-hero-video" : ""}`}>
@@ -78,10 +78,15 @@ export default function ProjectDetails({ project, onBack, effectsEnabled }: Prop
             <section className="project-story-section" aria-labelledby={`${project.id}-engineering-title`}>
               <div className="project-story-heading"><span className="eyebrow">03 / خلف الواجهات</span><h2 id={`${project.id}-engineering-title`}>بنية تخدم التجربة.</h2></div>
               <div className="project-engineering-grid">{study.engineering.map((item, index) => <article key={item.title}><span className="project-note-index" aria-hidden="true">0{index + 1}</span><h3>{item.title}</h3><p>{item.description}</p></article>)}</div>
-              <div className="project-architecture" aria-label="طبقات التطبيق: العرض وإدارة الحالة، منطق العمل، البيانات والخدمات">
-                <div><b dir="ltr">Presentation</b><span>{study.presentationLayer ?? "واجهات + Bloc / Cubit"}</span></div><span aria-hidden="true">←</span>
-                <div><b dir="ltr">Domain</b><span>حالات الاستخدام ومنطق العمل</span></div><span aria-hidden="true">←</span>
-                <div><b dir="ltr">Data</b><span>{study.dataLayer}</span></div>
+              <div className="project-architecture" aria-label="تنظيم طبقات التطبيق">
+                {(study.architectureLayers ?? [
+                  { name: "Presentation", description: study.presentationLayer ?? "واجهات + Bloc / Cubit" },
+                  { name: "Domain", description: "حالات الاستخدام ومنطق العمل" },
+                  { name: "Data", description: study.dataLayer },
+                ]).map((layer, index) => <Fragment key={layer.name}>
+                  {index > 0 && <span aria-hidden="true">←</span>}
+                  <div><b dir="ltr">{layer.name}</b><span>{layer.description}</span></div>
+                </Fragment>)}
               </div>
             </section>
           </>

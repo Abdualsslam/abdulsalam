@@ -7,6 +7,7 @@ import "./components/layout/VerticalTabs.css";
 import "./motion.css";
 import "./portrait.css";
 import "./file-materials.css";
+import "./components/sections/Hero.css";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>

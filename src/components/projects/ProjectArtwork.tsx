@@ -1,15 +1,17 @@
 import { Smartphone, ShoppingBag, Headphones, Home, Heart, User, MessageSquare, Workflow, Database } from "lucide-react";
 import type { PortfolioProject } from "../../data/projects";
 import { getProjectCaseStudy } from "../../data/caseStudies";
+import { getPackageCover } from "../../data/packageCovers";
 import { publicAsset } from "../../lib/publicAsset";
 
 export default function ProjectArtwork({ project }: { project: PortfolioProject }) {
   const study = getProjectCaseStudy(project.id);
   const hasCapturedMedia = study?.mediaReady;
+  const packageCover = getPackageCover(project.id);
   return (
     <div className="project-art" aria-hidden="true">
       <span className="art-index">
-        0{project.index + 1} / {project.category}
+        {String(project.index + 1).padStart(2, "0")} / {project.category}
       </span>
       {hasCapturedMedia ? (
         <div className="project-real-preview">
@@ -63,28 +65,11 @@ export default function ProjectArtwork({ project }: { project: PortfolioProject 
             <User size={14} />
           </div>
         </div>
-      ) : project.index < 5 ? (
-        <div className="package-art">
-          <span>{project.index === 3 ? "{ }" : "< / >"}</span>
-          <b>
-            {project.index === 3 ? "elastic_sheet" : "frost_nav_bar"}
-          </b>
-          <small>CRAFTED FOR FLUTTER</small>
-          <div className="package-sheet">
-            {project.index === 3 ? (
-              <>
-                <i />
-                <i />
-                <i />
-              </>
-            ) : (
-              <>
-                <Home />
-                <Heart />
-                <User />
-              </>
-            )}
-          </div>
+      ) : packageCover ? (
+        <div className={`package-source-preview package-source-${packageCover.layout}`}>
+          {packageCover.images.map((image) => (
+            <img key={image.file} src={publicAsset(`projects/${project.id}/${image.file}`)} alt="" width={image.width} height={image.height} loading="lazy" />
+          ))}
         </div>
       ) : (
         <div className="workflow-art">
@@ -104,7 +89,7 @@ export default function ProjectArtwork({ project }: { project: PortfolioProject 
           </div>
         </div>
       )}
-      <span className="concept-label">{hasCapturedMedia ? "من التطبيق الفعلي" : study ? "شعار التطبيق" : "تصوّر بصري للمشروع"}</span>
+      <span className="concept-label">{hasCapturedMedia ? "من التطبيق الفعلي" : packageCover ? "من أمثلة الحزمة الفعلية" : study ? "شعار التطبيق" : "تصوّر بصري للمشروع"}</span>
     </div>
 
   );
