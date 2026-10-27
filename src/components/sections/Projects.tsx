@@ -29,7 +29,7 @@ export default function Projects() {
           role="group"
           aria-label="تصفية المشاريع"
         >
-          {["الكل", "تطبيقات", "مفتوح المصدر", "أتمتة"].map((category) => (
+          {["الكل", ...new Set(projectsData.map((project) => project.category))].map((category) => (
             <button
               key={category}
               onClick={() => setFilter(category)}

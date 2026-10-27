@@ -83,16 +83,6 @@ export const projectsData = [
     demo: "https://pub.dev/packages/frost_nav_bar",
   },
   {
-    id: "sales-automation",
-    category: "أتمتة",
-    title: "أتمتة مبيعات البوت | n8n",
-    description:
-      "نظام أتمتة متكامل للرد على رسائل العملاء، واستقبال الطلبات، ومعالجة البيانات تلقائياً دون تدخل بشري. يعتمد بالكامل على منصة سير العمل n8n وسكريبتات Python للتواصل المباشر مع ملفات إكسل كقاعدة بيانات.",
-    tags: ["n8n Workflows", "Python Scripting", "Automation", "Excel API"],
-    github: "https://github.com/Abdualsslam",
-    demo: "#",
-  },
-  {
     id: "qit3ati",
     category: "تطبيقات",
     title: "تطبيق قطعتي | Qit3ati",
