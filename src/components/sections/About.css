@@ -1,0 +1,45 @@
+.about-faq {
+  margin-block-start: 48px;
+  padding-block-start: 32px;
+  border-block-start: 1px solid var(--paper-rule);
+}
+
+.about-faq-heading h3 {
+  margin: 0 0 24px;
+  color: var(--paper-ink);
+  font-size: clamp(19px, 2.4vw, 24px);
+  font-weight: 600;
+  line-height: 1.7;
+}
+
+.about-faq-item {
+  border-block-end: 1px solid var(--paper-rule);
+}
+
+.about-faq-item summary {
+  padding-block: 18px;
+  color: var(--paper-ink);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.9;
+  cursor: pointer;
+}
+
+.about-faq-item summary::marker {
+  color: var(--paper-accent);
+}
+
+.about-faq-item summary:focus-visible {
+  outline: 2px solid var(--paper-accent);
+  outline-offset: 4px;
+}
+
+.about-faq-item p {
+  max-width: 76ch;
+  margin: 0;
+  padding-block-end: 20px;
+  color: var(--paper-ink-muted);
+  font-size: 13px;
+  line-height: 2.1;
+  overflow-wrap: anywhere;
+}

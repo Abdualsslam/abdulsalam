@@ -98,7 +98,7 @@ export default function Contact() {
       <div className="max-w-6xl mx-auto px-5">
         <motion.h2
           className="section-title"
-          initial={{ opacity: 0, y: 30 }}
+          initial={false}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
         >
@@ -107,7 +107,7 @@ export default function Contact() {
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
           <motion.div
-            initial={{ opacity: 0, y: 24 }}
+            initial={false}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
@@ -159,7 +159,7 @@ export default function Contact() {
             className="card p-10"
             onSubmit={handleSubmit}
             aria-busy={status === "sending"}
-            initial={{ opacity: 0, y: 24 }}
+            initial={false}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >

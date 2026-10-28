@@ -1,3 +1,4 @@
+import { sectionHref } from "../../lib/routes";
 import { ArrowUpLeft, Braces, Layers3, Workflow } from "lucide-react";
 import "./Skills.css";
 
@@ -77,7 +78,7 @@ export default function Skills() {
 
         <div className="skills-closing">
           <p><span aria-hidden="true">✳</span> الأدوات وسيلة. والنتيجة تجربة تستحق الاستخدام.</p>
-          <a href="#projects">شاهدها في أعمالي <ArrowUpLeft size={18} aria-hidden="true" /></a>
+          <a href={sectionHref("projects")}>شاهدها في أعمالي <ArrowUpLeft size={18} aria-hidden="true" /></a>
         </div>
       </div>
     </section>

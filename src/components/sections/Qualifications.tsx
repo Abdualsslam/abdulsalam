@@ -1,3 +1,4 @@
+import { sectionHref } from "../../lib/routes";
 import { ArrowUpLeft, GraduationCap, Languages } from "lucide-react";
 import "./Qualifications.css";
 
@@ -95,7 +96,7 @@ export default function Qualifications() {
 
         <div className="qualifications-closing">
           <p>المعرفة أساس، والتطبيق هو الامتداد.</p>
-          <a href="#skills">اكتشف مهاراتي <ArrowUpLeft size={18} aria-hidden="true" /></a>
+          <a href={sectionHref("skills")}>اكتشف مهاراتي <ArrowUpLeft size={18} aria-hidden="true" /></a>
         </div>
       </div>
     </section>

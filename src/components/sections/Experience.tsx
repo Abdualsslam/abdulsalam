@@ -1,3 +1,4 @@
+import { sectionHref } from "../../lib/routes";
 import "./Experience.css";
 import { ArrowUpLeft, Plus } from "lucide-react";
 
@@ -127,7 +128,7 @@ export default function Experience() {
 
         <div className="experience-closing">
           <p>من الخبرة إلى التنفيذ.</p>
-          <a href="#projects">استكشف أعمالي <ArrowUpLeft size={18} aria-hidden="true" /></a>
+          <a href={sectionHref("projects")}>استكشف أعمالي <ArrowUpLeft size={18} aria-hidden="true" /></a>
         </div>
       </div>
     </section>

@@ -9,6 +9,7 @@ import ProjectWebsitePreview from "./ProjectWebsitePreview";
 import ProjectAppSuite from "./ProjectAppSuite";
 import "./ProjectDetails.css";
 import { publicAsset } from "../../lib/publicAsset";
+import { sectionHref } from "../../lib/routes";
 
 interface Props {
   project: PortfolioProject;
@@ -48,14 +49,14 @@ export default function ProjectDetails({ project, onBack, effectsEnabled }: Prop
     >
       <div className={`project-detail-inner project-${project.index}`} data-project={project.id}>
         <nav className="project-detail-nav" aria-label="التنقل في تفاصيل المشروع">
-          <button onClick={onBack}><ArrowRight size={18} aria-hidden="true" />العودة إلى أعمالي</button>
+          <a href={sectionHref("projects")} onClick={event => { if (event.button === 0 && !event.metaKey && !event.ctrlKey && !event.shiftKey && !event.altKey) { event.preventDefault(); event.stopPropagation(); onBack(); } }}><ArrowRight size={18} aria-hidden="true" />العودة إلى أعمالي</a>
           <span dir="ltr">PROJECT {String(project.index + 1).padStart(2, "0")} / {project.id.toUpperCase()}</span>
         </nav>
 
         <header className={`project-detail-hero ${study ? "project-detail-hero-video" : ""}`}>
           <div className="project-detail-copy">
             <span className="eyebrow">{project.category} / دراسة مشروع</span>
-            <h1 id="project-detail-title" className={study ? `project-detail-brand-title ${study.logo.square ? "project-detail-brand-square" : ""}` : undefined} tabIndex={-1} ref={heading}>{study ? <><img src={publicAsset(`projects/${project.id}/${study.logo.file ?? "logo.png"}`)} alt={study.logo.showName ? "" : study.name} width={study.logo.width} height={study.logo.height} />{study.logo.showName && <span className="project-detail-brand-name">{study.name}</span>}</> : project.title}</h1>
+            <h1 id="project-detail-title" className={study ? `project-detail-brand-title ${study.logo.square ? "project-detail-brand-square" : ""}` : undefined} tabIndex={-1} ref={heading}>{study ? <><img src={publicAsset(`projects/${project.id}/${study.logo.file ?? "logo.png"}`)} alt="" width={study.logo.width} height={study.logo.height} /><span className={study.logo.showName ? "project-detail-brand-name" : "sr-only"}>{project.title}</span></> : project.title}</h1>
             <p className={`project-detail-lead ${study ? "" : "project-detail-lead-generic"}`}>{study ? study.lead : projectIntro}</p>
             {study && <p className="project-detail-summary">{study.summary}</p>}
             <div className="project-detail-tags" dir="ltr">{project.tags.map((tag) => <span key={tag}>{tag}</span>)}</div>
@@ -104,7 +105,7 @@ export default function ProjectDetails({ project, onBack, effectsEnabled }: Prop
           </section>
         )}
 
-        <footer className="project-detail-footer"><span>عبدالسلام معاد / {project.title}</span><button onClick={onBack}>العودة إلى المشاريع <ArrowRight size={18} aria-hidden="true" /></button></footer>
+        <footer className="project-detail-footer"><span>عبدالسلام معاد / {project.title}</span><a href={sectionHref("projects")}>العودة إلى المشاريع <ArrowRight size={18} aria-hidden="true" /></a></footer>
       </div>
 
     </motion.main>

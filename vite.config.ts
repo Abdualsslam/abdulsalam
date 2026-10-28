@@ -1,8 +1,11 @@
-import { defineConfig } from 'vite'
+import { defineConfig, loadEnv } from 'vite'
 import react from '@vitejs/plugin-react'
 import { resolve } from 'path'
 
-export default defineConfig({
+export default defineConfig(({ mode }) => ({
+    define: {
+        'import.meta.env.VITE_SITE_URL': JSON.stringify(process.env.VITE_SITE_URL || loadEnv(mode, process.cwd()).VITE_SITE_URL || 'https://abdulsalam.pro/'),
+    },
     plugins: [react()],
     resolve: {
         alias: {
@@ -16,4 +19,4 @@ export default defineConfig({
         port: Number(process.env.PORT) || 5173,
         strictPort: false,
     },
-})
+}))

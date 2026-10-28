@@ -32,7 +32,7 @@
 .project-detail-page { position: absolute; inset: 78px 0 0; z-index: 55; overflow-y: auto; overscroll-behavior: contain; background: var(--paper-bg) var(--paper-grain); color: var(--paper-ink); scrollbar-gutter: stable; }
 .project-detail-inner { width: min(1180px, calc(100% - 96px)); margin-inline: auto; padding-bottom: 30px; }
 .project-detail-nav { display: flex; align-items: center; justify-content: space-between; gap: 20px; min-height: 84px; border-bottom: 1px solid var(--paper-rule); }
-.project-detail-nav button, .project-detail-footer button { display: flex; align-items: center; gap: 12px; min-height: 44px; font-size: 12px; background: none; border: 0; color: var(--paper-accent); }
+.project-detail-nav button, .project-detail-footer button, .project-detail-nav > a, .project-detail-footer > a { display: flex; align-items: center; gap: 12px; min-height: 44px; font-size: 12px; background: none; border: 0; color: var(--paper-accent); }
 .project-detail-nav > span { font-family: monospace; font-size: 10px; letter-spacing: 1.2px; color: var(--paper-ink-muted); }
 .project-detail-hero { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: center; gap: clamp(30px, 5vw, 70px); padding-block: 46px; }
 .project-detail-copy h1 { margin-block: 20px 22px; font-size: clamp(38px, 5.5vw, 72px); font-weight: 800; line-height: 1.5; letter-spacing: -2px; overflow-wrap: anywhere; }

@@ -1,3 +1,4 @@
+import { sectionHref } from "../../lib/routes";
 import {
   ArrowUpLeft,
   ArrowDown,
@@ -9,6 +10,7 @@ import {
 import PortraitMotion from "../common/PortraitMotion";
 import PaperTape from "../common/PaperTape";
 import { projectsData } from "../../data/projects";
+import { profile } from "../../data/profile";
 
 export default function Hero({
   effectsEnabled = true,
@@ -23,21 +25,21 @@ export default function Hero({
           <div className="hero-scrap hero-scrap--name">
             <PaperTape className="hero-name-tape" />
             <h1 id="hero-name" className="hero-name">
-              عبدالسلام معاد<span className="title-dot" aria-hidden="true">.</span>
+              {profile.name}<span className="title-dot" aria-hidden="true">.</span>
             </h1>
           </div>
           <div className="hero-scrap hero-scrap--role">
-            <p className="hero-role">مطوّر تطبيقات ومواقع، محلّل نظم، ومدير مشاريع</p>
+            <p className="hero-role">مطوّر Flutter ومواقع ويب، ومحلّل نظم</p>
           </div>
           <div className="hero-scrap hero-scrap--description">
             <PaperTape className="hero-description-tape" />
             <p className="hero-description">
-              أحوّل احتياجاتك إلى تطبيقات سهلة الاستخدام، وأبني أنظمة أتمتة تختصر
-              العمل المتكرر.
+              أبني تطبيقات متعددة المنصات بـ Flutter وDart، ومواقع ويب،
+              وأنظمة أتمتة بـ Python وn8n تختصر العمل المتكرر.
             </p>
           </div>
           <div className="hero-actions">
-            <a className="btn btn-primary" href="#projects">
+            <a className="btn btn-primary" href={sectionHref("projects")}>
               شاهد أعمالي <ArrowUpLeft size={20} aria-hidden="true" />
             </a>
             <a className="cv-link" href={`${import.meta.env.BASE_URL}cv.pdf`} download>
@@ -47,7 +49,7 @@ export default function Hero({
           <div className="hero-social">
             <span className="hero-social-label">تجدني أيضًا على</span>
             <a
-              href="https://github.com/Abdualsslam"
+              href={profile.sameAs.github}
               target="_blank"
               rel="noopener noreferrer"
               aria-label="GitHub"
@@ -55,7 +57,7 @@ export default function Hero({
               <Github size={19} aria-hidden="true" />
             </a>
             <a
-              href="https://www.linkedin.com/in/abdulsalam-muaad/"
+              href={profile.sameAs.linkedin}
               target="_blank"
               rel="noopener noreferrer"
               aria-label="LinkedIn"
@@ -63,7 +65,7 @@ export default function Hero({
               <Linkedin size={19} aria-hidden="true" />
             </a>
             <span className="hero-location">
-              <MapPin size={14} aria-hidden="true" /> صنعاء، اليمن
+              <MapPin size={14} aria-hidden="true" /> {profile.address.locality}، {profile.address.countryName}
             </span>
           </div>
         </div>
@@ -88,7 +90,7 @@ export default function Hero({
             </div>
           ))}
         </div>
-        <a className="scroll-cue" href="#about">
+        <a className="scroll-cue" href={sectionHref("about")}>
           <span>هناك المزيد لتكتشفه</span>
           <ArrowDown size={19} />
         </a>

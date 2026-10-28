@@ -1,4 +1,4 @@
-import { useEffect, useLayoutEffect, useRef, type MouseEvent } from "react";
+import { useEffect, useLayoutEffect, useRef, useState, type MouseEvent } from "react";
 import {
   ArrowUpLeft,
   FolderOpen,
@@ -17,17 +17,19 @@ import { getProjectById } from "./data/projects";
 import ProjectDetails from "./components/projects/ProjectDetails";
 
 import AmbientEffects from "./components/common/AmbientEffects";
+import { readRoute, readLegacyHash, sectionHref, type PortfolioRoute } from "./lib/routes";
+import { applyPageMetadata, getPageMetadata } from "./lib/seo";
 
-export default function App() {
+export default function App({ initialRoute }: { initialRoute: PortfolioRoute }) {
   const reducedMotion = useReducedMotion();
-  const effectsEnabled = !reducedMotion;
-  const { activeTab, projectId, openTab, openProject, closeProject } = useNavigation();
+  const [ready, setReady] = useState(false);
+  useEffect(() => setReady(true), []);
+  const effectsEnabled = ready && !reducedMotion;
+  const { activeTab, projectId, notFound, openTab, openProject, closeProject } = useNavigation(initialRoute);
   const selectedProject = projectId ? getProjectById(projectId) : undefined;
   useEffect(() => {
-    document.title = selectedProject
-      ? `${selectedProject.title} — عبدالسلام معاد`
-      : "عبدالسلام معاد | مطور Flutter وخبير أتمتة";
-  }, [selectedProject]);
+    applyPageMetadata(getPageMetadata({ activeTab, projectId, notFound }));
+  }, [activeTab, projectId, notFound]);
   const previousProject = useRef<string | null>(null);
   const projectListPosition = useRef(0);
   useLayoutEffect(() => {
@@ -44,23 +46,22 @@ export default function App() {
   }, [projectId, activeTab]);
   const handleLocalLink = (event: MouseEvent<HTMLDivElement>) => {
     if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
-    const anchor = (event.target as HTMLElement).closest('a[href^="#"]');
-    const id = anchor?.getAttribute("href")?.slice(1);
-    if (id?.startsWith("projects/") && getProjectById(id.slice("projects/".length))) {
-      event.preventDefault();
-      openProject(id.slice("projects/".length));
-      return;
-    }
-    const target = tabsConfig.find((tab) => tab.id === id);
-    if (target) {
-      event.preventDefault();
-      openTab(target.id);
-    }
+    const anchor = (event.target as Element).closest<HTMLAnchorElement>("a[href]");
+    if (!anchor || anchor.hasAttribute("download") || (anchor.target && anchor.target !== "_self")) return;
+    const url = new URL(anchor.href, window.location.href);
+    if (url.origin !== window.location.origin) return;
+    const route = readLegacyHash(url.hash) ?? (!url.hash && readRoute(url.pathname));
+    if (!route || route.notFound) return;
+    event.preventDefault();
+    if (route.projectId) openProject(route.projectId);
+    else openTab(route.activeTab ?? "home");
+    anchor.closest("details")?.removeAttribute("open");
   };
   return (
     <MotionConfig reducedMotion={effectsEnabled ? "user" : "always"}>
       <div
         className="portfolio folder-portfolio"
+        data-ready={ready}
         data-effects={effectsEnabled ? "on" : "off"}
         onClick={handleLocalLink}
       >
@@ -69,7 +70,7 @@ export default function App() {
           <div className="header-inner">
             <a
               className="brand"
-              href="#home"
+              href={sectionHref("home")}
               aria-label="عبدالسلام معاد — الغلاف"
             >
               <svg className="brand-mark" viewBox="0 0 64 64" fill="none" aria-hidden="true">
@@ -92,12 +93,18 @@ export default function App() {
                   : "الغلاف"}
               </b>
             </div>
-            <a className="header-contact" href="#contact">
+            <details className="site-index">
+              <summary>تصفح الموقع</summary>
+              <nav aria-label="صفحات الموقع">
+                {tabsConfig.map(tab => <a key={tab.id} href={sectionHref(tab.id)} aria-current={!notFound && !projectId && (activeTab ?? "home") === tab.id ? "page" : undefined}>{tab.label}</a>)}
+              </nav>
+            </details>
+            <a className="header-contact" href={sectionHref("contact")}>
               لنبنِ شيئاً مميزاً <ArrowUpLeft size={17} />
             </a>
           </div>
         </header>
-        <div inert={!!selectedProject} aria-hidden={!!selectedProject}>
+        <div inert={!!selectedProject || notFound} aria-hidden={!!selectedProject || notFound}>
           <main
             id="main"
             className="folder-cover"
@@ -108,10 +115,10 @@ export default function App() {
               <span dir="ltr">PORTFOLIO / PERSONAL FILE</span>
               <span>أفكار، أعمال، وما بينهما.</span>
             </div>
-            <Hero effectsEnabled={effectsEnabled} />
+            <Hero effectsEnabled={effectsEnabled && activeTab === null && !selectedProject && !notFound} />
           </main>
           <VerticalTabs
-            navigationEnabled={!selectedProject}
+            navigationEnabled={!selectedProject && !notFound}
             effectsEnabled={effectsEnabled}
             activeTab={activeTab}
             onTabChange={openTab}
@@ -126,6 +133,7 @@ export default function App() {
             }}
           />
         </div>
+        {notFound && <main className="project-detail-page" aria-labelledby="not-found-title"><div className="project-detail-inner section-space"><h1 id="not-found-title">الصفحة غير موجودة</h1><p>قد يكون الرابط غير صحيح أو تغيّر عنوان الصفحة.</p><a className="text-link" href={sectionHref("home")}>العودة إلى الصفحة الرئيسية</a></div></main>}
         <AnimatePresence initial={false}>
           {selectedProject && <ProjectDetails key={selectedProject.id} project={selectedProject} onBack={closeProject} effectsEnabled={effectsEnabled} />}
         </AnimatePresence>

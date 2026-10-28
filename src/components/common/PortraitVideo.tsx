@@ -10,7 +10,7 @@ export default function PortraitVideo({ enabled }: { enabled: boolean }) {
   const wasAway = useRef(false);
   const [clip, setClip] = useState<Clip>("idle");
   const [intersecting, setIntersecting] = useState(true);
-  const [pageVisible, setPageVisible] = useState(!document.hidden);
+  const [pageVisible, setPageVisible] = useState(true);
   const [ready, setReady] = useState(false);
   // An open sheet blurs the cover but can still leave the portrait in view.
   const absent = !intersecting || !pageVisible;
@@ -18,6 +18,7 @@ export default function PortraitVideo({ enabled }: { enabled: boolean }) {
 
   useEffect(() => {
     const visibility = () => setPageVisible(!document.hidden);
+    visibility();
     document.addEventListener("visibilitychange", visibility);
     const observer = new IntersectionObserver(([entry]) => setIntersecting(entry.isIntersecting), { threshold: .1 });
     if (container.current) observer.observe(container.current);
@@ -56,10 +57,10 @@ export default function PortraitVideo({ enabled }: { enabled: boolean }) {
 
   return (
     <div ref={container} className={`portrait-media portrait-photograph ${ready ? "is-playing" : ""}`}>
-      <img className="portrait-video-poster" src={`${ROOT}${clip}.webp`} width={720} height={1280} alt="" fetchPriority="high" />
+      <img className="portrait-video-poster" src={`${ROOT}${clip}.webp`} width={720} height={1280} alt="عبدالسلام معاد، مطور Flutter وخبير أتمتة" fetchPriority="high" />
       <video ref={video} className={`portrait-video ${ready ? "is-active" : ""}`}
         src={`${ROOT}${clip}.mp4`} data-clip={clip} loop muted playsInline disablePictureInPicture
-        preload="auto" width={720} height={1280} aria-hidden="true" tabIndex={-1}
+        preload="none" width={720} height={1280} aria-hidden="true" tabIndex={-1}
         onPlaying={() => setReady(true)} onError={() => setReady(false)} />
     </div>
   );

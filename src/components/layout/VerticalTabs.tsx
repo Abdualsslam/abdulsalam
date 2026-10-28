@@ -31,12 +31,13 @@ export default function VerticalTabs({
   navigationEnabled = true,
 }: Props) {
   const [arriving, setArriving] = useState(() => effectsEnabled && !activeTab);
-  const [mobile, setMobile] = useState(() => window.matchMedia("(max-width: 760px)").matches);
+  const [mobile, setMobile] = useState(false);
   const pull = useMotionValue<SheetPull | null>(null);
   const previous = useRef<TabId | null>(null);
   useEffect(() => {
     const query = window.matchMedia("(max-width: 760px)");
     const update = () => setMobile(query.matches);
+    update();
     query.addEventListener("change", update);
     return () => query.removeEventListener("change", update);
   }, []);

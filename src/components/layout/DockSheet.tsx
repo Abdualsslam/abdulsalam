@@ -182,7 +182,8 @@ export default function DockSheet({id, label, index, active, enabled, mobile, pu
         <span className="sheet-return-hint">اسحب رأس الورقة للأسفل لإعادتها</span>
         <button className="paper-close" onClick={onClose} aria-label="إعادة الورقة إلى الملف"><X size={17}/></button>
       </div>
-      <div ref={panel} className="paper-scroll" role="region" id={`panel-${id}`} aria-labelledby={`tab-${id}`} tabIndex={active?0:-1}>
+      <div ref={panel} className="paper-scroll" role={active ? "main" : "region"} id={`panel-${id}`} aria-labelledby={`tab-${id}`} tabIndex={active?0:-1}>
+        {active && <h1 className="sr-only">{label} — عبدالسلام معاد</h1>}
         {revealed && content}
         <footer className="paper-footer"><span>عبدالسلام معاد · {label}</span><button onClick={onClose}>إلى غلاف الملف</button></footer>
       </div>

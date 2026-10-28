@@ -4,6 +4,7 @@ import { projectsData } from "../../data/projects";
 import ProjectArtwork from "../projects/ProjectArtwork";
 import { getProjectCaseStudy } from "../../data/caseStudies";
 import { publicAsset } from "../../lib/publicAsset";
+import { projectHref } from "../../lib/routes";
 import "../projects/ProjectDetails.css";
 export default function Projects() {
   const [filter, setFilter] = useState("الكل");
@@ -53,7 +54,7 @@ export default function Projects() {
               data-project={project.id}
               key={project.title}
             >
-              <a className="project-card-open" id={`project-${project.id}`} href={`#projects/${project.id}`} aria-label={`عرض تفاصيل ${project.title}`}>
+              <a className="project-card-open" id={`project-${project.id}`} href={projectHref(project.id)} aria-label={`عرض تفاصيل ${project.title}`}>
               <ProjectArtwork project={project} />
               <div className="project-content">
                 <div className="project-card-meta">
