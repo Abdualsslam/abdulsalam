@@ -23,11 +23,6 @@ export const kuraimiCaseStudy: ProjectCaseStudy = {
       width: 640, height: 1428,
     },
     {
-      file: "home-dark.webp", title: "التجربة بالمظهر المظلم",
-      description: "ألوان وأسطح مخصصة للمظهر المظلم، مع الحفاظ على هوية التطبيق ووضوح المحتوى.",
-      width: 640, height: 1428,
-    },
-    {
       file: "cards.webp", title: "إدارة البطاقات",
       description: "عرض بطاقات بلوتو وإيدي ومميز، والحسابات المرتبطة بها وخيارات إدارتها داخل النموذج.",
       width: 640, height: 1428,
@@ -45,6 +40,11 @@ export const kuraimiCaseStudy: ProjectCaseStudy = {
     {
       file: "login.webp", title: "بداية الرحلة",
       description: "واجهة الدخول واختصارات الخدمات، مع خيار البصمة لفتح النموذج المحلي.",
+      width: 640, height: 1428,
+    },
+    {
+      file: "home-dark.webp", title: "التجربة بالمظهر المظلم",
+      description: "ألوان وأسطح مخصصة للمظهر المظلم، مع الحفاظ على هوية التطبيق ووضوح المحتوى.",
       width: 640, height: 1428,
     },
   ],
