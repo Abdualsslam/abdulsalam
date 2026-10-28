@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import { getProjectById } from "../data/projects";
+import { projectHref, readLegacyHash, readRoute, routeHref, sectionHref, type PortfolioRoute } from "../lib/routes";
 export type TabId =
   | "home"
   | "about"
@@ -22,23 +23,17 @@ export const tabsConfig: TabConfig[] = [
   { id: "qualifications", label: "مؤهلاتي", color: "var(--paper-accent)" },
   { id: "contact", label: "تواصل", color: "var(--paper-accent)" },
 ];
-const readLocation = (): { activeTab: TabId | null; projectId: string | null } => {
-  const id = window.location.hash.slice(1);
-  if (id.startsWith("projects/")) {
-    const projectId = id.slice("projects/".length);
-    return { activeTab: "projects", projectId: getProjectById(projectId) ? projectId : null };
-  }
-  const activeTab = tabsConfig.some((tab) => tab.id === id && id !== "home")
-    ? (id as TabId)
-    : null;
-  return { activeTab, projectId: null };
-};
-export function useNavigation() {
-  const [{ activeTab, projectId }, setLocation] = useState(readLocation);
+export function useNavigation(initialRoute: PortfolioRoute) {
+  const [{ activeTab, projectId, notFound }, setLocation] = useState(initialRoute);
   useEffect(() => {
     const previousRestoration = window.history.scrollRestoration;
     window.history.scrollRestoration = "manual";
-    const sync = () => setLocation(readLocation());
+    const sync = () => {
+      const legacy = readLegacyHash(window.location.hash);
+      if (legacy) window.history.replaceState(null, "", routeHref(legacy));
+      setLocation(legacy ?? readRoute(window.location.pathname));
+    };
+    sync();
     window.addEventListener("hashchange", sync);
     window.addEventListener("popstate", sync);
     return () => {
@@ -48,20 +43,22 @@ export function useNavigation() {
     };
   }, []);
   const openTab = useCallback((id: TabId) => {
-    if (window.location.hash !== `#${id}`)
-      window.history.pushState(null, "", `#${id}`);
-    setLocation({ activeTab: id === "home" ? null : id, projectId: null });
+    const href = sectionHref(id);
+    if (window.location.pathname !== href || window.location.hash)
+      window.history.pushState(null, "", href);
+    setLocation({ activeTab: id === "home" ? null : id, projectId: null, notFound: false });
   }, []);
   const openProject = useCallback((id: string) => {
     if (!getProjectById(id)) return;
-    if (window.location.hash !== `#projects/${id}`) {
-      window.history.pushState({ portfolioProject: true }, "", `#projects/${id}`);
+    const href = projectHref(id);
+    if (window.location.pathname !== href) {
+      window.history.pushState({ portfolioProject: true }, "", href);
     }
-    setLocation({ activeTab: "projects", projectId: id });
+    setLocation({ activeTab: "projects", projectId: id, notFound: false });
   }, []);
   const closeProject = useCallback(() => {
     if (window.history.state?.portfolioProject) window.history.back();
     else openTab("projects");
   }, [openTab]);
-  return { activeTab, projectId, openTab, openProject, closeProject };
+  return { activeTab, projectId, notFound, openTab, openProject, closeProject };
 }
