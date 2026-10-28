@@ -2,13 +2,45 @@ import { StrictMode } from "react";
 import { renderToString } from "react-dom/server";
 import App from "./App";
 import { projectsData } from "./data/projects";
+import { getProjectCaseStudy } from "./data/caseStudies";
 import { profile } from "./data/profile";
 import { projectHref, readRoute, sectionHref, sectionIds } from "./lib/routes";
-import { getPageMetadata, renderMetaTags } from "./lib/seo";
+import { getPageMetadata, normalizeSiteUrl, renderMetaTags } from "./lib/seo";
 
 export const pagePaths = [sectionHref("home"), ...sectionIds.map(sectionHref), ...projectsData.map(project => projectHref(project.id))];
 export const noindex = import.meta.env.VITE_NOINDEX === "true";
 export const siteUrl = import.meta.env.VITE_SITE_URL;
+
+// These are independent static documents, with no portfolio React shell.
+export const showcasePages = projectsData.flatMap(project => {
+  const study = getProjectCaseStudy(project.id);
+  const showcase = study?.showcase;
+  if (!showcase) return [];
+  const site = normalizeSiteUrl(siteUrl);
+  const canonical = site ? new URL(showcase.path, site).href : undefined;
+  const title = `${project.title} | معرض الواجهات — ${profile.name}`;
+  const metadata = getPageMetadata({ activeTab: "projects", projectId: project.id, notFound: false });
+  return [{
+    path: showcase.path,
+    canonical,
+    headHtml: renderMetaTags({
+      ...metadata,
+      title,
+      description: showcase.summary,
+      canonical,
+      image: site && study.screenshots?.[0] ? new URL(`projects/${project.id}/${study.screenshots[0].file}`, site).href : undefined,
+      structuredData: {
+        "@context": "https://schema.org",
+        "@type": "CreativeWork",
+        name: title,
+        description: showcase.summary,
+        inLanguage: "ar",
+        ...(canonical && { url: canonical }),
+        author: { "@type": "Person", name: profile.name },
+      },
+    }),
+  }];
+});
 
 export function renderPage(path: string) {
   const route = readRoute(path);

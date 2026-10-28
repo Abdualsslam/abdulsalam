@@ -56,8 +56,13 @@ for (const section of sectionIds) {
 assert(await exists(resolve(output, "404.html")), "Missing 404.html");
 
 const projectDirectory = resolve(output, "projects");
-const projectIds = (await readdir(projectDirectory, { withFileTypes: true }))
+const projectDirectories = (await readdir(projectDirectory, { withFileTypes: true }))
   .filter(entry => entry.isDirectory()).map(entry => entry.name);
+// Hidden projects may retain their public assets without a published route.
+const projectIds = [];
+for (const id of projectDirectories) {
+  if (await exists(resolve(projectDirectory, id, "index.html"))) projectIds.push(id);
+}
 assert(projectIds.length > 0, "No prerendered project pages found");
 const listing = await readFile(resolve(projectDirectory, "index.html"), "utf8");
 const projectLinks = elements(listing, "a").map(link => link.href);
@@ -80,12 +85,13 @@ for (const file of pages) {
   const name = relative(output, file).split(sep).join("/");
   const html = await readFile(file, "utf8");
   const is404 = name === "404.html";
+  const isShowcase = /^showcase\/[^/]+\/index\.html$/.test(name);
   const route = name === "index.html" ? base : `${base}${name.replace(/index\.html$/, "")}`;
   const head = html.match(/<head\b[^>]*>([\s\S]*?)<\/head>/i)?.[1];
   assert(head, `${name}: no document head`);
   assert.match(html, /<html\b[^>]*\blang=["']ar["'][^>]*>/i, `${name}: missing Arabic document language`);
   assert.match(html, /<html\b[^>]*\bdir=["']rtl["'][^>]*>/i, `${name}: missing RTL document direction`);
-  assert.match(html, /<div\b[^>]*\bid=["']root["'][^>]*>\s*</i, `${name}: empty client-only root`);
+  if (!isShowcase) assert.match(html, /<div\b[^>]*\bid=["']root["'][^>]*>\s*</i, `${name}: empty client-only root`);
   assert.match(html, /<main\b/i, `${name}: no main content in initial HTML`);
   if (name.endsWith("/index.html")) {
     const segments = name.split("/");
@@ -166,7 +172,7 @@ for (const file of pages) {
     assert.deepEqual(structuredItems, visibleItems, `${name}: FAQ structured data differs from the visible questions and answers`);
   } else assert.equal(faqSchemas.length, 0, `${name}: FAQPage must only appear on the page displaying the FAQ`);
 
-  if (!is404) {
+  if (!is404 && !isShowcase) {
     const anchors = elements(html, "a").map(link => link.href);
     for (const section of sectionIds) {
       assert(anchors.includes(`${base}${section}/`), `${name}: no crawlable link to ${section}`);

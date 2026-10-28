@@ -1,4 +1,5 @@
-export const projectsData = [
+// Keep hidden projects and their assets available for restoring later.
+const projectCatalog = [
   {
     id: "tagadod",
     category: "تطبيقات",
@@ -133,6 +134,7 @@ export const projectsData = [
   },
   {
     id: "eman-website",
+    hidden: true,
     category: "مواقع وصفحات هبوط",
     title: "موقع إيمان | Eman",
     description: "موقع شخصي تفاعلي لعرض خبرات ومهارات وأعمال مصممة UI/UX. يضم معرض مشاريع مصنّفًا وصفحات تفاصيل ومدونة ونموذج تواصل، مع لوحة تحكم لإدارة المحتوى وخادم NestJS وقاعدة بيانات MongoDB.",
@@ -149,10 +151,22 @@ export const projectsData = [
     github: "https://github.com/nirab-project",
     demo: "#",
   },
+  {
+    id: "kuraimi",
+    category: "تطبيقات",
+    title: "الكريمي | تصور لتجربة مصرفية",
+    description:
+      "إعادة تصور مستقلة وغير رسمية لواجهات الكريمي باستخدام Flutter. تجربة عربية تشمل الحسابات متعددة العملات والبطاقات والحوالات وسداد الفواتير وتحليل العمليات، مع الوضعين الفاتح والمظلم. يعمل النموذج ببيانات وهمية ومحاكاة محلية دون اتصال بخوادم البنك.",
+    tags: ["Flutter", "Dart", "RTL", "UI/UX", "Dark Mode", "Custom Animations"],
+    github: "https://github.com/Abdualsslam",
+    demo: "#",
+  },
 ].map((project, index) => ({
   ...project,
   index,
 }));
+
+export const projectsData = projectCatalog.filter((project) => !project.hidden);
 
 export type PortfolioProject = (typeof projectsData)[number];
 export const getProjectById = (id: string) => projectsData.find((project) => project.id === id);

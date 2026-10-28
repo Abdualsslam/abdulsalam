@@ -8,6 +8,7 @@ import {
   MapPin,
 } from "lucide-react";
 import PortraitMotion from "../common/PortraitMotion";
+import PortraitProjects from "../common/PortraitProjects";
 import PaperTape from "../common/PaperTape";
 import { projectsData } from "../../data/projects";
 import { profile } from "../../data/profile";
@@ -71,6 +72,7 @@ export default function Hero({
         </div>
         <figure className="portrait-scene" aria-label="عبدالسلام معاد — خلف كل تجربة، إنسان">
           <PortraitMotion enabled={effectsEnabled} />
+          <PortraitProjects />
           <figcaption className="portrait-figure-caption">
             <span dir="ltr">CRAFTED WITH INTENT</span>
             <span>خلف كل تجربة، إنسان.</span>

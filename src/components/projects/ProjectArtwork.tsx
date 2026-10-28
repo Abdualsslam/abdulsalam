@@ -23,6 +23,10 @@ export default function ProjectArtwork({ project }: { project: PortfolioProject 
         <div className="project-website-preview">
           <img src={publicAsset(`projects/${project.id}/${study.website.screenshots[0].file}`)} alt="" width={study.website.screenshots[0].width} height={study.website.screenshots[0].height} loading="lazy" />
         </div>
+      ) : study?.screenshots?.length ? (
+        <div className="project-real-preview">
+          {study.screenshots.slice(0, 2).map(shot => <img key={shot.file} src={publicAsset(`projects/${project.id}/${shot.file}`)} alt="" width={shot.width} height={shot.height} loading="lazy" decoding="async" />)}
+        </div>
       ) : hasCapturedMedia ? (
         <div className="project-real-preview">
           <img src={publicAsset(project.id === "tagadod" ? "projects/tagadod/home.webp" : `projects/${project.id}/${study.experiences[0].file}-poster.webp`)} alt="" width="1280" height="2856" loading="lazy" />
@@ -99,7 +103,7 @@ export default function ProjectArtwork({ project }: { project: PortfolioProject 
           </div>
         </div>
       )}
-      <span className="concept-label">{study?.appSuite ? "واجهات التطبيقات الثلاثة" : study?.website ? "من الموقع الفعلي" : hasCapturedMedia ? "من التطبيق الفعلي" : packageCover ? "من أمثلة الحزمة الفعلية" : study ? "شعار التطبيق" : "تصوّر بصري للمشروع"}</span>
+      <span className="concept-label">{study?.appSuite ? "واجهات التطبيقات الثلاثة" : study?.website ? "من الموقع الفعلي" : study?.screenshots?.length || hasCapturedMedia ? "من التطبيق الفعلي" : packageCover ? "من أمثلة الحزمة الفعلية" : study ? "شعار التطبيق" : "تصوّر بصري للمشروع"}</span>
     </div>
 
   );

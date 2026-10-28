@@ -7,6 +7,7 @@ import ProjectArtwork from "./ProjectArtwork";
 import ProjectExperience from "./ProjectExperience";
 import ProjectWebsitePreview from "./ProjectWebsitePreview";
 import ProjectAppSuite from "./ProjectAppSuite";
+import ProjectScreenshots from "./ProjectScreenshots";
 import "./ProjectDetails.css";
 import { publicAsset } from "../../lib/publicAsset";
 import { sectionHref } from "../../lib/routes";
@@ -64,13 +65,14 @@ export default function ProjectDetails({ project, onBack, effectsEnabled }: Prop
               {project.demo !== "#" && <a className="project-website-source" href={project.demo} target="_blank" rel="noopener noreferrer">زيارة الموقع <ArrowUpLeft size={16} aria-hidden="true" /></a>}
               <a className="project-website-source" href={project.github} target="_blank" rel="noopener noreferrer">مصدر المشروع <ArrowUpLeft size={16} aria-hidden="true" /></a>
             </div>}
+            {study?.showcase && <div className="project-website-links"><a className="project-showcase-link" href={publicAsset(`${study.showcase.path}index.html`)}>معاينة الواجهات في صفحة مستقلة <ArrowUpLeft size={18} aria-hidden="true" /></a></div>}
           </div>
           {!study && <ProjectArtwork project={project} />}
         </header>
 
         {study ? (
           <>
-            {study.appSuite ? <ProjectAppSuite projectId={project.id} apps={study.appSuite.apps} /> : study.website ? <ProjectWebsitePreview projectId={project.id} name={study.name} screenshots={study.website.screenshots} /> : study.mediaReady && <ProjectExperience active={isPresent} projectId={project.id} projectName={study.name} clips={study.experiences} />}
+            {study.appSuite ? <ProjectAppSuite projectId={project.id} apps={study.appSuite.apps} /> : study.website ? <ProjectWebsitePreview projectId={project.id} name={study.name} screenshots={study.website.screenshots} /> : study.screenshots?.length ? <ProjectScreenshots projectId={project.id} name={study.name} screenshots={study.screenshots} /> : study.mediaReady && <ProjectExperience active={isPresent} projectId={project.id} projectName={study.name} clips={study.experiences} />}
             <dl className="project-facts">
               {study.facts.map((fact) => <div key={fact.label}><dt>{fact.label}</dt><dd>{fact.value}</dd></div>)}
             </dl>

@@ -14,6 +14,8 @@ export interface ProjectCaseStudy {
   logo: { width: number; height: number; square?: boolean; showName?: boolean; file?: string };
   website?: { screenshots: readonly ProjectWebsiteScreenshot[] };
   appSuite?: { apps: readonly ProjectSuiteApp[] };
+  screenshots?: readonly ProjectWebsiteScreenshot[];
+  showcase?: { path: string; summary: string };
   lead: string;
   summary: string;
   facts: readonly { label: string; value: string }[];

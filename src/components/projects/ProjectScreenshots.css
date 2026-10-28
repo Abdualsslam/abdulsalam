@@ -1,0 +1,25 @@
+.project-screenshots { margin-block: 8px 46px; }
+.project-screenshots-heading { margin-bottom: 28px; }
+.project-screenshots-heading h2 { font-size: clamp(24px, 3vw, 34px); font-weight: 700; line-height: 1.6; }
+.project-screenshots-heading p { margin-top: 12px; max-width: 70ch; font-size: 13px; line-height: 2; color: var(--paper-ink-muted); }
+.project-screenshots-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 32px 24px; align-items: start; }
+.project-screenshots-grid figure { min-width: 0; margin: 0; }
+.project-screenshot-open { display: block; padding: 14px; background: var(--paper-muted); color: var(--paper-accent); }
+.project-screenshot-open img { display: block; width: 100%; height: auto; }
+.project-screenshot-open > span { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-top: 12px; font-size: 11px; line-height: 1.9; }
+.project-screenshot-open:hover > span { text-decoration: underline; text-underline-offset: 4px; }
+.project-screenshot-open:focus-visible { outline: 2px solid var(--paper-accent); outline-offset: 4px; }
+.project-screenshots-grid:focus-visible { outline: 2px solid var(--paper-accent); outline-offset: 6px; }
+.project-screenshots-grid figcaption { padding-block: 18px 0; }
+.project-screenshots-grid h3 { font-size: 16px; font-weight: 600; line-height: 1.8; }
+.project-screenshots-grid figcaption p { margin-top: 7px; font-size: 12px; line-height: 2; color: var(--paper-ink-muted); }
+.project-screenshots-swipe { display: none; }
+
+@media (max-width: 760px) {
+  .project-screenshots-heading { margin-bottom: 22px; }
+  .project-screenshots-heading p { font-size: 12px; }
+  .project-screenshots-grid { grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: 82%; gap: 18px; overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x proximity; scrollbar-color: var(--paper-accent) var(--paper-muted); padding-block: 6px 12px; padding-inline: 4px; }
+  .project-screenshots-grid figure { scroll-snap-align: start; }
+  .project-screenshot-open { padding: 10px; }
+  .project-screenshots-swipe { display: block; margin-top: 12px; font-size: 11px; line-height: 1.9; color: var(--paper-ink-muted); }
+}

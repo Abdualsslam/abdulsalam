@@ -29,7 +29,7 @@ await build({
     rollupOptions: { output: { entryFileNames: "entry-server.mjs" } },
   },
 });
-const { renderPage, pagePaths, noindex, siteUrl, llmsText } = await import(pathToFileURL(join(serverOutput, "entry-server.mjs")).href);
+const { renderPage, pagePaths, showcasePages, noindex, siteUrl, llmsText } = await import(pathToFileURL(join(serverOutput, "entry-server.mjs")).href);
 const template = await readFile(join(output, "index.html"), "utf8");
 if (!template.includes("<!--seo-head-->") || !template.includes("<!--app-html-->")) {
   throw new Error("Missing HTML placeholders for SEO or prerendered content.");
@@ -44,6 +44,14 @@ for (const path of [...pagePaths, `${base}404.html`]) {
   await writeFile(destination, html);
   if (canonical && !noindex) canonicals.push(canonical);
 }
+for (const page of showcasePages) {
+  const destination = join(output, page.path, "index.html");
+  const html = await readFile(destination, "utf8");
+  const seoBlock = /<!--showcase-seo-start-->[\s\S]*?<!--showcase-seo-end-->/;
+  if (!seoBlock.test(html)) throw new Error(`Missing showcase SEO placeholder: ${page.path}`);
+  await writeFile(destination, html.replace(seoBlock, () => page.headHtml));
+  if (page.canonical && !noindex) canonicals.push(page.canonical);
+}
 const xmlEscape = value => value.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&apos;");
 if (canonicals.length) {
   await writeFile(join(output, "sitemap.xml"), `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${canonicals.map(url => `  <url><loc>${xmlEscape(url)}</loc></url>`).join("\n")}\n</urlset>\n`);
@@ -53,4 +61,4 @@ if (canonicals.length) {
 const sitemapUrl = canonicals.length ? new URL("sitemap.xml", siteUrl).href : null;
 await writeFile(join(output, "robots.txt"), `User-agent: *\nAllow: /\n\nUser-agent: OAI-SearchBot\nAllow: /\n${sitemapUrl ? `\nSitemap: ${sitemapUrl}\n` : ""}`);
 if (siteUrl && !noindex) await writeFile(join(output, "llms.txt"), llmsText());
-console.log(`Prerendered ${pagePaths.length} pages and 404.html. ${noindex ? "Mirror/staging pages are noindex." : `${canonicals.length} canonical URLs in sitemap.xml.`}`);
+console.log(`Prerendered ${pagePaths.length} pages and 404.html; prepared ${showcasePages.length} standalone showcases. ${noindex ? "Mirror/staging pages are noindex." : `${canonicals.length} canonical URLs in sitemap.xml.`}`);

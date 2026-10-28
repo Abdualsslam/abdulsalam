@@ -50,7 +50,7 @@ export default function Projects() {
             const study = getProjectCaseStudy(project.id);
             return (
             <article
-              className={`project-card project-${project.index}`}
+              className={`project-card project-${project.index}${study?.showcase ? " project-card-with-showcase" : ""}`}
               data-project={project.id}
               key={project.title}
             >
@@ -71,6 +71,7 @@ export default function Projects() {
                 <span className="project-link">تفاصيل المشروع <ArrowUpLeft size={19} aria-hidden="true" /></span>
               </div>
               </a>
+              {study?.showcase && <a className="project-card-showcase" href={publicAsset(`${study.showcase.path}index.html`)}>معاينة الواجهات في صفحة مستقلة <ArrowUpLeft size={18} aria-hidden="true" /></a>}
             </article>
           );})}
         </div>
