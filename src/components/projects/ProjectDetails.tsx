@@ -5,6 +5,8 @@ import type { PortfolioProject } from "../../data/projects";
 import { getProjectCaseStudy } from "../../data/caseStudies";
 import ProjectArtwork from "./ProjectArtwork";
 import ProjectExperience from "./ProjectExperience";
+import ProjectWebsitePreview from "./ProjectWebsitePreview";
+import ProjectAppSuite from "./ProjectAppSuite";
 import "./ProjectDetails.css";
 import { publicAsset } from "../../lib/publicAsset";
 
@@ -53,17 +55,21 @@ export default function ProjectDetails({ project, onBack, effectsEnabled }: Prop
         <header className={`project-detail-hero ${study ? "project-detail-hero-video" : ""}`}>
           <div className="project-detail-copy">
             <span className="eyebrow">{project.category} / دراسة مشروع</span>
-            <h1 id="project-detail-title" className={study ? `project-detail-brand-title ${study.logo.square ? "project-detail-brand-square" : ""}` : undefined} tabIndex={-1} ref={heading}>{study ? <><img src={publicAsset(`projects/${project.id}/logo.png`)} alt={study.logo.showName ? "" : study.name} width={study.logo.width} height={study.logo.height} />{study.logo.showName && <span className="project-detail-brand-name">{study.name}</span>}</> : project.title}</h1>
+            <h1 id="project-detail-title" className={study ? `project-detail-brand-title ${study.logo.square ? "project-detail-brand-square" : ""}` : undefined} tabIndex={-1} ref={heading}>{study ? <><img src={publicAsset(`projects/${project.id}/${study.logo.file ?? "logo.png"}`)} alt={study.logo.showName ? "" : study.name} width={study.logo.width} height={study.logo.height} />{study.logo.showName && <span className="project-detail-brand-name">{study.name}</span>}</> : project.title}</h1>
             <p className={`project-detail-lead ${study ? "" : "project-detail-lead-generic"}`}>{study ? study.lead : projectIntro}</p>
             {study && <p className="project-detail-summary">{study.summary}</p>}
             <div className="project-detail-tags" dir="ltr">{project.tags.map((tag) => <span key={tag}>{tag}</span>)}</div>
+            {study?.website && <div className="project-website-links">
+              {project.demo !== "#" && <a className="project-website-source" href={project.demo} target="_blank" rel="noopener noreferrer">زيارة الموقع <ArrowUpLeft size={16} aria-hidden="true" /></a>}
+              <a className="project-website-source" href={project.github} target="_blank" rel="noopener noreferrer">مصدر المشروع <ArrowUpLeft size={16} aria-hidden="true" /></a>
+            </div>}
           </div>
           {!study && <ProjectArtwork project={project} />}
         </header>
 
         {study ? (
           <>
-            {study.mediaReady && <ProjectExperience active={isPresent} projectId={project.id} projectName={study.name} clips={study.experiences} />}
+            {study.appSuite ? <ProjectAppSuite projectId={project.id} apps={study.appSuite.apps} /> : study.website ? <ProjectWebsitePreview projectId={project.id} name={study.name} screenshots={study.website.screenshots} /> : study.mediaReady && <ProjectExperience active={isPresent} projectId={project.id} projectName={study.name} clips={study.experiences} />}
             <dl className="project-facts">
               {study.facts.map((fact) => <div key={fact.label}><dt>{fact.label}</dt><dd>{fact.value}</dd></div>)}
             </dl>
@@ -78,7 +84,7 @@ export default function ProjectDetails({ project, onBack, effectsEnabled }: Prop
             <section className="project-story-section" aria-labelledby={`${project.id}-engineering-title`}>
               <div className="project-story-heading"><span className="eyebrow">03 / خلف الواجهات</span><h2 id={`${project.id}-engineering-title`}>بنية تخدم التجربة.</h2></div>
               <div className="project-engineering-grid">{study.engineering.map((item, index) => <article key={item.title}><span className="project-note-index" aria-hidden="true">0{index + 1}</span><h3>{item.title}</h3><p>{item.description}</p></article>)}</div>
-              <div className="project-architecture" aria-label="تنظيم طبقات التطبيق">
+              <div className="project-architecture" aria-label="تنظيم المشروع">
                 {(study.architectureLayers ?? [
                   { name: "Presentation", description: study.presentationLayer ?? "واجهات + Bloc / Cubit" },
                   { name: "Domain", description: "حالات الاستخدام ومنطق العمل" },

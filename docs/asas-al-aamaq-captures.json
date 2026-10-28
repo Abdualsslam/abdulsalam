@@ -1,0 +1,34 @@
+[
+  {
+    "file": "home-desktop.webp",
+    "width": 1270,
+    "height": 714,
+    "bytes": 92220,
+    "sha256": "cc0c6b59b8f5428969ba46b290afbbd78337fa0a1ed4a6d35b8923bb90880ef5",
+    "source": "Browser screenshot from the local production build of asas_al-aamaq, without altering the page."
+  },
+  {
+    "file": "services-desktop.webp",
+    "width": 1270,
+    "height": 714,
+    "bytes": 83212,
+    "sha256": "d30ae2fc6e85be84df77cf44fa249a1565ce9be10a91b440bf9eb6b668f3b2ef",
+    "source": "Browser screenshot from the local production build of asas_al-aamaq, without altering the page."
+  },
+  {
+    "file": "projects-desktop.webp",
+    "width": 1270,
+    "height": 714,
+    "bytes": 138266,
+    "sha256": "c8fd34c902b5b078107260cd80a8ca8d14715486b43a976f344843c3ddd6be75",
+    "source": "Browser screenshot from the local production build of asas_al-aamaq, without altering the page."
+  },
+  {
+    "file": "home-mobile.webp",
+    "width": 380,
+    "height": 822,
+    "bytes": 37248,
+    "sha256": "834afa9b133393b1ed59c37fe1340b4bf9503279d41df5ff913b77364af821c3",
+    "source": "Browser screenshot from the local production build of asas_al-aamaq, without altering the page."
+  }
+]

@@ -1,0 +1,83 @@
+[
+  {
+    "file": "customer-home.webp",
+    "width": 720,
+    "height": 1560,
+    "bytes": 68704,
+    "sha256": "8a54f19db85a3d3b0c80c41a93b454f016f5f7bc7aadd04eaa647e6dbadd6c1d",
+    "source": "user-app-web/artifacts/rui-local/device/direct-grid-home-android.png",
+    "provenance": "Existing project artifacts selected at the user request; includes UI test previews with illustrative data. No new recording."
+  },
+  {
+    "file": "customer-service.webp",
+    "width": 720,
+    "height": 1560,
+    "bytes": 54168,
+    "sha256": "b1efc2a70f4d06cfec86c0ef0f6fc228ffd15d4f3034fb348cc3b7a0ee6bf621",
+    "source": "user-app-web/artifacts/rui-local/device/delivery-gallery.png",
+    "provenance": "Existing project artifacts selected at the user request; includes UI test previews with illustrative data. No new recording."
+  },
+  {
+    "file": "customer-bookings.webp",
+    "width": 720,
+    "height": 1560,
+    "bytes": 28210,
+    "sha256": "2a0dcccef0925e6cf22b9877e42c9b654530811fb484a2ccd1b3c4e61f9ad979",
+    "source": "user-app-web/artifacts/rui-local/device/bookings-redesign-final.png",
+    "provenance": "Existing project artifacts selected at the user request; includes UI test previews with illustrative data. No new recording."
+  },
+  {
+    "file": "provider-availability.webp",
+    "width": 720,
+    "height": 1846,
+    "bytes": 55294,
+    "sha256": "36df83c5f04366783b066be1239a6e57498a30bb097bb73d72d59a50f0b6fdc8",
+    "source": "provider-app/artifacts/ui-polish/availability-ar-light.png",
+    "provenance": "Existing project artifacts selected at the user request; includes UI test previews with illustrative data. No new recording."
+  },
+  {
+    "file": "provider-bookings.webp",
+    "width": 720,
+    "height": 1662,
+    "bytes": 33334,
+    "sha256": "f6d0b9eda65c21fcac54079d564e2aec9535d21e08652eeb3139e47643764614",
+    "source": "provider-app/artifacts/ui-polish/booking-ar-light.png",
+    "provenance": "Existing project artifacts selected at the user request; includes UI test previews with illustrative data. No new recording."
+  },
+  {
+    "file": "provider-reports.webp",
+    "width": 720,
+    "height": 1809,
+    "bytes": 36500,
+    "sha256": "970324ca514702227a3628999fe133a616d9b8a5cab081a72a22f0222b795691",
+    "source": "provider-app/artifacts/ui-polish/reports-ar-light.png",
+    "provenance": "Existing project artifacts selected at the user request; includes UI test previews with illustrative data. No new recording."
+  },
+  {
+    "file": "technician-status.webp",
+    "width": 720,
+    "height": 1846,
+    "bytes": 45806,
+    "sha256": "9b5caf78d33295a2d25c4c06cf73563f1d0bf954219c3da28493b5d82fea5826",
+    "source": "service-man-app/artifacts/booking-clarity/status-ar-light.png",
+    "provenance": "Existing project artifacts selected at the user request; includes UI test previews with illustrative data. No new recording."
+  },
+  {
+    "file": "technician-card.webp",
+    "width": 720,
+    "height": 786,
+    "bytes": 25664,
+    "sha256": "d60482fed9856983a5299e8f2276b6b7d71117831525579aabd31ff55a35d9ee",
+    "source": "service-man-app/artifacts/booking-clarity/card-ar-light.png",
+    "provenance": "Existing project artifacts selected at the user request; includes UI test previews with illustrative data. No new recording."
+  },
+  {
+    "file": "technician-account.webp",
+    "width": 390,
+    "height": 900,
+    "bytes": 19336,
+    "sha256": "f15ffb2d4c2685ceea3230a6b50c5df8635aa8611ca1116d78e7bfe9dae97bb2",
+    "source": "service-man-app/artifacts/ui-polish/account-ar-light-settings-390.png",
+    "provenance": "Existing project artifacts selected at the user request; includes UI test previews with illustrative data. No new recording."
+  }
+]

@@ -3,6 +3,8 @@ import type { PortfolioProject } from "../../data/projects";
 import { getProjectCaseStudy } from "../../data/caseStudies";
 import { getPackageCover } from "../../data/packageCovers";
 import { publicAsset } from "../../lib/publicAsset";
+import "./ProjectWebsitePreview.css";
+import "./ProjectAppSuite.css";
 
 export default function ProjectArtwork({ project }: { project: PortfolioProject }) {
   const study = getProjectCaseStudy(project.id);
@@ -13,14 +15,22 @@ export default function ProjectArtwork({ project }: { project: PortfolioProject 
       <span className="art-index">
         {String(project.index + 1).padStart(2, "0")} / {project.category}
       </span>
-      {hasCapturedMedia ? (
+      {study?.appSuite ? (
+        <div className="project-suite-preview">
+          {study.appSuite.apps.map(app => <img key={app.id} src={publicAsset(`projects/${project.id}/${app.screenshots[0].file}`)} alt="" width={app.screenshots[0].width} height={app.screenshots[0].height} loading="lazy" />)}
+        </div>
+      ) : study?.website ? (
+        <div className="project-website-preview">
+          <img src={publicAsset(`projects/${project.id}/${study.website.screenshots[0].file}`)} alt="" width={study.website.screenshots[0].width} height={study.website.screenshots[0].height} loading="lazy" />
+        </div>
+      ) : hasCapturedMedia ? (
         <div className="project-real-preview">
           <img src={publicAsset(project.id === "tagadod" ? "projects/tagadod/home.webp" : `projects/${project.id}/${study.experiences[0].file}-poster.webp`)} alt="" width="1280" height="2856" loading="lazy" />
           <img src={publicAsset(project.id === "tagadod" ? "projects/tagadod/catalog.webp" : `projects/${project.id}/${study.experiences[1]?.file ?? study.experiences[0].file}-poster.webp`)} alt="" width="1280" height="2856" loading="lazy" />
         </div>
       ) : study ? (
         <div className="project-logo-preview">
-          <img src={publicAsset(`projects/${project.id}/logo.png`)} alt="" width={study.logo.width} height={study.logo.height} loading="lazy" />
+          <img src={publicAsset(`projects/${project.id}/${study.logo.file ?? "logo.png"}`)} alt="" width={study.logo.width} height={study.logo.height} loading="lazy" />
           <b>{study.name}</b>
         </div>
       ) : project.index < 3 ? (
@@ -89,7 +99,7 @@ export default function ProjectArtwork({ project }: { project: PortfolioProject 
           </div>
         </div>
       )}
-      <span className="concept-label">{hasCapturedMedia ? "من التطبيق الفعلي" : packageCover ? "من أمثلة الحزمة الفعلية" : study ? "شعار التطبيق" : "تصوّر بصري للمشروع"}</span>
+      <span className="concept-label">{study?.appSuite ? "واجهات التطبيقات الثلاثة" : study?.website ? "من الموقع الفعلي" : hasCapturedMedia ? "من التطبيق الفعلي" : packageCover ? "من أمثلة الحزمة الفعلية" : study ? "شعار التطبيق" : "تصوّر بصري للمشروع"}</span>
     </div>
 
   );

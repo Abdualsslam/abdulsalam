@@ -1,0 +1,34 @@
+[
+  {
+    "file": "home-desktop.webp",
+    "width": 1092,
+    "height": 871,
+    "bytes": 60982,
+    "sha256": "13850519fea62539521055d92ab8d9c961c76568a049ffd867275e7fe0be64a4",
+    "source": "Browser screenshot from https://emanjameel.pro/, without altering page content. Public pages only."
+  },
+  {
+    "file": "skills-desktop.webp",
+    "width": 1092,
+    "height": 871,
+    "bytes": 57664,
+    "sha256": "62d61da383718170d3f1ef4a9f73d67e900e33bd5efd5a87cc1d0dfa2c160b04",
+    "source": "Browser screenshot from https://emanjameel.pro/, without altering page content. Public pages only."
+  },
+  {
+    "file": "works-desktop.webp",
+    "width": 1092,
+    "height": 871,
+    "bytes": 68268,
+    "sha256": "3c4974673b7ff61633394157960450555f38f624870607e3a13c794006d92f01",
+    "source": "Browser screenshot from https://emanjameel.pro/, without altering page content. Public pages only."
+  },
+  {
+    "file": "home-mobile.webp",
+    "width": 382,
+    "height": 827,
+    "bytes": 30726,
+    "sha256": "6885d271c8c13a38633c78cdec35d8e648699f60de87fe6dc6e4048190f7e644",
+    "source": "Browser screenshot from https://emanjameel.pro/, without altering page content. Public pages only."
+  }
+]

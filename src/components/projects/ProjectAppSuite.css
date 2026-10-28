@@ -1,0 +1,45 @@
+.app-suite { margin-block: 8px 46px; }
+.app-suite > h2 { margin-bottom: 24px; font-size: clamp(24px, 3vw, 34px); font-weight: 700; line-height: 1.6; }
+.app-suite-options { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border-block-start: 1px solid var(--paper-rule); border-inline-start: 1px solid var(--paper-rule); }
+.app-suite-options button { display: flex; flex-direction: column; gap: 8px; min-height: 88px; padding: 18px; text-align: start; background: var(--paper-surface); color: var(--paper-ink); border: 0; border-inline-end: 1px solid var(--paper-rule); border-block-end: 1px solid var(--paper-rule); }
+.app-suite-options b { font-size: 17px; font-weight: 700; }
+.app-suite-options span { font-size: 11px; line-height: 1.8; color: var(--paper-ink-muted); }
+.app-suite-options button[aria-pressed="true"] { background: var(--paper-ink); color: var(--paper-raised); }
+.app-suite-options button[aria-pressed="true"] span { color: var(--paper-muted); }
+.app-suite-options button:hover:not([aria-pressed="true"]) { background: var(--paper-muted); }
+.app-suite-options button:focus-visible { position: relative; outline-offset: -4px; }
+.app-suite-intro { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); gap: 32px; padding-block: 30px 22px; }
+.app-suite-intro h3 { font-size: 22px; font-weight: 700; margin-bottom: 10px; }
+.app-suite-intro p { font-size: 14px; line-height: 2; color: var(--paper-ink-muted); max-width: 70ch; }
+.app-suite-intro ul { display: flex; flex-direction: column; justify-content: center; gap: 10px; padding-inline-start: 20px; border-inline-start: 1px solid var(--paper-rule); }
+.app-suite-intro li { font-size: 12px; line-height: 1.9; }
+.app-suite-note { font-size: 11px; line-height: 1.9; color: var(--paper-ink-muted); margin-block: 0 22px; }
+.app-suite-screens { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; align-items: start; }
+.app-suite-screens figure { min-width: 0; margin: 0; }
+.app-suite-screens figure > a { display: block; padding: 14px; background: var(--paper-muted); }
+.app-suite-screens img { display: block; width: 100%; height: auto; }
+.app-suite-screens figcaption { padding-block: 18px; }
+.app-suite-screens h4 { display: flex; align-items: center; justify-content: space-between; gap: 10px; font-size: 15px; font-weight: 600; line-height: 1.8; }
+.app-suite-screens h4 svg { color: var(--paper-accent); flex-shrink: 0; }
+.app-suite-screens figcaption p { margin-top: 7px; font-size: 12px; line-height: 1.9; color: var(--paper-ink-muted); }
+.app-suite-swipe { display: none; }
+.project-suite-preview { position: absolute; inset: 45px 12px auto; display: flex; align-items: flex-start; justify-content: center; gap: 7px; }
+.project-suite-preview img { display: block; width: 29%; height: auto; border: 2px solid var(--paper-ink); border-radius: 10px; box-shadow: 2px 6px 12px rgb(var(--paper-shadow-rgb) / .12); }
+.project-suite-preview img:nth-child(2) { margin-top: 14px; }
+.project-suite-preview img:nth-child(3) { margin-top: 28px; }
+[data-project="nirab"] .project-detail-brand-title { flex-wrap: nowrap; gap: 24px; }
+[data-project="nirab"] .project-detail-brand-title > img { width: clamp(115px, 15vw, 180px); flex-shrink: 0; }
+[data-project="nirab"] .project-detail-copy h1 > .project-detail-brand-name { font-size: clamp(28px, 4vw, 42px); }
+@media (max-width: 760px) {
+  .app-suite-options button { padding: 14px 10px; min-height: 80px; gap: 6px; }
+  .app-suite-options b { font-size: 13px; }
+  .app-suite-options span { font-size: 10px; }
+  .app-suite-intro { grid-template-columns: minmax(0, 1fr); gap: 18px; padding-block: 24px 18px; }
+  .app-suite-intro h3 { font-size: 20px; }
+  .app-suite-intro ul { padding-inline-start: 0; border: 0; gap: 5px; }
+  .app-suite-screens { grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: 82%; gap: 16px; overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x proximity; scrollbar-color: var(--paper-accent) var(--paper-muted); padding-bottom: 10px; }
+  .app-suite-screens figure { scroll-snap-align: start; }
+  .app-suite-screens figure > a { padding: 10px; }
+  .app-suite-swipe { display: block; margin-top: 12px; font-size: 11px; color: var(--paper-ink-muted); }
+  [data-project="nirab"] .project-detail-brand-title { gap: 16px; }
+}

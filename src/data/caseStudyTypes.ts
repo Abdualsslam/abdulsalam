@@ -11,7 +11,9 @@ export interface ProjectExperienceClip {
 export interface ProjectCaseStudy {
   name: string;
   mediaReady: boolean;
-  logo: { width: number; height: number; square?: boolean; showName?: boolean };
+  logo: { width: number; height: number; square?: boolean; showName?: boolean; file?: string };
+  website?: { screenshots: readonly ProjectWebsiteScreenshot[] };
+  appSuite?: { apps: readonly ProjectSuiteApp[] };
   lead: string;
   summary: string;
   facts: readonly { label: string; value: string }[];
@@ -22,4 +24,22 @@ export interface ProjectCaseStudy {
   dataLayer: string;
   presentationLayer?: string;
   architectureLayers?: readonly { name: string; description: string }[];
+}
+
+export interface ProjectWebsiteScreenshot {
+  file: string;
+  title: string;
+  description: string;
+  width: number;
+  height: number;
+  mobile?: boolean;
+}
+
+export interface ProjectSuiteApp {
+  id: string;
+  name: string;
+  role: string;
+  summary: string;
+  features: readonly string[];
+  screenshots: readonly ProjectWebsiteScreenshot[];
 }

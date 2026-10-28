@@ -58,7 +58,7 @@ export default function Projects() {
               <div className="project-content">
                 <div className="project-card-meta">
                   <span className="project-category">{project.category}</span>
-                  {study && <img className={`project-card-logo ${study.logo.square ? "project-card-logo-square" : ""}`} src={publicAsset(`projects/${project.id}/logo.png`)} alt={`شعار ${study.name}`} width={study.logo.width} height={study.logo.height} loading="lazy" />}
+                  {study && <img className={`project-card-logo ${study.logo.square ? "project-card-logo-square" : ""}`} src={publicAsset(`projects/${project.id}/${study.logo.file ?? "logo.png"}`)} alt={`شعار ${study.name}`} width={study.logo.width} height={study.logo.height} loading="lazy" />}
                 </div>
                 <h3>{project.title}</h3>
                 <p>{project.description}</p>
