@@ -1,6 +1,5 @@
 import { useEffect, useLayoutEffect, useRef, useState, type MouseEvent } from "react";
 import {
-  ArrowUpLeft,
   FolderOpen,
 } from "lucide-react";
 import { AnimatePresence, MotionConfig, useReducedMotion } from "framer-motion";
@@ -12,6 +11,7 @@ import Experience from "./components/sections/Experience";
 import Qualifications from "./components/sections/Qualifications";
 import Contact from "./components/sections/Contact";
 import VerticalTabs from "./components/layout/VerticalTabs";
+import "./components/layout/SiteHeader.css";
 import { useNavigation, tabsConfig } from "./hooks/useNavigation";
 import { getProjectById } from "./data/projects";
 import ProjectDetails from "./components/projects/ProjectDetails";
@@ -95,17 +95,13 @@ export default function App({ initialRoute }: { initialRoute: PortfolioRoute }) 
                   : "الغلاف"}
               </b>
             </div>
-            <details className="site-index">
-              <summary>تصفح الموقع</summary>
-              <nav aria-label="صفحات الموقع">
-                {tabsConfig.map(tab => <a key={tab.id} href={sectionHref(tab.id)} aria-current={!notFound && !projectId && (activeTab ?? "home") === tab.id ? "page" : undefined}>{tab.label}</a>)}
-              </nav>
-            </details>
-            <a className="header-contact" href={sectionHref("contact")}>
-              لنبنِ شيئاً مميزاً <ArrowUpLeft size={17} />
-            </a>
           </div>
         </header>
+        <noscript>
+          <nav className="static-site-nav" aria-label="صفحات الموقع">
+            {tabsConfig.map(tab => <a key={tab.id} href={sectionHref(tab.id)}>{tab.label}</a>)}
+          </nav>
+        </noscript>
         <div inert={!!selectedProject || notFound} aria-hidden={!!selectedProject || notFound}>
           <main
             id="main"
