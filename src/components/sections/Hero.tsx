@@ -70,14 +70,16 @@ export default function Hero({
             </span>
           </div>
         </div>
-        <figure className="portrait-scene" aria-label="عبدالسلام معاد — خلف كل تجربة، إنسان">
-          <PortraitMotion enabled={effectsEnabled} />
-          <PortraitProjects />
-          <figcaption className="portrait-figure-caption">
-            <span dir="ltr">CRAFTED WITH INTENT</span>
-            <span>خلف كل تجربة، إنسان.</span>
-          </figcaption>
-        </figure>
+        <div className="portrait-gallery">
+          <figure className="portrait-scene" aria-label="عبدالسلام معاد — خلف كل تجربة، إنسان">
+            <PortraitMotion enabled={effectsEnabled} />
+            <figcaption className="portrait-figure-caption">
+              <span dir="ltr">CRAFTED WITH INTENT</span>
+              <span>خلف كل تجربة، إنسان.</span>
+            </figcaption>
+          </figure>
+          <PortraitProjects animated={effectsEnabled} />
+        </div>
       </div>
       <div className="hero-bottom page-width">
         <div className="hero-stats">

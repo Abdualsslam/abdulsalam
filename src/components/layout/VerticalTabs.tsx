@@ -30,7 +30,8 @@ export default function VerticalTabs({
   effectsEnabled = true,
   navigationEnabled = true,
 }: Props) {
-  const [arriving, setArriving] = useState(() => effectsEnabled && !activeTab);
+  // Keep the entrance pending while hydration prepares motion on the client.
+  const [arriving, setArriving] = useState(() => !activeTab && navigationEnabled);
   const [mobile, setMobile] = useState(false);
   const pull = useMotionValue<SheetPull | null>(null);
   const previous = useRef<TabId | null>(null);
@@ -43,10 +44,11 @@ export default function VerticalTabs({
   }, []);
   useEffect(() => {
     if (!arriving) return;
-    if (activeTab || !effectsEnabled || !navigationEnabled) {
+    if (activeTab || !navigationEnabled) {
       setArriving(false);
       return;
     }
+    if (!effectsEnabled) return;
     // Finish once per mount; opening or touching a sheet takes priority.
     const finish = window.setTimeout(() => setArriving(false), 1300);
     return () => window.clearTimeout(finish);

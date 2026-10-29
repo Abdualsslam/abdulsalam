@@ -1,9 +1,7 @@
 import { ShoppingBag } from "lucide-react";
-import type { CSSProperties } from "react";
 import { projectsData } from "../../data/projects";
 import { projectHref } from "../../lib/routes";
 import { publicAsset } from "../../lib/publicAsset";
-import PaperTape from "./PaperTape";
 
 const projectLabels: Record<string, string> = {
   talentgate: "TalentGate",
@@ -17,22 +15,27 @@ const projectLabels: Record<string, string> = {
   kuraimi: "الكريمي",
 };
 const iconProjects = new Set(["talentgate", "qit3ati", "shoot-live", "tras-phone", "tagadod", "wamadat", "nirab", "kuraimi"]);
-const applicationProjects = projectsData.filter((project) => project.category === "تطبيقات");
+const stripOrder = new Map([
+  "tagadod", "talentgate", "wamadat", "nirab", "shoot-live",
+  "tras-phone", "qit3ati", "smart-store", "kuraimi",
+].map((id, index) => [id, index] as const));
+const applicationProjects = projectsData
+  .filter((project) => project.category === "تطبيقات")
+  .sort((a, b) => (stripOrder.get(a.id) ?? stripOrder.size) - (stripOrder.get(b.id) ?? stripOrder.size));
 
-/** Application marks, taped outside the portrait as small paper labels. */
-export default function PortraitProjects() {
+/** A quiet vertical tear beside the portrait reveals the applications beneath. */
+export default function PortraitProjects({ animated = true }: { animated?: boolean }) {
   return (
-    <nav className="portrait-projects" aria-label="تطبيقاتي حول الصورة" style={{
-      "--project-rows": Math.ceil(applicationProjects.length / 2),
-      "--project-mobile-columns": applicationProjects.length > 8 ? 3 : 4,
-    } as CSSProperties}>
+    <nav className={`portrait-projects${animated ? " portrait-projects--reveal" : ""}`} aria-label="تطبيقاتي">
+      <span className="paper-slit-material" aria-hidden="true">
+        <img src={publicAsset("paper-textures/torn-opening-photographic-v1.webp")}
+          width={2172} height={724} alt="" decoding="async" />
+      </span>
       {applicationProjects.map((project) => {
         const { id } = project;
         return (
           <a key={id} className="portrait-project" data-project={id}
             href={projectHref(id)} aria-label={`عرض مشروع ${project.title}`} title={project.title}>
-            <PaperTape className="portrait-project-tape portrait-project-tape--left" />
-            <PaperTape className="portrait-project-tape portrait-project-tape--right" />
             <span className="portrait-project-mark">
               {iconProjects.has(id) ? (
                 <img src={publicAsset(`projects/${id}/portrait-icon.webp`)}

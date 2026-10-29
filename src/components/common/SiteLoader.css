@@ -1,0 +1,61 @@
+#site-loader {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  place-items: center;
+  background: var(--paper-bg, #f6f1e8);
+  color: var(--paper-ink, #20201e);
+  font-family: "Cairo", sans-serif;
+  opacity: 1;
+  transition: opacity 180ms ease-out;
+}
+
+html[data-site-loading] #site-loader { display: grid; }
+html[data-site-loading="leaving"] #site-loader { opacity: 0; pointer-events: none; }
+
+.site-loader-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 32px;
+}
+
+.site-loader-emblem { position: relative; width: 108px; height: 120px; margin-bottom: 24px; }
+.site-loader-sheet {
+  position: absolute;
+  inset: 12px 18px 14px;
+  background: var(--paper-muted, #eee7da);
+  border: 1px solid var(--paper-rule, #d4cbbf);
+  transform-origin: center 90%;
+}
+.site-loader-sheet-back { transform: rotate(-10deg) translateX(-6px); }
+.site-loader-sheet-middle { transform: rotate(9deg) translateX(6px); }
+.site-loader-mark { position: relative; width: 108px; height: 120px; stroke-linecap: square; stroke-linejoin: miter; }
+.site-loader-paper { fill: var(--paper-raised, #fffdf7); stroke: var(--paper-accent, #a63e46); stroke-width: 1.2; }
+.site-loader-monogram { stroke: var(--paper-ink, #20201e); stroke-width: 2.5; }
+.site-loader-underline { stroke: var(--paper-accent, #a63e46); stroke-width: 1.5; }
+.site-loader-name { font-size: 22px; font-weight: 800; line-height: 1.8; }
+.site-loader-name > span { color: var(--paper-accent, #a63e46); }
+.site-loader-caption { margin-top: 8px; font-size: 12px; color: var(--paper-ink-muted, #625f59); }
+
+@media (prefers-reduced-motion: no-preference) {
+  .site-loader-sheet-back { animation: loader-paper-back 1100ms ease-in-out infinite; }
+  .site-loader-sheet-middle { animation: loader-paper-middle 1100ms ease-in-out infinite; }
+  .site-loader-underline { stroke-dasharray: 24; animation: loader-ink 1100ms ease-in-out infinite; }
+}
+@keyframes loader-paper-back {
+  0%, 100% { transform: rotate(-10deg) translateX(-6px); }
+  50% { transform: rotate(-17deg) translate(-9px, -3px); }
+}
+@keyframes loader-paper-middle {
+  0%, 100% { transform: rotate(9deg) translateX(6px); }
+  50% { transform: rotate(15deg) translate(9px, -2px); }
+}
+@keyframes loader-ink {
+  0%, 100% { stroke-dashoffset: 24; }
+  55%, 75% { stroke-dashoffset: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  #site-loader { transition-duration: 80ms; }
+}

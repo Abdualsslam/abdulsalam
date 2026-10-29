@@ -19,12 +19,14 @@ import ProjectDetails from "./components/projects/ProjectDetails";
 import AmbientEffects from "./components/common/AmbientEffects";
 import { readRoute, readLegacyHash, sectionHref, type PortfolioRoute } from "./lib/routes";
 import { applyPageMetadata, getPageMetadata } from "./lib/seo";
+import { useSiteStartup } from "./hooks/useSiteStartup";
 
 export default function App({ initialRoute }: { initialRoute: PortfolioRoute }) {
   const reducedMotion = useReducedMotion();
   const [ready, setReady] = useState(false);
   useEffect(() => setReady(true), []);
-  const effectsEnabled = ready && !reducedMotion;
+  const startupComplete = useSiteStartup();
+  const effectsEnabled = ready && startupComplete && !reducedMotion;
   const { activeTab, projectId, notFound, openTab, openProject, closeProject } = useNavigation(initialRoute);
   const selectedProject = projectId ? getProjectById(projectId) : undefined;
   useEffect(() => {

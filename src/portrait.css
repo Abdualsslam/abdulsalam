@@ -10,84 +10,98 @@
   direction: ltr;
 }
 
-.portrait-projects {
-  --project-sticker-width: clamp(56px, 7.4vh, 64px);
-  position: absolute;
-  inset: 0 0 28px;
+.portrait-gallery {
   display: grid;
-  grid-template-columns: repeat(2, var(--project-sticker-width));
-  grid-template-rows: repeat(var(--project-rows), 1fr);
-  justify-content: space-between;
+  grid-template-columns: 84px minmax(0, 1fr);
   align-items: center;
-  z-index: 2;
+  gap: 20px;
+  width: 100%;
+  min-width: 0;
+  direction: ltr;
+}
+.portrait-gallery > .portrait-scene { grid-column: 2; grid-row: 1; }
+.portrait-projects {
+  position: relative;
+  isolation: isolate;
+  grid-column: 1;
+  grid-row: 1;
+  display: grid;
+  grid-template-columns: 44px;
+  grid-auto-rows: 44px;
+  justify-content: center;
+  align-content: space-between;
+  width: 84px;
+  height: 420px;
+  margin: 0;
+  padding: 12px 20px;
+  direction: ltr;
+}
+.portrait-projects::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
   pointer-events: none;
+  background-color: var(--paper-raised);
+  background-image: linear-gradient(rgb(var(--paper-raised-rgb) / .85), rgb(var(--paper-raised-rgb) / .85)), url('/paper-textures/cotton.webp');
+  background-size: 100% 100%, 480px;
+  mask-image: linear-gradient(transparent, #000 20px, #000 calc(100% - 20px), transparent);
+}
+.paper-slit-material {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  opacity: .32;
+  pointer-events: none;
+  mask-image: linear-gradient(transparent, #000 20px, #000 calc(100% - 20px), transparent);
+}
+.paper-slit-material img {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 420px;
+  max-width: none;
+  height: 84px;
+  transform: translate(-50%, -50%) rotate(90deg);
+  user-select: none;
 }
 .portrait-project {
-  --project-angle: -5deg;
-  --project-offset: calc(-100% - 10px);
   position: relative;
+  z-index: 1;
   display: grid;
-  justify-items: center;
-  gap: 4px;
-  width: var(--project-sticker-width);
-  padding: 6px;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  padding: 5px;
   color: var(--paper-ink-muted);
-  background: var(--paper-surface);
-  box-shadow: 1px 5px 10px rgb(var(--paper-shadow-rgb) / .14);
-  transform: translateX(var(--project-offset)) rotate(var(--project-angle));
-  pointer-events: auto;
-  text-align: center;
-  text-underline-offset: 3px;
-  transition: color .2s, background-color .2s;
+  transition: color .2s;
 }
-.portrait-project:nth-child(even) { --project-offset: calc(100% + 10px); --project-angle: 5deg; }
-.portrait-project:nth-child(3n) { --project-angle: 3deg; }
-.portrait-project:nth-child(4n) { --project-angle: -4deg; }
-.portrait-project .portrait-project-tape { width: 24px; height: 11px; top: -3px; }
-.portrait-project-tape--left { left: -6px; transform: rotate(-36deg); }
-.portrait-project-tape--right { right: -6px; transform: rotate(33deg); }
 .portrait-project-mark {
   display: grid;
   place-items: center;
-  width: clamp(24px, 3.8vh, 40px);
-  height: clamp(24px, 3.8vh, 40px);
-  border-radius: 10px;
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
 }
 .portrait-project-mark img { display: block; width: 100%; height: 100%; object-fit: contain; }
 .portrait-project[data-project="talentgate"] .portrait-project-mark { background: var(--paper-ink); }
-.portrait-project-name { font-size: 10px; line-height: 1.3; white-space: nowrap; }
-.portrait-project:hover, .portrait-project:focus-visible { color: var(--paper-accent); background: var(--paper-raised); }
-.portrait-project:hover .portrait-project-name, .portrait-project:focus-visible .portrait-project-name { text-decoration: underline; }
-
-@media (min-width: 1080px) {
-  .folder-cover .hero-section--identity.hero-section--scraps .portrait-scene {
-    max-width: min(clamp(180px, calc((100dvh - 400px) * .82), 420px), calc(100% - 64px));
-  }
-}
-@media (max-width: 1079px), (max-height: 650px) {
-  .portrait-projects {
-    position: relative;
-    inset: auto;
-    grid-template-columns: repeat(var(--project-mobile-columns), 44px);
-    grid-template-rows: none;
-    grid-auto-rows: 44px;
-    justify-content: center;
-    gap: 9px 6px;
-    width: max-content;
-    margin: 14px auto 0;
-  }
-  .portrait-projects .portrait-project { --project-offset: 0px; inset: auto; width: 44px; height: 44px; padding: 5px; }
-  .portrait-project .portrait-project-tape { width: 18px; height: 9px; }
-  .portrait-project-mark { width: 34px; height: 34px; border-radius: 8px; }
-  .portrait-project-name { display: none; }
-}
+.portrait-project-name { display: none; }
+.portrait-project:hover, .portrait-project:focus-visible { color: var(--paper-accent); }
+.portrait-project:focus-visible { outline: 2px solid var(--paper-accent); outline-offset: 1px; border-radius: 4px; }
 @media (max-width: 760px) {
   .hero-section--scraps .hero-scrap--role { align-self: start; }
   .hero-section--identity.hero-section--scraps .hero-grid { row-gap: 8px; padding-block-start: 12px; }
-  .portrait-projects { margin-top: 8px; }
 }
 @media (max-width: 760px) and (max-height: 740px) {
   .hero-section--identity.hero-section--scraps .hero-grid { row-gap: 6px; padding-block-start: 8px; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .portrait-projects--reveal { animation: paper-aperture-open .6s cubic-bezier(.16, 1, .3, 1) both; }
+}
+@keyframes paper-aperture-open {
+  from { clip-path: inset(0 0 95%); }
+  to { clip-path: inset(0); }
 }
 .portrait-artwork {
   position: relative;

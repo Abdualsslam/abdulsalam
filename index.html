@@ -5,12 +5,36 @@
     <link rel="icon" type="image/svg+xml" href="%BASE_URL%favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#f6f1e8" />
+    <link rel="stylesheet" href="/src/components/common/SiteLoader.css" />
+    <script>
+      document.documentElement.dataset.siteLoading = "loading";
+      document.documentElement.dataset.siteStarted = String(Date.now());
+      // Leave the prerendered website accessible if the application cannot start.
+      window.setTimeout(function () {
+        delete document.documentElement.dataset.siteLoading;
+      }, 5000);
+    </script>
     <!--seo-head-->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800&family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet" />
   </head>
   <body>
+    <div id="site-loader" role="status" aria-live="polite" aria-label="جارٍ فتح ملف عبدالسلام معاد">
+      <div class="site-loader-content">
+        <div class="site-loader-emblem" aria-hidden="true">
+          <span class="site-loader-sheet site-loader-sheet-back"></span>
+          <span class="site-loader-sheet site-loader-sheet-middle"></span>
+          <svg class="site-loader-mark" viewBox="0 0 64 64" fill="none">
+            <path class="site-loader-paper" d="M9 20V7h34l12 12v38H9V46M43 7v12h12" />
+            <path class="site-loader-monogram" d="m13 43 8-22 8 22m-13-7h10m7 7V22l8 11 8-11v21" />
+            <path class="site-loader-underline" d="M18 50h24" />
+          </svg>
+        </div>
+        <span class="site-loader-name">عبدالسلام معاد<span aria-hidden="true">.</span></span>
+        <span class="site-loader-caption">جارٍ فتح الملف</span>
+      </div>
+    </div>
     <div id="root"><!--app-html--></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
