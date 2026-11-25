@@ -143,16 +143,6 @@ const projectCatalog = [
     demo: "https://emanjameel.pro/",
   },
   {
-    id: "nirab",
-    hidden: true,
-    category: "تطبيقات",
-    title: "نيراب كلين | NIRAB CLEAN",
-    description: "منظومة واحدة لخدمات التنظيف والصيانة تضم ثلاثة تطبيقات مترابطة: العميل لحجز الخدمات ومتابعتها، ومقدّم الخدمة لإدارة الفرع والطلبات والفنيين، والفني لمتابعة التنفيذ. مبنية بـ Flutter وGetX، ومتكاملة مع Laravel API ولوحة إدارة مشتركة.",
-    tags: ["Flutter", "GetX", "Laravel API", "Google Maps", "Firebase", "Drift"],
-    github: "https://github.com/nirab-project",
-    demo: "#",
-  },
-  {
     id: "kuraimi",
     category: "تطبيقات",
     title: "الكريمي | تصور لتجربة مصرفية",

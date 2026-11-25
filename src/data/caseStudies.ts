@@ -7,7 +7,6 @@ import { talentGateCaseStudy } from "./talentGate";
 import { wamadatCaseStudy } from "./wamadat";
 import { asasAlAamaqCaseStudy } from "./asasAlAamaq";
 import { emanWebsiteCaseStudy } from "./emanWebsite";
-import { nirabCaseStudy } from "./nirab";
 import { kuraimiCaseStudy } from "./kuraimi";
 
 const studies: Record<string, ProjectCaseStudy> = {
@@ -36,7 +35,6 @@ const studies: Record<string, ProjectCaseStudy> = {
   wamadat: wamadatCaseStudy,
   "asas-al-aamaq": asasAlAamaqCaseStudy,
   "eman-website": emanWebsiteCaseStudy,
-  nirab: nirabCaseStudy,
 };
 
 export const getProjectCaseStudy = (id: string): ProjectCaseStudy | undefined => studies[id];

@@ -10,13 +10,12 @@ const projectLabels: Record<string, string> = {
   "tras-phone": "TRAS Phone",
   tagadod: "تجدُّد",
   wamadat: "ومضات",
-  nirab: "نيراب كلين",
   "smart-store": "Smart Store",
   kuraimi: "الكريمي",
 };
-const iconProjects = new Set(["talentgate", "qit3ati", "shoot-live", "tras-phone", "tagadod", "wamadat", "nirab", "kuraimi"]);
+const iconProjects = new Set(["talentgate", "qit3ati", "shoot-live", "tras-phone", "tagadod", "wamadat", "kuraimi"]);
 const stripOrder = new Map([
-  "tagadod", "talentgate", "wamadat", "nirab", "shoot-live",
+  "tagadod", "talentgate", "wamadat", "shoot-live",
   "tras-phone", "qit3ati", "smart-store", "kuraimi",
 ].map((id, index) => [id, index] as const));
 const applicationProjects = projectsData

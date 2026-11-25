@@ -27,9 +27,6 @@
 .project-suite-preview img { display: block; width: 29%; height: auto; border: 2px solid var(--paper-ink); border-radius: 10px; box-shadow: 2px 6px 12px rgb(var(--paper-shadow-rgb) / .12); }
 .project-suite-preview img:nth-child(2) { margin-top: 14px; }
 .project-suite-preview img:nth-child(3) { margin-top: 28px; }
-[data-project="nirab"] .project-detail-brand-title { flex-wrap: nowrap; gap: 24px; }
-[data-project="nirab"] .project-detail-brand-title > img { width: clamp(115px, 15vw, 180px); flex-shrink: 0; }
-[data-project="nirab"] .project-detail-copy h1 > .project-detail-brand-name { font-size: clamp(28px, 4vw, 42px); }
 @media (max-width: 760px) {
   .app-suite-options button { padding: 14px 10px; min-height: 80px; gap: 6px; }
   .app-suite-options b { font-size: 13px; }
@@ -41,5 +38,4 @@
   .app-suite-screens figure { scroll-snap-align: start; }
   .app-suite-screens figure > a { padding: 10px; }
   .app-suite-swipe { display: block; margin-top: 12px; font-size: 11px; color: var(--paper-ink-muted); }
-  [data-project="nirab"] .project-detail-brand-title { gap: 16px; }
 }
